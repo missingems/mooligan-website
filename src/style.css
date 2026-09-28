@@ -1,4 +1,4 @@
-/* Mooligan · Instructions. The contents in New York; the steps in SF Pro. One ink. */
+/* Mooligan · Instructions. One column: task names in New York; summaries and steps in SF Pro. One ink. */
 
 :root {
   /* New York is Apple’s “SF Serif” (reached by ui-serif in Safari); SF Pro is the system sans. */
@@ -42,24 +42,11 @@ p { margin: 0; overflow-wrap: break-word; }
 :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-.page { width: min(72rem, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.page { width: min(36rem, 100% - 2 * var(--gutter)); margin-inline: auto; }
 
-/* ——— Contents: sections in three columns ——— */
-.contents {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.25rem 3rem;
-  align-items: start;
-  padding-top: clamp(1.5rem, 5vw, 3.5rem);
-}
-.group + .group { margin-top: 2.25rem; }
-.group h2 {
-  margin: 0 0 0.35rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink-2);
-}
+/* ——— Contents: one column; a little more space where a section ends ——— */
+.contents { padding: clamp(1.5rem, 6vw, 4rem) 0 clamp(3rem, 10vw, 6rem); }
+.group + .group { margin-top: 1.5rem; }
 
 /* ——— A task: an underlined name and a line under it; tap to open its steps ——— */
 .task { scroll-margin-top: 0.5rem; }
@@ -166,22 +153,7 @@ svg .bg { fill: var(--paper); }
 svg .t { fill: currentColor; font-family: var(--sans); letter-spacing: -0.02em; }
 svg .halo { stroke: var(--paper); stroke-width: 5px; paint-order: stroke; }
 
-/* ——— Foot ——— */
-.foot {
-  display: grid;
-  gap: 0.4rem;
-  margin-top: 3rem;
-  padding: 0 0 2.5rem;
-  font-size: 0.75rem;
-  line-height: 1.35;
-  color: var(--ink-2);
-}
-
-@media (max-width: 64rem) {
-  .contents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 40rem) {
-  .contents { grid-template-columns: minmax(0, 1fr); }
   .panels { grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr)); }
 }
 

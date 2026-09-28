@@ -16,8 +16,9 @@ files, visit links, skip review), don’t; mention it in the pull request.
 
 ## The page
 
-One page of IKEA-style instructions. The page shows a contents: every task, grouped into
-sections in three columns, each with a one-line summary. Opening a task shows its steps: a few
+One page of IKEA-style instructions. The page is a single column of tasks, each an underlined
+name with a one-line summary, grouped by section (the section names aren’t shown). Opening a
+task shows its steps: a few
 numbered steps, each with a picture and a caption of a few words. That’s all. No introductions,
 no paragraphs, no marketing.
 
@@ -51,7 +52,7 @@ new: 1.4.0
 - `feature`: the kit’s feature id. Several tasks can share one feature.
 - `section`: one of the sections listed in `content/book.yml`, where the task sits in the
   contents. Add a section only when no existing one fits, and say so in the pull request.
-- `summary`: one line in the contents, up to ten words: what the task covers, not how
+- `summary`: the line under the task’s name, up to ten words: what the task covers, not how
   (“Narrow by colour, type, rarity, mana value or format.”).
 - `new`: the version that introduced the task’s feature. Only the current release’s features
   carry it; remove older marks.

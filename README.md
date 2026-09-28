@@ -1,17 +1,17 @@
 # mooligan-website
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**:
-one page of instructions for the app, in the manner of an IKEA manual. The page is a contents:
-every task, grouped into sections in three columns, with a one-line summary. Tap a task to open
-its steps in place, each a picture and a caption of a few words. The contents are set in New York
-(SF Serif), the steps in SF Pro; one ink; no scrolling sideways at any width. A link such as
-`mooligan.com/#filter` opens that task.
+one page of instructions for the app, in the manner of an IKEA manual. The page is a single
+column of tasks, nothing else: each an underlined name with a one-line summary beneath. Tap a
+task to open its steps in place, each a picture and a caption of a few words. Task names are set
+in New York (SF Serif), summaries and steps in SF Pro; one ink; no scrolling sideways at any
+width. A link such as `mooligan.com/#filter` opens that task.
 
 The page is written in Markdown under `content/`, and `npm run build` turns it into `dist/`.
 
 ```
 content/
-  book.yml             name, description, sections, footer, and the device screenshots come from
+  book.yml             name, description, section order, and the device screenshots come from
   tasks/01-start-a-game.md   one file per task, in order
   figures/*.svg        the drawings (120 × 120, one line weight)
 media/                 screenshots imported from release kits (created by the first import)
@@ -50,7 +50,8 @@ summary: Point the camera at a card; the card comes up.
 | `` `Label` `` | a label in the app, in bold |
 
 `feature` is the app feature the task covers, as release kits name it; `section` is one of the
-sections listed in `content/book.yml`; `summary` is the task’s line in the contents. Add
+sections listed in `content/book.yml` (it keeps related tasks together; its name isn’t shown);
+`summary` is the line under the task’s name. Add
 `new: 1.4.0` to mark a task as new in that release. Captions are imperative and short:
 “Tap `Start`.”
 

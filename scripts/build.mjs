@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds mooligan.com from content/ into dist/: one page of illustrated instructions.
-// The page is a contents, grouped into sections in three columns; each task opens in place
+// The page is a single column of tasks, grouped by section; each task opens in place
 // to show its steps. Each file in content/tasks is a task, in file order: a short run of
 // numbered steps, each with a drawing (content/figures) or a capture from a release kit
 // (media/), plus tips and do/don’t panels. The build fails on anything it can’t resolve.
@@ -160,34 +160,18 @@ ${indent(items.join('\n'), 4)}
 </details>`;
 }
 
-// Sections flow into three columns, kept whole and in order, as evenly as their tasks allow.
-// Fixed columns (rather than CSS columns) so opening a task only lengthens its own column.
-function balance(groups, n) {
-  const weight = g => 1 + g.tasks.length;
-  const target = groups.reduce((s, g) => s + weight(g), 0) / n;
-  const cols = [[]];
-  let sum = 0;
-  for (const [i, g] of groups.entries()) {
-    const mustStart = groups.length - i <= n - cols.length;
-    const better = Math.abs(sum + weight(g) - target) > Math.abs(sum - target);
-    if (cols.at(-1).length && cols.length < n && (better || mustStart)) { cols.push([]); sum = 0; }
-    cols.at(-1).push(g);
-    sum += weight(g);
-  }
-  return cols;
-}
-
+// Sections keep related tasks together; only a little extra space shows where one ends.
+// Their names stay in the markup for screen readers.
 const css = (await readFile(path.join(ROOT, 'src/style.css'), 'utf8')).trimEnd();
 const rendered = new Map();
 for (const [i, t] of tasks.entries()) rendered.set(t, await renderTask(t, i));
 const groups = book.sections
   .map(name => ({ name, tasks: tasks.filter(t => t.data.section === name) }))
-  .filter(g => g.tasks.length);
-const columns = balance(groups, 3).map(col => `<div class="col">\n${indent(col.map(g => `<section class="group" aria-labelledby="s-${g.tasks[0].slug}">
-  <h2 id="s-${g.tasks[0].slug}">${esc(g.name)}</h2>
+  .filter(g => g.tasks.length)
+  .map(g => `<section class="group" aria-labelledby="s-${g.tasks[0].slug}">
+  <h2 class="vh" id="s-${g.tasks[0].slug}">${esc(g.name)}</h2>
 ${indent(g.tasks.map(t => rendered.get(t)).join('\n'), 2)}
-</section>`).join('\n\n'), 2)}\n</div>`);
-const version = book.app_version ? `Mooligan ${esc(book.app_version)} · ` : '';
+</section>`);
 
 // Opens the task named in the address, keeps the address in step with the task opened
 // last, and opens every task before printing.
@@ -236,13 +220,8 @@ ${indent(css, 2)}
 <h1 class="vh">${esc(book.name)}${book.label ? ` ${esc(book.label)}` : ''}</h1>
 
 <main class="contents">
-${columns.join('\n\n')}
+${groups.join('\n\n')}
 </main>
-
-<footer class="foot">
-  <p>${version}${book.source ? `<a href="${esc(book.source)}">Source</a> · ` : ''}${esc(book.data ?? '')}</p>
-  <p>${esc(book.legal ?? '')}</p>
-</footer>
 
 </div>
 <script>
