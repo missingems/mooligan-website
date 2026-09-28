@@ -134,8 +134,6 @@ async function figure(fig, where) {
 
 // ——— Render ———
 
-const two = n => String(n).padStart(2, '0');
-
 async function renderTask(task, i) {
   const items = [];
   let step = 0;
@@ -153,8 +151,7 @@ async function renderTask(task, i) {
   const isNew = task.data.new ? `<span class="new">New</span>` : '';
   return `<details class="task" id="${task.slug}">
   <summary>
-    <span class="n">${two(i + 1)}</span>
-    <span class="name">${esc(task.data.title)}${isNew}</span>
+    <span class="name">${esc(task.data.title)}</span>${isNew}
     <span class="sum">${inline(task.data.summary)}</span>
   </summary>
   <ol class="panels">
@@ -190,7 +187,7 @@ const columns = balance(groups, 3).map(col => `<div class="col">\n${indent(col.m
   <h2 id="s-${g.tasks[0].slug}">${esc(g.name)}</h2>
 ${indent(g.tasks.map(t => rendered.get(t)).join('\n'), 2)}
 </section>`).join('\n\n'), 2)}\n</div>`);
-const version = book.app_version ? ` <span class="v">${esc(book.app_version)}</span>` : '';
+const version = book.app_version ? `Mooligan ${esc(book.app_version)} · ` : '';
 
 // Opens the task named in the address, keeps the address in step with the task opened
 // last, and opens every task before printing.
@@ -236,16 +233,14 @@ ${indent(css, 2)}
 <body>
 <div class="page">
 
-<header class="top">
-  <h1 class="mark">${esc(book.name)}${version}${book.label ? ` <span class="label">${esc(book.label)}</span>` : ''}</h1>
-</header>
+<h1 class="vh">${esc(book.name)}${book.label ? ` ${esc(book.label)}` : ''}</h1>
 
 <main class="contents">
 ${columns.join('\n\n')}
 </main>
 
 <footer class="foot">
-  <p>${book.source ? `<a href="${esc(book.source)}">Source</a> · ` : ''}${esc(book.data ?? '')}</p>
+  <p>${version}${book.source ? `<a href="${esc(book.source)}">Source</a> · ` : ''}${esc(book.data ?? '')}</p>
   <p>${esc(book.legal ?? '')}</p>
 </footer>
 
