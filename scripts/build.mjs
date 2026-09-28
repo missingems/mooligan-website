@@ -149,7 +149,8 @@ async function renderTask(task, i) {
     }
   }
   const isNew = task.data.new ? `<span class="new">New</span>` : '';
-  return `<details class="task" id="${task.slug}">
+  const startsSection = i > 0 && tasks[i - 1].data.section !== task.data.section;
+  return `<details class="task${startsSection ? ' gs' : ''}" id="${task.slug}">
   <summary>
     <span class="name">${esc(task.data.title)}</span>${isNew}
     <span class="sum">${inline(task.data.summary)}</span>
@@ -160,35 +161,13 @@ ${indent(items.join('\n'), 4)}
 </details>`;
 }
 
-// Sections keep related tasks together; only a little extra space shows where one ends.
-// Their names stay in the markup for screen readers.
+// Tasks run in section order (file order within a section); the section names aren’t shown,
+// only a little extra space where one ends (the “gs” class on its first task).
 const css = (await readFile(path.join(ROOT, 'src/style.css'), 'utf8')).trimEnd();
-const rendered = new Map();
-for (const [i, t] of tasks.entries()) rendered.set(t, await renderTask(t, i));
-const groups = book.sections
-  .map(name => ({ name, tasks: tasks.filter(t => t.data.section === name) }))
-  .filter(g => g.tasks.length)
-  .map(g => `<section class="group" aria-labelledby="s-${g.tasks[0].slug}">
-  <h2 class="vh" id="s-${g.tasks[0].slug}">${esc(g.name)}</h2>
-${indent(g.tasks.map(t => rendered.get(t)).join('\n'), 2)}
-</section>`);
-
-// Opens the task named in the address, keeps the address in step with the task opened
-// last, and opens every task before printing.
-const script = `(() => {
-  const tasks = [...document.querySelectorAll('details.task')];
-  const show = () => {
-    const d = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (d && d.matches('details.task')) { d.open = true; d.scrollIntoView({ block: 'start' }); }
-  };
-  for (const d of tasks) d.addEventListener('toggle', () => {
-    if (d.open) history.replaceState(null, '', '#' + d.id);
-    else if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
-  });
-  addEventListener('hashchange', show);
-  addEventListener('beforeprint', () => tasks.forEach(d => { d.open = true; }));
-  show();
-})();`;
+const script = (await readFile(path.join(ROOT, 'src/page.js'), 'utf8')).trimEnd();
+tasks.sort((a, b) => book.sections.indexOf(a.data.section) - book.sections.indexOf(b.data.section));
+const taskHtml = [];
+for (const [i, t] of tasks.entries()) taskHtml.push(await renderTask(t, i));
 
 const html = `<!doctype html>
 <html lang="en">
@@ -220,7 +199,7 @@ ${indent(css, 2)}
 <h1 class="vh">${esc(book.name)}${book.label ? ` ${esc(book.label)}` : ''}</h1>
 
 <main class="contents">
-${groups.join('\n\n')}
+${taskHtml.join("\n\n")}
 </main>
 
 </div>

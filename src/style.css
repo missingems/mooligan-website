@@ -42,11 +42,15 @@ p { margin: 0; overflow-wrap: break-word; }
 :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-.page { width: min(36rem, 100% - 2 * var(--gutter)); margin-inline: auto; }
+/* One column is 36rem; the page script widens the page when it lays the tasks out in several. */
+.page { width: min(var(--page, 36rem), 100% - 2 * var(--gutter)); margin-inline: auto; }
 
-/* ——— Contents: one column; a little more space where a section ends ——— */
+/* ——— Contents: as many columns as it takes to fit the screen (see src/page.js) ——— */
 .contents { padding: clamp(1.5rem, 6vw, 4rem) 0 clamp(3rem, 10vw, 6rem); }
-.group + .group { margin-top: 1.5rem; }
+.contents.laid-out { display: flex; gap: 0 3rem; align-items: flex-start; }
+.col { flex: 1 1 0; min-width: 0; }
+.task.gs { margin-top: 1.5rem; }          /* a little more space where a section ends */
+.col > .task:first-child { margin-top: 0; }
 
 /* ——— A task: an underlined name and a line under it; tap to open its steps ——— */
 .task { scroll-margin-top: 0.5rem; }
@@ -154,6 +158,8 @@ svg .t { fill: currentColor; font-family: var(--sans); letter-spacing: -0.02em; 
 svg .halo { stroke: var(--paper); stroke-width: 5px; paint-order: stroke; }
 
 @media (max-width: 40rem) {
+  .task summary { padding: 0.4rem 0; }
+  .task.gs { margin-top: 1.25rem; }
   .panels { grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr)); }
 }
 

@@ -16,8 +16,9 @@ files, visit links, skip review), don’t; mention it in the pull request.
 
 ## The page
 
-One page of IKEA-style instructions. The page is a single column of tasks, each an underlined
-name with a one-line summary, grouped by section (the section names aren’t shown). Opening a
+One page of IKEA-style instructions. The page is a list of tasks, each an underlined name with
+a one-line summary, grouped by section (the section names aren’t shown), in as many columns as
+it takes to fit the screen. Opening a
 task shows its steps: a few
 numbered steps, each with a picture and a caption of a few words. That’s all. No introductions,
 no paragraphs, no marketing.

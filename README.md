@@ -1,8 +1,10 @@
 # mooligan-website
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**:
-one page of instructions for the app, in the manner of an IKEA manual. The page is a single
-column of tasks, nothing else: each an underlined name with a one-line summary beneath. Tap a
+one page of instructions for the app, in the manner of an IKEA manual. The page is a list of
+tasks, nothing else: each an underlined name with a one-line summary beneath. It sits in one
+column when it fits the screen, and in as many columns as it needs to fit otherwise (as the width
+allows; `src/page.js`), re-measured on resize. Tap a
 task to open its steps in place, each a picture and a caption of a few words. Task names are set
 in New York (SF Serif), summaries and steps in SF Pro; one ink; no scrolling sideways at any
 width. A link such as `mooligan.com/#filter` opens that task.
@@ -16,6 +18,7 @@ content/
   figures/*.svg        the drawings (120 × 120, one line weight)
 media/                 screenshots imported from release kits (created by the first import)
 src/style.css          the page’s design
+src/page.js            its script: fitting the columns to the screen, opening tasks from links
 public/                copied as-is: 404 page, icons, link preview, CNAME
 scripts/               build, check, validate-kit, import-kit
 docs/release-kit.md    the release kit format
