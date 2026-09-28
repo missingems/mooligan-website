@@ -2,7 +2,6 @@
 title: Settings
 feature: settings
 section: Settings
-summary: What’s on your phone, and how fresh it is.
 ---
 ## Up to date
 1. Tap ≡, then `Settings`. ![](figure:menu-settings)

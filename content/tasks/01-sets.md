@@ -2,7 +2,6 @@
 title: Sets
 feature: sets
 section: Sets
-summary: Every paper set, under the day it came out.
 ---
 ## Release dates
 1. Scroll the `Sets` list. ![](figure:sets-dates)

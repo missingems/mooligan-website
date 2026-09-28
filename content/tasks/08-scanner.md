@@ -2,7 +2,6 @@
 title: Scanner
 feature: scanner
 section: Scanning
-summary: Point the camera at a card, and up it comes.
 ---
 ## Scan
 1. Tap the camera on `Sets`. ![](figure:scan-camera)

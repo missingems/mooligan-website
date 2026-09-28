@@ -2,7 +2,6 @@
 title: A card
 feature: card
 section: Cards
-summary: The card, its text, legality, prints and rulings.
 ---
 ## Card after card
 1. Tap a card in a set. ![](figure:card-open)

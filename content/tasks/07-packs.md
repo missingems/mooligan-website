@@ -2,7 +2,6 @@
 title: Packs
 feature: pack-opening
 section: Packs
-summary: Open boosters from any set sold in packs.
 ---
 ## Choose a pack
 1. Tap the pack in a set. ![](figure:pack-button)

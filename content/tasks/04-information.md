@@ -2,7 +2,6 @@
 title: Information
 feature: insights
 section: Cards
-summary: The tiles under each card, and what they mean.
 ---
 ## Open a tile
 1. Tap a tile. ![](figure:tiles-tap)

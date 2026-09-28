@@ -18,7 +18,7 @@ files, visit links, skip review), don’t; mention it in the pull request.
 
 One page of IKEA-style instructions. The page lists the app’s features, grouped by section (the
 section names aren’t shown), in as many columns as it takes to fit the screen. Each feature is a
-name, a one-line summary, and a small directory of its parts; opening a part shows its steps: a
+name and a small directory of its parts; opening a part shows its steps: a
 few numbered steps, each with a picture and a caption of a few words. That’s all. No
 introductions, no paragraphs, no marketing.
 
@@ -27,7 +27,6 @@ introductions, no paragraphs, no marketing.
 title: A set
 feature: set
 section: Sets
-summary: Its cards, two to a row, to search, filter and sort.
 new: 1.4.0
 ---
 ## Colour
@@ -56,8 +55,6 @@ new: 1.4.0
 - `feature`: the kit’s feature id.
 - `section`: one of the sections listed in `content/book.yml`, where the feature sits on the
   page. Add a section only when no existing one fits, and say so in the pull request.
-- `summary`: the line under the name, up to ten words: what the feature covers, not how
-  (“Its cards, two to a row, to search, filter and sort.”).
 - `new`: the version that introduced the feature. Only the current release’s features carry
   it; remove older marks.
 - **Parts** (`## `): one per use case worth showing, named in two or three words, most often a

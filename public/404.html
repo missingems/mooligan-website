@@ -7,24 +7,24 @@
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
-  :root { --paper: #ffffff; --ink: #111111; --ink-2: #6e6e6e; }
-  @media (prefers-color-scheme: dark) { :root { --paper: #0f0f0f; --ink: #f0f0f0; --ink-2: #9a9a9a; } }
+  :root { --paper: #ffffff; --ink: #161616; --ink-2: #767676; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #141414; --ink: #e8e8e8; --ink-2: #8e8e8e; } }
   body {
     margin: 0; min-height: 100dvh; display: grid; place-items: center;
     background: var(--paper); color: var(--ink);
-    font: 0.9375rem/1.25 ui-serif, "New York", "Iowan Old Style", Georgia, serif;
-    letter-spacing: -0.012em; -webkit-font-smoothing: antialiased;
+    font: 0.875rem/1.45 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    -webkit-font-smoothing: antialiased;
   }
-  main { width: min(20rem, 100% - 32px); }
-  h1 { margin: 0 0 0.5rem; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.04em; }
-  p { margin: 0; color: var(--ink-2); }
-  a { color: var(--ink); text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+  main { width: min(24rem, 100% - 32px); }
+  h1, p { margin: 0; font: inherit; }
+  span { color: var(--ink-2); }
+  a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 </style>
 </head>
 <body>
 <main>
   <h1>404</h1>
-  <p>This page isn’t in the instructions. <a href="/">Back to the start.</a></p>
+  <p><span aria-hidden="true">└</span> This page isn’t in the instructions. <a href="/">Back to the start.</a></p>
 </main>
 </body>
 </html>

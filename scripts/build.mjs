@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Builds mooligan.com from content/ into dist/: one page of illustrated instructions.
-// Each file in content/tasks is a feature of the app, in file order: its name, a line of summary,
-// and a small directory of its parts, each opening in place to show its steps (or, without parts,
-// the steps themselves). A step is a caption with a drawing (content/figures) or a capture from a
+// Builds mooligan.com from content/ into dist/: one page of illustrated instructions, under the
+// logo (content/logo.svg). Each file in content/tasks is a feature of the app, in file order: its
+// name and a small directory of its parts, each opening in place to show its steps (or, without
+// parts, the steps themselves). A step is a caption with a drawing (content/figures) or a capture from a
 // release kit (media/); tips and do/don’t panels sit among them. The build fails on anything it
 // can’t resolve.
 
@@ -59,7 +59,6 @@ function parseTask(src, file) {
   catch (e) { fail(file, `the front matter isn’t valid YAML (${e.message.split('\n')[0]}); quote a value that holds “: ”`); }
   if (!data.title) fail(file, '“title” is required in the front matter');
   if (!data.feature) fail(file, '“feature” is required in the front matter (the feature id release kits use)');
-  if (!data.summary) fail(file, '“summary” is required in the front matter (one line, shown in the contents)');
   if (!book.sections.includes(data.section)) fail(file, `“section” should be one of: ${book.sections.join(', ')}`);
   const own = { panels: [] };   // steps of a task without parts
   const parts = [];
@@ -179,27 +178,24 @@ async function renderTask(task, i) {
   if (!task.parts.length) {
     return `<div class="${cls}">
   <details class="task" id="${task.slug}">
-    <summary>
-      <span class="name">${esc(task.data.title)}</span>${isNew}
-      <span class="sum">${inline(task.data.summary)}</span>
-    </summary>
+    <summary><span class="name">${esc(task.data.title)}</span>${isNew}</summary>
 ${indent(await renderPanels(task.panels), 4)}
   </details>
 </div>`;
   }
-  // A feature with parts: its name and summary, then a directory of its parts.
+  // A feature with parts: its name, then its parts as a directory, ├ for each and └ for the last.
   const parts = [];
-  for (const part of task.parts) {
+  for (const [k, part] of task.parts.entries()) {
+    const branch = k === task.parts.length - 1 ? '└' : '├';
     parts.push(`<li>
   <details class="task" id="${task.slug}-${part.slug}">
-    <summary><span class="name">${esc(part.title)}</span></summary>
+    <summary><span class="br" aria-hidden="true">${branch}</span><span class="name">${esc(part.title)}</span></summary>
 ${indent(await renderPanels(part.panels), 4)}
   </details>
 </li>`);
   }
   return `<div class="${cls}" id="${task.slug}">
   <h2 class="fname">${esc(task.data.title)}${isNew}</h2>
-  <p class="sum">${inline(task.data.summary)}</p>
   <ul class="tree">
 ${indent(parts.join('\n'), 4)}
   </ul>
@@ -209,6 +205,12 @@ ${indent(parts.join('\n'), 4)}
 // Tasks run in section order (file order within a section); the section names aren’t shown,
 // only a little extra space where one ends (the “gs” class on its first task).
 const css = (await readFile(path.join(ROOT, 'src/style.css'), 'utf8')).trimEnd();
+// The logo, inline so it takes the page’s ink in light and dark.
+const logoFile = path.join(CONTENT, 'logo.svg');
+let logo = (await readFile(logoFile, 'utf8')).trim();
+if (!/<title>[^<]+<\/title>/.test(logo)) fail(rel(logoFile), 'the logo needs a <title> naming it');
+logo = logo.replace(/^<svg([^>]*?)\s+xmlns="[^"]*"([^>]*)>/, '<svg$1$2>')
+  .replace(/^<svg/, '<svg role="img" aria-labelledby="logo"').replace('<title>', '<title id="logo">');
 const script = (await readFile(path.join(ROOT, 'src/page.js'), 'utf8')).trimEnd();
 tasks.sort((a, b) => book.sections.indexOf(a.data.section) - book.sections.indexOf(b.data.section));
 const taskHtml = [];
@@ -241,7 +243,7 @@ ${indent(css, 2)}
 <body>
 <div class="page">
 
-<h1 class="vh">${esc(book.name)}${book.label ? ` ${esc(book.label)}` : ''}</h1>
+<h1 class="logo">${logo}<span class="vh">${book.label ? ` ${esc(book.label)}` : ''}</span></h1>
 
 <main class="contents">
 ${taskHtml.join("\n\n")}

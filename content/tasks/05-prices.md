@@ -2,7 +2,6 @@
 title: Prices
 feature: prices
 section: Value
-summary: What a card costs, what it cost, and what a store pays.
 ---
 ## Market price
 1. Scroll to `Market Price`. ![](figure:prices-row)

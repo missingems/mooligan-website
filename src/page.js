@@ -10,7 +10,7 @@
   // up to as many as the width allows. Features (a task, or a feature with its directory of
   // parts) keep their order and are split so the columns come out as even as they can. Only
   // closed heights count, so opening a task lengthens its own column and never moves the others.
-  const SINGLE = 36;   // rem: the width of the page as one column
+  const SINGLE = 34;   // rem: the width of the page as one column
   const COLUMN = 20;   // rem: the widest a column gets when there are several
   const MIN = 15;      // rem: the narrowest a column may be
   const GAP = 3;       // rem: between columns
@@ -56,8 +56,8 @@
     contents.replaceChildren(...features);
     root.style.removeProperty('--page');
 
-    // The notice under the list counts too, so the whole page fits when it can.
-    const room = innerHeight - parseFloat(getComputedStyle(contents).paddingTop) - px(1.5) -
+    // The logo above the list and the notice under it count too, so the whole page fits when it can.
+    const room = innerHeight - (contents.getBoundingClientRect().top + scrollY) - px(1.5) -
       (notice ? notice.getBoundingClientRect().height : 0);
     const gutter = Math.min(40, Math.max(16, 0.04 * root.clientWidth));   // as --gutter in the CSS
     const across = root.clientWidth - 2 * gutter;

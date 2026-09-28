@@ -2,7 +2,6 @@
 title: A set
 feature: set
 section: Sets
-summary: Its cards, two to a row, to search, filter and sort.
 ---
 ## Cards
 1. Tap a set. ![](figure:set-open)
