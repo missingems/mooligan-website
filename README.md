@@ -2,42 +2,57 @@
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**.
 
-It is one page, designed as the index at the back of a book. The index *is* the manual: entries are
-alphabetical, sub-entries are indented, and each number is a page. Tapping a number opens that page
-over the index; ← and → turn pages, Esc closes. With JavaScript off, the pages simply follow the index.
+It is written as a small book, *The Mooligan Companion*: a guide to the app in five parts, one for
+each colour of Magic.
 
-Plain static HTML — no build step, no dependencies.
+| | Part | Chapters |
+| --- | --- | --- |
+| White | **The Table** | Starting a Game · Keeping Score · Ending a Game |
+| Blue | **The Library** | Browsing · Searching · Filtering · The Card Page |
+| Black | **The Ledger** | Printings · Prices · Pull Rates |
+| Red | **The Eye** | The Scanner |
+| Green | **The Field** | The Metagame · Decklists and Usage · Events |
+
+Before the parts come a cover, an epigraph, the contents and a preface, all numbered in roman
+numerals. After them come a glossary, an index and a colophon. Page numbers sit in the margin, notes
+in the side margin on wide screens, and a running head at the top shows the current chapter and page.
+The ribbon on the cover remembers the last page you read.
+
+Plain static HTML, with no build step and no dependencies.
 
 | File | |
 | --- | --- |
-| `index.html` | The whole site: styles, index, pages and the small script that opens them. |
+| `index.html` | The whole book: styles, text, figures (inline SVG) and a short script for the running head and ribbon. |
 | `404.html` | “This page was never printed.” |
 | `favicon.svg`, `apple-touch-icon.png`, `og.png` | Icons and the link-preview image. |
 | `CNAME` | Custom domain for GitHub Pages. |
 
 ## Editing
 
-**A page** is an `<article class="page" id="pN" data-section="…">` in the `The Pages` section of
-`index.html`. The `id` is its page number, `data-section` is the running head shown on the open
-page, and the order in the file is the order pages turn in.
+**Pages.** The page number of a chapter or section is its `data-folio`, and its `id` is `p` plus that
+number (`id="p15" data-folio="15"`). The contents, the index and cross-references (`a.xr`) all link to
+those ids, so if a page number changes, search for `#p15` and update the links too.
 
-**An entry** is an `<li class="entry">` inside its letter’s `<section>`:
+**Parts** are `<section class="part" data-colour="w|u|b|r|g">`. The colour sets the accent for
+everything inside: drop caps, kickers, notes and figures.
+
+**Notes** are `<aside class="note">`, placed just before the paragraph they sit beside.
+
+**Glossary terms** are linked from the text with `<a class="gl" href="#g-term">`.
+
+**Index entries** are `<li class="entry">` inside their letter’s section:
 
 ```html
 <li class="entry" id="e-filtering">
-  <p class="head">filtering, <a class="loc" href="#p8">8–10</a></p>
+  <p class="head">filtering, <a class="loc" href="#p15">15–17</a></p>
   <ul class="subs">
-    <li>by colour, <a class="loc" href="#p8">8</a></li>
+    <li>by colour, <a class="loc" href="#p15">15</a></li>
     <li><em>See also</em> <a class="xref" href="#e-searching">searching</a></li>
   </ul>
 </li>
 ```
 
-`a.loc` is a page number (links to `#pN`); `a.xref` is a *see* / *see also* reference (links to
-another entry’s `id`). Adding a new letter means adding its `<section class="letter" id="X">` and
-turning its `<span>` in the letter row (`nav.thumbs`) into `<a href="#X">`.
-
-Type is set in New York and SF Pro on Apple devices, falling back to Iowan Old Style / Georgia and the
+Type is set in New York and SF Pro on Apple devices, falling back to Iowan Old Style or Georgia and the
 system sans elsewhere. Apple’s licence doesn’t allow serving SF fonts from a website, so none are
 bundled.
 
