@@ -49,14 +49,14 @@ p { margin: 0; overflow-wrap: break-word; }
 .contents { padding: clamp(1.5rem, 6vw, 4rem) 0 clamp(3rem, 10vw, 6rem); }
 .contents.laid-out { display: flex; gap: 0 3rem; align-items: flex-start; }
 .col { flex: 1 1 0; min-width: 0; }
-.task.gs { margin-top: 1.5rem; }          /* a little more space where a section ends */
-.col > .task:first-child { margin-top: 0; }
+.feature { padding: 0.5rem 0; scroll-margin-top: 0.5rem; }
+.feature.gs { margin-top: 1.25rem; }       /* a little more space where a section ends */
+.col > .feature:first-child { margin-top: 0; }
 
 /* ——— A task: an underlined name and a line under it; tap to open its steps ——— */
 .task { scroll-margin-top: 0.5rem; }
 .task summary {
   display: block;
-  padding: 0.5rem 0;
   cursor: pointer;
   list-style: none;
 }
@@ -70,8 +70,8 @@ p { margin: 0; overflow-wrap: break-word; }
   text-decoration-color: var(--ink-3);
   text-underline-offset: 0.18em;
 }
-.task summary:hover .name, .task[open] .name { text-decoration-color: currentColor; }
-.task .sum {
+.task summary:hover .name, .task[open] > summary .name { text-decoration-color: currentColor; }
+.sum {
   display: block;
   margin-top: 0.2rem;
   font-family: var(--sans);
@@ -80,6 +80,17 @@ p { margin: 0; overflow-wrap: break-word; }
   letter-spacing: -0.005em;
   color: var(--ink-2);
 }
+
+/* ——— A feature with parts: its name, then a small directory of the parts ——— */
+.fname { margin: 0; font-size: 1rem; font-weight: 400; line-height: 1.25; letter-spacing: -0.02em; }
+.tree { list-style: none; margin: 0.3rem 0 0; padding: 0; }
+.tree > li { position: relative; padding-left: 1.15rem; }
+.tree > li::before, .tree > li::after { content: ""; position: absolute; left: 0.3rem; border: 0 solid var(--ink-3); }
+.tree > li::before { top: 0; bottom: 0; border-left-width: 1px; }                 /* ├ │ */
+.tree > li:last-child::before { bottom: auto; height: 0.95rem; }                  /* └ */
+.tree > li::after { top: 0.95rem; width: 0.6rem; border-top-width: 1px; }         /* ─ */
+.tree .task summary { padding: 0.3rem 0; }
+.tree .task .name { font-size: 0.9375rem; }
 .new {
   display: inline-block;
   margin-left: 0.4rem;
@@ -106,6 +117,13 @@ p { margin: 0; overflow-wrap: break-word; }
   letter-spacing: -0.005em;
 }
 .task[open] .panels { animation: open 0.25s ease-out; }
+/* Steps without pictures yet: a plain numbered list. */
+.panels.list { grid-template-columns: minmax(0, 1fr); gap: 0.3rem; padding: 0.3rem 0 0.8rem; }
+.panels.list .panel { display: grid; grid-template-columns: 1.2rem minmax(0, 1fr); align-items: baseline; }
+.panels.list .panel .k { position: static; font-size: 0.875rem; }
+.panels.list .panel p { margin: 0; font-size: 0.875rem; }
+.panels.list .tip { grid-column: auto; display: grid; align-items: center; }
+.panels.list .tip .k, .panels.list .do .k, .panels.list .dont .k { width: 0.95rem; height: 0.95rem; border-width: 1px; font-size: 0.5625rem; }
 @keyframes open { from { opacity: 0; transform: translateY(-4px); } }
 .panel { position: relative; min-width: 0; }
 .panel .k {
@@ -158,11 +176,11 @@ svg .t { fill: currentColor; font-family: var(--sans); letter-spacing: -0.02em; 
 svg .halo { stroke: var(--paper); stroke-width: 5px; paint-order: stroke; }
 
 @media (max-width: 40rem) {
-  .task summary { padding: 0.4rem 0; }
-  .task.gs { margin-top: 1.25rem; }
+  .feature { padding: 0.4rem 0; }
+  .feature.gs { margin-top: 1rem; }
   .panels { grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr)); }
 }
 
 @media print {
-  .group, .task { break-inside: avoid; }
+  .feature { break-inside: avoid; }
 }

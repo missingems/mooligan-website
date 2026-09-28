@@ -1,13 +1,14 @@
 (() => {
   const contents = document.querySelector('.contents');
-  const tasks = [...contents.querySelectorAll('details.task')];
+  const features = [...contents.querySelectorAll('.feature')];   // what the columns hold
+  const tasks = [...contents.querySelectorAll('details.task')];   // what opens
   const root = document.documentElement;
 
   // ——— Columns ———
   // One column if every task fits on the screen; otherwise as many columns as it takes,
-  // up to as many as the width allows. Tasks keep their order and are split so the columns
-  // come out as even as they can. Only closed heights count, so opening a task lengthens
-  // its own column and never moves the others.
+  // up to as many as the width allows. Features (a task, or a feature with its directory of
+  // parts) keep their order and are split so the columns come out as even as they can. Only
+  // closed heights count, so opening a task lengthens its own column and never moves the others.
   const SINGLE = 36;   // rem: the width of the page as one column
   const COLUMN = 20;   // rem: the widest a column gets when there are several
   const MIN = 15;      // rem: the narrowest a column may be
@@ -35,13 +36,15 @@
     return { cols: fill(hi), tallest: hi };
   }
 
+  // A feature’s height with every task in it closed.
+  const closed = f => [...f.querySelectorAll('details.task[open]')].reduce(
+    (h, d) => h - (d.getBoundingClientRect().height - d.querySelector('summary').getBoundingClientRect().height),
+    f.getBoundingClientRect().height);
+
   function measure(width) {
     contents.style.width = width + 'px';
-    const heights = tasks.map((t, i) => {
-      const s = getComputedStyle(t);
-      const gap = i && t.classList.contains('gs') ? parseFloat(s.marginTop) : 0;
-      return t.querySelector('summary').getBoundingClientRect().height + gap;
-    });
+    const heights = features.map((f, i) =>
+      closed(f) + (i && f.classList.contains('gs') ? parseFloat(getComputedStyle(f).marginTop) : 0));
     contents.style.width = '';
     return heights;
   }
@@ -49,7 +52,7 @@
   function layout() {
     // Start again from one plain list, as if there were no columns.
     contents.classList.remove('laid-out');
-    contents.replaceChildren(...tasks);
+    contents.replaceChildren(...features);
     root.style.removeProperty('--page');
 
     const room = innerHeight - parseFloat(getComputedStyle(contents).paddingTop) - px(1.5);
@@ -65,11 +68,11 @@
       if (result.tallest <= room || n === most) break;
     }
 
-    // Move the tasks into their columns (moving keeps each task open or closed).
+    // Move the features into their columns (moving keeps each task open or closed).
     contents.replaceChildren(...cols.map(ids => {
       const col = document.createElement('div');
       col.className = 'col';
-      col.append(...ids.map(i => tasks[i]));
+      col.append(...ids.map(i => features[i]));
       return col;
     }));
     contents.classList.add('laid-out');
