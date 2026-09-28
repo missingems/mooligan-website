@@ -246,7 +246,7 @@ ${indent(css, 2)}
 <main class="contents">
 ${taskHtml.join("\n\n")}
 </main>
-
+${book.notice ? `\n<p class="notice">${inline(book.notice)}</p>\n` : ''}
 </div>
 <script>
 ${indent(script, 2)}

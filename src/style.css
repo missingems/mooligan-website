@@ -46,7 +46,7 @@ p { margin: 0; overflow-wrap: break-word; }
 .page { width: min(var(--page, 36rem), 100% - 2 * var(--gutter)); margin-inline: auto; }
 
 /* ——— Contents: as many columns as it takes to fit the screen (see src/page.js) ——— */
-.contents { padding: clamp(1.5rem, 6vw, 4rem) 0 clamp(3rem, 10vw, 6rem); }
+.contents { padding: clamp(1.5rem, 6vw, 4rem) 0 clamp(2rem, 6vw, 3rem); }
 .contents.laid-out { display: flex; gap: 0 3rem; align-items: flex-start; }
 .col { flex: 1 1 0; min-width: 0; }
 .feature { padding: 0.5rem 0; scroll-margin-top: 0.5rem; }
@@ -104,6 +104,17 @@ p { margin: 0; overflow-wrap: break-word; }
   letter-spacing: 0.02em;
   vertical-align: 0.15rem;
 }
+
+/* ——— The fan content notice: one grey line under everything ——— */
+.notice {
+  margin: 0 0 clamp(1.5rem, 5vw, 2.5rem);
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--ink-2);
+}
+.notice a { text-decoration-color: var(--ink-3); }
 
 /* ——— Steps: set in SF Pro ——— */
 .panels {

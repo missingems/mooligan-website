@@ -2,8 +2,9 @@
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**:
 one page of instructions for the app, in the manner of an IKEA manual. The page is a list of the
-app’s features, nothing else: each a name with a one-line summary beneath, and under it a small
-directory of its parts (for Sets: release dates, upcoming sets, set codes, search…). It sits in one
+app’s features: each a name with a one-line summary beneath, and under it a small directory of
+its parts (for Sets: release dates, upcoming sets, set codes, search…). Under them is one grey
+line, the notice Wizards’ Fan Content Policy asks for (`notice` in `content/book.yml`). It sits in one
 column when it fits the screen, and in as many columns as it needs to fit otherwise (as the width
 allows; `src/page.js`), re-measured on resize. Tap a part to open its steps in place, each a
 picture and a caption of a few words. Names are set in New York (SF Serif), summaries and steps

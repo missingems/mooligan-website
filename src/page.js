@@ -3,6 +3,7 @@
   const features = [...contents.querySelectorAll('.feature')];   // what the columns hold
   const tasks = [...contents.querySelectorAll('details.task')];   // what opens
   const root = document.documentElement;
+  const notice = document.querySelector('.notice');
 
   // ——— Columns ———
   // One column if every task fits on the screen; otherwise as many columns as it takes,
@@ -55,7 +56,9 @@
     contents.replaceChildren(...features);
     root.style.removeProperty('--page');
 
-    const room = innerHeight - parseFloat(getComputedStyle(contents).paddingTop) - px(1.5);
+    // The notice under the list counts too, so the whole page fits when it can.
+    const room = innerHeight - parseFloat(getComputedStyle(contents).paddingTop) - px(1.5) -
+      (notice ? notice.getBoundingClientRect().height : 0);
     const gutter = Math.min(40, Math.max(16, 0.04 * root.clientWidth));   // as --gutter in the CSS
     const across = root.clientWidth - 2 * gutter;
     const most = Math.max(1, Math.floor((across + px(GAP)) / (px(MIN) + px(GAP))));
