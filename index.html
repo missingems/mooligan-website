@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mooligan — Index</title>
+<meta name="description" content="Mooligan is a companion for Magic: The Gathering. Its manual, arranged as the index at the back of a book.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161512" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mooligan.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mooligan.com/">
+<meta property="og:title" content="Mooligan — Index">
+<meta property="og:description" content="A companion for Magic: The Gathering, explained as the index at the back of a book.">
+<meta property="og:image" content="https://mooligan.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    /* New York is Apple's “SF Serif”; ui-serif reaches it in Safari. */
+    --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+    --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+
+    --paper: #f5f1e8;
+    --leaf: #fbf8f1;
+    --ink: #1c1a16;
+    --ink-2: #6b6457;
+    --ink-3: #b3ab9b;
+    --rule: #dcd4c3;
+    --rubric: #a4321f;
+    --mark: #efd9a8;
+    --shadow: 0 1px 1px rgb(40 30 10 / 4%), 0 12px 40px -8px rgb(40 30 10 / 22%);
+
+    --measure: 72rem;
+    --gutter: clamp(16px, 5vw, 64px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161512;
+      --leaf: #1e1c18;
+      --ink: #ebe5d8;
+      --ink-2: #a0978a;
+      --ink-3: #5b554b;
+      --rule: #34302a;
+      --rubric: #e27b62;
+      --mark: #5a4523;
+      --shadow: 0 1px 1px rgb(0 0 0 / 30%), 0 16px 48px -8px rgb(0 0 0 / 60%);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--mark); }
+
+  .sheet {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* ——— Running head ——— */
+  .runner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.75rem 0 0.7rem;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* ——— Title ——— */
+  .title { padding: clamp(3rem, 10vw, 7.5rem) 0 clamp(2rem, 5vw, 3.5rem); }
+  h1 {
+    margin: 0;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(4.25rem, 15vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+  }
+  .lede {
+    max-width: 32em;
+    margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .lede b { font-weight: 400; color: var(--ink); }
+  .howto {
+    max-width: 34em;
+    margin: 1rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .howto .loc { cursor: default; text-decoration: none; }
+
+  /* ——— Thumb index ——— */
+  .thumbs {
+    display: grid;
+    grid-template-columns: repeat(26, 1fr);
+    gap: 0.15rem 0;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .thumbs > * {
+    padding: 0.35rem 0;
+    text-align: center;
+    text-decoration: none;
+  }
+  .thumbs a { color: var(--ink); border-radius: 3px; }
+  .thumbs a:hover { color: var(--rubric); }
+  .thumbs span { color: var(--ink-3); }
+
+  /* ——— The index ——— */
+  .index {
+    columns: 2 19rem;
+    column-gap: clamp(2.5rem, 6vw, 5rem);
+    column-rule: 1px solid var(--rule);
+    padding-bottom: 2rem;
+  }
+  .letter {
+    break-inside: avoid;
+    padding-bottom: 1.6rem;
+  }
+  .letter h2 {
+    margin: 0 0 0.35rem;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: var(--rubric);
+  }
+  .entries, .subs { list-style: none; margin: 0; padding: 0; }
+  .entry { break-inside: avoid; scroll-margin-top: 2rem; }
+  .head, .subs li { margin: 0; padding-left: 2em; text-indent: -2em; }
+  .subs li { margin-left: 1em; }
+  .entry + .entry { margin-top: 0.15rem; }
+  .entry em { font-style: italic; }
+  .entry:target .head { animation: mark 2.4s ease-out; }
+  @keyframes mark {
+    0%, 30% { background: var(--mark); box-shadow: -0.3em 0 0 var(--mark), 0.3em 0 0 var(--mark); }
+    100%    { background: transparent; box-shadow: none; }
+  }
+
+  .loc {
+    color: var(--rubric);
+    text-decoration: none;
+    font-variant-numeric: oldstyle-nums proportional-nums;
+    white-space: nowrap;
+  }
+  a.loc:hover, a.loc:focus-visible { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  .xref {
+    text-decoration: none;
+    background-image: linear-gradient(var(--ink-3), var(--ink-3));
+    background-size: 100% 1px;
+    background-position: 0 92%;
+    background-repeat: no-repeat;
+  }
+  .xref:hover { color: var(--rubric); background-image: linear-gradient(var(--rubric), var(--rubric)); }
+  :focus-visible { outline: 2px solid var(--rubric); outline-offset: 2px; border-radius: 2px; }
+
+  /* ——— The pages (shown in place when scripts are off) ——— */
+  .pages { padding: 2rem 0 1rem; border-top: 1px solid var(--rule); }
+  .pages > h2 {
+    margin: 0 0 2rem;
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .page { max-width: 34em; margin: 0 0 3rem; scroll-margin-top: 2rem; }
+  .page h3 {
+    margin: 0 0 0.6rem;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.625rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .page p { margin: 0 0 0.9em; hanging-punctuation: first; }
+  .page p + p { text-indent: 1.5em; margin-top: -0.9em; }
+  .page .folio-inline {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .js .pages { display: none; }
+
+  /* ——— Colophon ——— */
+  .colophon {
+    display: grid;
+    gap: 0.6rem;
+    padding: 2rem 0 1rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .colophon p { margin: 0; max-width: 62em; }
+  .colophon a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; text-decoration-color: var(--ink-3); }
+  .colophon a:hover { color: var(--rubric); }
+  .folio {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+    font-style: italic;
+    font-variant-numeric: oldstyle-nums;
+    color: var(--ink-2);
+  }
+
+  /* ——— A page, opened ——— */
+  dialog.leaf {
+    width: min(35rem, 100% - 2rem);
+    max-height: min(46rem, 100% - 2rem);
+    padding: 0;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--leaf);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  dialog.leaf::backdrop {
+    background: color-mix(in srgb, var(--paper) 72%, transparent);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+  dialog.leaf[open] { animation: open 0.28s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  dialog.leaf[open]::backdrop { animation: fade 0.28s ease-out; }
+  @keyframes open { from { opacity: 0; transform: translateY(10px) scale(0.99); } }
+  @keyframes fade { from { opacity: 0; } }
+
+  .leaf-page {
+    display: flex;
+    flex-direction: column;
+    min-height: min(29rem, calc(100dvh - 2rem));
+    padding: 1.4rem clamp(1.4rem, 6vw, 3.25rem) 1.1rem;
+  }
+  .leaf-runner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .leaf-close {
+    margin: -0.5rem -0.6rem -0.5rem 0;
+    padding: 0.5rem 0.6rem;
+    border: 0;
+    background: none;
+    color: var(--ink-2);
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+  }
+  .leaf-close:hover { color: var(--rubric); }
+  .leaf-body { flex: 1; padding: clamp(2rem, 6vw, 3.25rem) 0 2rem; }
+  .leaf-body h3 {
+    margin: 0 0 1rem;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .leaf-body p { margin: 0; font-size: 1.0625rem; line-height: 1.6; hanging-punctuation: first; }
+  .leaf-body p + p { text-indent: 1.5em; }
+  .leaf-body.turn { animation: turn 0.32s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  @keyframes turn { from { opacity: 0; transform: translateX(var(--dir, 12px)); } }
+  .leaf-foot {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+  }
+  .leaf-folio { font-style: italic; font-variant-numeric: oldstyle-nums; color: var(--ink-2); }
+  .leaf-foot button {
+    justify-self: start;
+    padding: 0.4rem 0;
+    border: 0;
+    background: none;
+    color: var(--ink-2);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .leaf-foot button:last-child { justify-self: end; }
+  .leaf-foot button:hover:not(:disabled) { color: var(--rubric); }
+  .leaf-foot button:disabled { visibility: hidden; }
+
+  @media (max-width: 40rem) {
+    body { font-size: 1rem; }
+    .runner { padding-top: 1.1rem; }
+    .thumbs { grid-template-columns: repeat(13, 1fr); font-size: 0.6875rem; }
+    dialog.leaf { width: 100%; max-width: none; max-height: none; height: 100%; margin: 0; border: 0; border-radius: 0; }
+    .leaf-page { min-height: 100%; padding-top: max(1.1rem, env(safe-area-inset-top)); padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after, dialog.leaf[open], dialog.leaf[open]::backdrop { animation: none !important; }
+  }
+
+  @media print {
+    .thumbs, .leaf { display: none !important; }
+    .js .pages { display: block; }
+    body { background: #fff; color: #000; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="runner" aria-hidden="true"><span>Mooligan</span><span>A Field Guide</span></div>
+
+    <div class="title">
+      <h1>Index</h1>
+      <p class="lede"><b>Mooligan</b> is a companion for Magic: The Gathering. It keeps the score at your table, knows every card, reads cards through the camera, and follows what is winning this week. This is its manual, arranged the way the back of a book is.</p>
+      <p class="howto">Find what you want to do. Numbers such as <span class="loc">8</span> are pages; tap one to read it. <em>See</em> and <em>see also</em> lead elsewhere in the index.</p>
+    </div>
+
+    <nav class="thumbs" aria-label="Letters">
+      <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a><a href="#E">E</a><a href="#F">F</a><a href="#G">G</a><span aria-hidden="true">H</span><span aria-hidden="true">I</span><span aria-hidden="true">J</span><span aria-hidden="true">K</span><a href="#L">L</a><a href="#M">M</a><span aria-hidden="true">N</span><span aria-hidden="true">O</span><a href="#P">P</a><span aria-hidden="true">Q</span><a href="#R">R</a><a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><span aria-hidden="true">V</span><span aria-hidden="true">W</span><span aria-hidden="true">X</span><span aria-hidden="true">Y</span><span aria-hidden="true">Z</span>
+    </nav>
+  </header>
+
+  <main class="index" id="index">
+
+    <section class="letter" id="A" aria-label="A">
+      <h2>A</h2>
+      <ul class="entries">
+        <li class="entry" id="e-archetypes">
+          <p class="head">archetypes, <a class="loc" href="#p19">19</a></p>
+          <ul class="subs">
+            <li>decklists for, <a class="loc" href="#p20">20</a></li>
+            <li>share of the metagame, <a class="loc" href="#p19">19</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="B" aria-label="B">
+      <h2>B</h2>
+      <ul class="entries">
+        <li class="entry" id="e-boosters">
+          <p class="head">boosters. <em>See</em> <a class="xref" href="#e-pull-rates">pull rates</a></p>
+        </li>
+        <li class="entry" id="e-browsing">
+          <p class="head">browsing, <a class="loc" href="#p5">5–7</a></p>
+          <ul class="subs">
+            <li>by set, <a class="loc" href="#p5">5</a></li>
+            <li>card to card, <a class="loc" href="#p6">6</a></li>
+            <li>in collector-number order, <a class="loc" href="#p5">5</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a>; <a class="xref" href="#e-searching">searching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="C" aria-label="C">
+      <h2>C</h2>
+      <ul class="entries">
+        <li class="entry" id="e-calendar">
+          <p class="head">calendar, premier play, <a class="loc" href="#p22">22</a></p>
+        </li>
+        <li class="entry" id="e-camera">
+          <p class="head">camera. <em>See</em> <a class="xref" href="#e-scanner">scanner</a></p>
+        </li>
+        <li class="entry" id="e-card-page">
+          <p class="head">card page, <a class="loc" href="#p11">11–16</a></p>
+          <ul class="subs">
+            <li>information tiles on, <a class="loc" href="#p15">15</a></li>
+            <li>legality on, <a class="loc" href="#p11">11</a></li>
+            <li>opened from a scan, <a class="loc" href="#p18">18</a></li>
+            <li>rulings on, <a class="loc" href="#p11">11</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-colour">
+          <p class="head">colour, filtering by, <a class="loc" href="#p8">8</a></p>
+        </li>
+        <li class="entry" id="e-commander">
+          <p class="head">Commander</p>
+          <ul class="subs">
+            <li>card usage in, <a class="loc" href="#p21">21</a></li>
+            <li>legality in, <a class="loc" href="#p9">9</a></li>
+            <li>starting life for, <a class="loc" href="#p2">2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="D" aria-label="D">
+      <h2>D</h2>
+      <ul class="entries">
+        <li class="entry" id="e-decklists">
+          <p class="head">decklists, <a class="loc" href="#p20">20</a></p>
+          <ul class="subs">
+            <li>opening a card from, <a class="loc" href="#p20">20</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-archetypes">archetypes</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-double-faced">
+          <p class="head">double-faced cards, <a class="loc" href="#p16">16</a></p>
+          <ul class="subs">
+            <li>scanning, <a class="loc" href="#p18">18</a></li>
+            <li>turning over, <a class="loc" href="#p16">16</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="E" aria-label="E">
+      <h2>E</h2>
+      <ul class="entries">
+        <li class="entry" id="e-events">
+          <p class="head">events, <a class="loc" href="#p22">22</a></p>
+          <ul class="subs">
+            <li>in store, near you, <a class="loc" href="#p22">22</a></li>
+            <li>premier play, <a class="loc" href="#p22">22</a></li>
+            <li>results of, <a class="loc" href="#p19">19</a>, <a class="loc" href="#p20">20</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="F" aria-label="F">
+      <h2>F</h2>
+      <ul class="entries">
+        <li class="entry" id="e-filtering">
+          <p class="head">filtering, <a class="loc" href="#p8">8–10</a></p>
+          <ul class="subs">
+            <li>by colour, <a class="loc" href="#p8">8</a></li>
+            <li>by format, <a class="loc" href="#p9">9</a></li>
+            <li>by mana value, <a class="loc" href="#p8">8</a></li>
+            <li>by rarity, <a class="loc" href="#p8">8</a></li>
+            <li>by type, <a class="loc" href="#p8">8</a></li>
+            <li>clearing, <a class="loc" href="#p10">10</a></li>
+            <li>several at once, <a class="loc" href="#p8">8</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-searching">searching</a>; <a class="xref" href="#e-sorting">sorting</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-formats">
+          <p class="head">formats, <a class="loc" href="#p9">9</a>, <a class="loc" href="#p19">19</a></p>
+          <ul class="subs">
+            <li>legality in, <a class="loc" href="#p9">9</a>, <a class="loc" href="#p11">11</a></li>
+            <li>metagame of, <a class="loc" href="#p19">19</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="G" aria-label="G">
+      <h2>G</h2>
+      <ul class="entries">
+        <li class="entry" id="e-game">
+          <p class="head">game, how to start a, <a class="loc" href="#p2">2–4</a></p>
+          <ul class="subs">
+            <li>choosing players, <a class="loc" href="#p2">2</a></li>
+            <li>ending, <a class="loc" href="#p4">4</a></li>
+            <li>keeping score in, <a class="loc" href="#p3">3</a></li>
+            <li>rematch, <a class="loc" href="#p4">4</a></li>
+            <li>starting life, <a class="loc" href="#p2">2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="L" aria-label="L">
+      <h2>L</h2>
+      <ul class="entries">
+        <li class="entry" id="e-legality">
+          <p class="head">legality. <em>See</em> <a class="xref" href="#e-formats">formats</a></p>
+        </li>
+        <li class="entry" id="e-life">
+          <p class="head">life totals, <a class="loc" href="#p3">3</a></p>
+          <ul class="subs">
+            <li>counting faster, <a class="loc" href="#p3">3</a></li>
+            <li>resetting, <a class="loc" href="#p4">4</a></li>
+            <li>starting, <a class="loc" href="#p2">2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="M" aria-label="M">
+      <h2>M</h2>
+      <ul class="entries">
+        <li class="entry" id="e-mana-value">
+          <p class="head">mana value, filtering by, <a class="loc" href="#p8">8</a></p>
+        </li>
+        <li class="entry" id="e-metagame">
+          <p class="head">metagame, <a class="loc" href="#p19">19–21</a></p>
+          <ul class="subs">
+            <li>archetypes in, <a class="loc" href="#p19">19</a></li>
+            <li>how often updated, <a class="loc" href="#p19">19</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-decklists">decklists</a>; <a class="xref" href="#e-usage">usage, card</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-mooligan">
+          <p class="head">Mooligan, <a class="loc" href="#p1">1</a></p>
+        </li>
+        <li class="entry" id="e-mulligan">
+          <p class="head">mulligan. <em>See</em> <a class="xref" href="#e-mooligan">Mooligan</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="P" aria-label="P">
+      <h2>P</h2>
+      <ul class="entries">
+        <li class="entry" id="e-players">
+          <p class="head">players, number of, <a class="loc" href="#p2">2</a></p>
+        </li>
+        <li class="entry" id="e-premier-play">
+          <p class="head">premier play. <em>See</em> <a class="xref" href="#e-events">events</a></p>
+        </li>
+        <li class="entry" id="e-prices">
+          <p class="head">prices, <a class="loc" href="#p13">13</a></p>
+          <ul class="subs">
+            <li>history of, <a class="loc" href="#p13">13</a></li>
+            <li>of each printing, <a class="loc" href="#p12">12</a></li>
+            <li>sorting by, <a class="loc" href="#p10">10</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-printings">
+          <p class="head">printings, <a class="loc" href="#p12">12</a></p>
+          <ul class="subs">
+            <li>choosing between, <a class="loc" href="#p12">12</a></li>
+            <li>of a scanned card, <a class="loc" href="#p18">18</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-pull-rates">
+          <p class="head">pull rates, <a class="loc" href="#p14">14</a></p>
+          <ul class="subs">
+            <li>by product and finish, <a class="loc" href="#p14">14</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="R" aria-label="R">
+      <h2>R</h2>
+      <ul class="entries">
+        <li class="entry" id="e-rarity">
+          <p class="head">rarity, filtering by, <a class="loc" href="#p8">8</a></p>
+        </li>
+        <li class="entry" id="e-rulings">
+          <p class="head">rulings, <a class="loc" href="#p11">11</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="S" aria-label="S">
+      <h2>S</h2>
+      <ul class="entries">
+        <li class="entry" id="e-scanner">
+          <p class="head">scanner, <a class="loc" href="#p17">17–18</a></p>
+          <ul class="subs">
+            <li>holding a card steady for, <a class="loc" href="#p17">17</a></li>
+            <li>opening a scanned card, <a class="loc" href="#p18">18</a></li>
+            <li>several cards in a row, <a class="loc" href="#p17">17</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-score">
+          <p class="head">score, keeping. <em>See</em> <a class="xref" href="#e-life">life totals</a></p>
+        </li>
+        <li class="entry" id="e-searching">
+          <p class="head">searching, <a class="loc" href="#p7">7</a></p>
+          <ul class="subs">
+            <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-sets">
+          <p class="head">sets, <a class="loc" href="#p5">5</a></p>
+        </li>
+        <li class="entry" id="e-sorting">
+          <p class="head">sorting, <a class="loc" href="#p10">10</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="T" aria-label="T">
+      <h2>T</h2>
+      <ul class="entries">
+        <li class="entry" id="e-tiles">
+          <p class="head">tiles, information, <a class="loc" href="#p15">15</a></p>
+        </li>
+        <li class="entry" id="e-turning">
+          <p class="head">turning a card over. <em>See</em> <a class="xref" href="#e-double-faced">double-faced cards</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="letter" id="U" aria-label="U">
+      <h2>U</h2>
+      <ul class="entries">
+        <li class="entry" id="e-usage">
+          <p class="head">usage, card, <a class="loc" href="#p21">21</a></p>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- The pages the index points to. With scripts on, each opens as a leaf over the index. -->
+  <section class="pages" id="pages" aria-label="Pages">
+    <h2>The Pages</h2>
+
+    <article class="page" id="p1" data-section="Before You Begin">
+      <h3>Mooligan</h3>
+      <p>A companion for Magic: The Gathering. It keeps the score at your table, knows every card ever printed, reads the cards in front of you through the camera, and follows what is winning in tournaments this week.</p>
+      <p>Nothing here needs reading in order. Like any index, this one is for finding the one thing you came for.</p>
+    </article>
+
+    <article class="page" id="p2" data-section="The Game">
+      <h3>Starting a game</h3>
+      <p>Open Play. Choose how many are at the table, and the life each player begins with: twenty for most formats, forty for Commander.</p>
+      <p>Tap Start. The screen divides into one seat for each player, each turned to face whoever sits there, so the phone can lie flat in the middle of the table.</p>
+    </article>
+
+    <article class="page" id="p3" data-section="The Game">
+      <h3>Keeping score</h3>
+      <p>Tap the upper half of a seat to gain a life, the lower half to lose one. Press and hold to count faster.</p>
+      <p>A small tally beside the total shows what has changed in the last few moments, so a hit for seven reads as −7 before it settles.</p>
+    </article>
+
+    <article class="page" id="p4" data-section="The Game">
+      <h3>Ending a game</h3>
+      <p>When the game is decided, choose Rematch to reset every total and keep the same seats, or New Game to choose players and starting life again.</p>
+    </article>
+
+    <article class="page" id="p5" data-section="Browsing">
+      <h3>By set</h3>
+      <p>Sets are listed newest first, each with its symbol and the date it was released.</p>
+      <p>Open a set to see its cards in collector-number order, as they would sit in a binder.</p>
+    </article>
+
+    <article class="page" id="p6" data-section="Browsing">
+      <h3>Card to card</h3>
+      <p>Open any card, then swipe sideways to move to its neighbour in the list you came from. A whole set can be walked this way, one card at a time, like turning pages.</p>
+    </article>
+
+    <article class="page" id="p7" data-section="Browsing">
+      <h3>Searching</h3>
+      <p>Type part of a card’s name; results gather as you type. Search looks across every set, so a single name leads to every printing of the card.</p>
+    </article>
+
+    <article class="page" id="p8" data-section="Filtering">
+      <h3>Narrowing a list</h3>
+      <p>Filters narrow whatever list you are looking at. Choose by colour, card type, rarity, or a range of mana value.</p>
+      <p>Filters stack. Each one you add narrows the list further, and each stays until you take it away.</p>
+    </article>
+
+    <article class="page" id="p9" data-section="Filtering">
+      <h3>By format</h3>
+      <p>Choose a format — Standard, Pioneer, Modern, Legacy, Vintage, Pauper or Commander — to see only the cards legal in it.</p>
+      <p>Combine it with colour to ask a sharper question: every blue card legal in Modern, say.</p>
+    </article>
+
+    <article class="page" id="p10" data-section="Filtering">
+      <h3>Sorting, and starting over</h3>
+      <p>Sort any list by name, mana value, price or release date.</p>
+      <p>The filters in use sit in a row above the results. Tap one to remove it, or Clear to begin again.</p>
+    </article>
+
+    <article class="page" id="p11" data-section="The Card">
+      <h3>The card page</h3>
+      <p>Everything about a card, in one place: its art, its rules text, whether it is legal in each format, and its rulings, newest first.</p>
+    </article>
+
+    <article class="page" id="p12" data-section="The Card">
+      <h3>Printings</h3>
+      <p>Most cards have been printed more than once. Printings lists every one, with its set and finish.</p>
+      <p>Choose one and the whole page follows it: the art, the collector number, the price.</p>
+    </article>
+
+    <article class="page" id="p13" data-section="The Card">
+      <h3>Prices</h3>
+      <p>Current prices are shown for each finish. Open a price to see its history, and tell a spike from a trend before you buy or trade.</p>
+    </article>
+
+    <article class="page" id="p14" data-section="The Card">
+      <h3>Pull rates</h3>
+      <p>How likely you are to open a card: the odds per pack for each printing, in each product it comes in and in each finish.</p>
+    </article>
+
+    <article class="page" id="p15" data-section="The Card">
+      <h3>Information tiles</h3>
+      <p>The card page is laid out in tiles: legality, prices, pull rates, usage. Tap any tile to open it at full size, then swipe to move between them.</p>
+    </article>
+
+    <article class="page" id="p16" data-section="The Card">
+      <h3>Double-faced cards</h3>
+      <p>Some cards have two faces. Turn the card over to read its other side; the page follows whichever face is showing.</p>
+    </article>
+
+    <article class="page" id="p17" data-section="The Scanner">
+      <h3>Scanning a card</h3>
+      <p>Point the camera at a card and hold it steady. Mooligan reads the card on the phone itself, and once it is recognised a copy floats up the screen.</p>
+      <p>Keep going. Several cards can be scanned one after another without stopping.</p>
+    </article>
+
+    <article class="page" id="p18" data-section="The Scanner">
+      <h3>After a scan</h3>
+      <p>Tap a scanned card to open it among its printings, showing the same face that was in front of the camera. A double-faced card can be turned over from here, as anywhere else.</p>
+    </article>
+
+    <article class="page" id="p19" data-section="The Metagame">
+      <h3>What is winning</h3>
+      <p>Choose a format to see its archetypes, ranked by their share of recent tournament results. The numbers are refreshed twice a day.</p>
+    </article>
+
+    <article class="page" id="p20" data-section="The Metagame">
+      <h3>Decklists</h3>
+      <p>Open an archetype to see the decklists behind it, each with the event it came from and how it finished. Any card in a list opens its own page.</p>
+    </article>
+
+    <article class="page" id="p21" data-section="The Metagame">
+      <h3>Card usage</h3>
+      <p>How widely a card is played: its share of decks in each format and, for Commander, how often it is chosen across the whole format.</p>
+    </article>
+
+    <article class="page" id="p22" data-section="Events">
+      <h3>Where to play</h3>
+      <p>Find events at stores near you — Friday Night Magic, prereleases, Commander nights — and the premier play calendar of tournaments ahead.</p>
+    </article>
+  </section>
+
+  <footer>
+    <div class="colophon">
+      <p>Mooligan is open source, at <a href="https://github.com/missingems/Mooligan">github.com/missingems/Mooligan</a>. With card data from Scryfall and MTGJSON, metagame from MTGGoldfish, Commander usage from EDHREC and the calendar from magic.gg.</p>
+      <p>Mooligan is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
+      <p>Set in New York and SF Pro.</p>
+    </div>
+    <p class="folio" aria-hidden="true">23</p>
+  </footer>
+
+</div>
+
+<dialog class="leaf" id="leaf" aria-labelledby="leaf-title">
+  <div class="leaf-page">
+    <div class="leaf-runner">
+      <span id="leaf-section"></span>
+      <button class="leaf-close" type="button" data-close>Index ×</button>
+    </div>
+    <div class="leaf-body" id="leaf-body"></div>
+    <div class="leaf-foot">
+      <button type="button" data-turn="-1" aria-label="Previous page">← <span></span></button>
+      <span class="leaf-folio" id="leaf-folio"></span>
+      <button type="button" data-turn="1" aria-label="Next page"><span></span> →</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const leaf = document.getElementById('leaf');
+  if (!leaf || typeof leaf.showModal !== 'function') {
+    document.documentElement.classList.remove('js');
+    return;
+  }
+
+  const pages = [...document.querySelectorAll('.page')];
+  const body = document.getElementById('leaf-body');
+  const section = document.getElementById('leaf-section');
+  const folio = document.getElementById('leaf-folio');
+  const [prev, next] = leaf.querySelectorAll('[data-turn]');
+  let current = -1;
+  let opener = null;
+
+  const indexOf = hash => pages.findIndex(p => '#' + p.id === hash);
+
+  function show(i, dir = 0) {
+    if (i < 0 || i >= pages.length) return;
+    const page = pages[i];
+    current = i;
+
+    body.innerHTML = page.innerHTML;
+    body.querySelector('h3').id = 'leaf-title';
+    section.textContent = page.dataset.section;
+    folio.textContent = page.id.slice(1);
+
+    prev.disabled = i === 0;
+    next.disabled = i === pages.length - 1;
+    if (!prev.disabled) prev.querySelector('span').textContent = pages[i - 1].id.slice(1);
+    if (!next.disabled) next.querySelector('span').textContent = pages[i + 1].id.slice(1);
+
+    if (dir) {
+      body.style.setProperty('--dir', dir * 14 + 'px');
+      body.classList.remove('turn');
+      void body.offsetWidth;
+      body.classList.add('turn');
+    }
+
+    history.replaceState(null, '', '#' + page.id);
+    if (!leaf.open) leaf.showModal();
+    leaf.scrollTop = 0;
+  }
+
+  function close() {
+    if (leaf.open) leaf.close();
+  }
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a.loc');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    const i = indexOf(a.getAttribute('href'));
+    if (i < 0) return;
+    e.preventDefault();
+    opener = a;
+    show(i);
+  });
+
+  leaf.addEventListener('click', e => {
+    if (e.target === leaf || e.target.closest('[data-close]')) close();
+    const turn = e.target.closest('[data-turn]');
+    if (turn) {
+      const d = Number(turn.dataset.turn);
+      show(current + d, d);
+    }
+  });
+
+  leaf.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1, 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); show(current - 1, -1); }
+  });
+
+  leaf.addEventListener('close', () => {
+    history.replaceState(null, '', location.pathname + location.search);
+    if (opener) opener.focus({ preventScroll: true });
+    opener = null;
+  });
+
+  const openFromHash = () => {
+    const i = indexOf(location.hash);
+    if (i >= 0) show(i);
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+})();
+</script>
+</body>
+</html>

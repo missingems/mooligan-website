@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    rect { fill: #f5f1e8; }
+    text { fill: #a4321f; }
+    @media (prefers-color-scheme: dark) { rect { fill: #161512; } text { fill: #e27b62; } }
+  </style>
+  <rect width="64" height="64" rx="14"/>
+  <text x="32" y="47" text-anchor="middle" font-family="ui-serif, 'New York', 'Iowan Old Style', Georgia, serif" font-style="italic" font-size="44">M</text>
+</svg>
