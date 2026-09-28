@@ -1,0 +1,13 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The colour identity tile, white and blue, being tapped.</title>
+  <rect class="soft" x="34" y="14" width="52" height="52" rx="12"/>
+  <rect class="ln" x="34" y="14" width="52" height="52" rx="12"/>
+  <circle class="ln bg" cx="51" cy="40" r="7.5"/>
+  <text class="t" x="51" y="40.2" font-size="8" text-anchor="middle" dominant-baseline="central" font-weight="600">W</text>
+  <circle class="ln bg" cx="69" cy="40" r="7.5"/>
+  <text class="t" x="69" y="40.2" font-size="8" text-anchor="middle" dominant-baseline="central" font-weight="600">U</text>
+  <text class="t" x="60" y="76" font-size="8.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Color</text>
+  <text class="t" x="60" y="86" font-size="8.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Identity</text>
+  <circle class="fill" cx="80" cy="60" r="2.2"/>
+  <circle class="ln" cx="80" cy="60" r="7"/>
+</svg>

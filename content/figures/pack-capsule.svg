@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Under the top card, a capsule: its rarity, price and odds.</title>
+  <rect class="ln" x="36" y="4" width="48" height="63.05" rx="3.43"/>
+  <rect class="ln faint" x="40.8" y="11.57" width="38.4" height="23.96" rx="1"/>
+  <line class="ln faint" x1="40.8" y1="43.09" x2="79.2" y2="43.09"/>
+  <line class="ln faint" x1="40.8" y1="49.39" x2="72" y2="49.39"/>
+  <line class="ln faint" x1="40.8" y1="55.7" x2="75.36" y2="55.7"/>
+  <rect class="soft" x="4" y="78" width="112" height="16" rx="8"/>
+  <rect class="ln" x="4" y="78" width="112" height="16" rx="8"/>
+  <text class="t" x="60" y="86.3" font-size="7.5" text-anchor="middle" dominant-baseline="central">Rare · $4.20 · 1 in 1,234</text>
+</svg>

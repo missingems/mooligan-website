@@ -1,0 +1,33 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Three chips over a set’s cards; the order being tapped.</title>
+  <rect class="ln" x="4" y="12" width="34" height="15" rx="7.5"/>
+  <circle class="ln bg" cx="12" cy="19.5" r="3.2"/>
+  <text class="t" x="12" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="16.6" cy="19.5" r="3.2"/>
+  <text class="t" x="16.6" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="21.2" cy="19.5" r="3.2"/>
+  <text class="t" x="21.2" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="25.8" cy="19.5" r="3.2"/>
+  <text class="t" x="25.8" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="30.4" cy="19.5" r="3.2"/>
+  <text class="t" x="30.4" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <rect class="ln" x="42" y="12" width="28" height="15" rx="7.5"/>
+  <rect class="fill" x="47.4" y="16.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="50.4" y="16.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="47.4" y="19.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="50.4" y="19.9" width="2.2" height="2.2" rx="0.4"/>
+  <text class="t" x="55.5" y="19.8" font-size="8" text-anchor="start" dominant-baseline="central">All</text>
+  <rect class="ln" x="74" y="12" width="38" height="15" rx="7.5"/>
+  <line class="ln" x1="82" y1="23.5" x2="82" y2="15.5"/>
+  <path class="ln" d="M80.75 17.78 L82 15.5 L83.25 17.78"/>
+  <text class="t" x="87.5" y="19.8" font-size="8" text-anchor="start" dominant-baseline="central">Name</text>
+  <rect class="ln faint" x="4" y="34" width="54" height="76" rx="5"/>
+  <rect class="ln faint" x="62" y="34" width="54" height="76" rx="5"/>
+  <circle class="fill" cx="109" cy="27" r="2.2"/>
+  <circle class="ln" cx="109" cy="27" r="7"/>
+</svg>

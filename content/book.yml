@@ -1,18 +1,19 @@
 # Mooligan: instructions. The page-wide settings.
-# Each file in content/tasks is one task, shown in file order; see README.md for the format.
+# Each file in content/tasks is one feature, with its parts; see README.md for the format.
 
 name: Mooligan
 label: Instructions
 url: https://mooligan.com/
 description: "How to use Mooligan, the companion app for Magic: The Gathering, in short illustrated steps."
 
-# Tasks are grouped by these sections, in this order (the names aren’t shown); each task names its section.
+# Features are grouped by these sections, in this order (the names aren’t shown); each names its section.
 sections:
-  - At the table
-  - Finding cards
+  - Sets
+  - Cards
   - Value
+  - Packs
   - Scanning
-  - The wider game
+  - Settings
 
 # The release the page describes, and the device its screenshots come from (release kits).
 app_version:

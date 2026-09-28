@@ -1,4 +1,4 @@
-/* Mooligan · Instructions. One column: task names in New York; summaries and steps in SF Pro. One ink. */
+/* Mooligan · Instructions. Feature and part names in New York; summaries and steps in SF Pro. One ink. */
 
 :root {
   /* New York is Apple’s “SF Serif” (reached by ui-serif in Safari); SF Pro is the system sans. */
@@ -172,6 +172,7 @@ svg .dash { stroke-dasharray: 2 3; }
 svg .fill { fill: currentColor; }
 svg .soft { fill: currentColor; fill-opacity: 0.08; }
 svg .bg { fill: var(--paper); }
+svg .tick { stroke: var(--paper); }              /* a tick on a filled circle */
 svg .t { fill: currentColor; font-family: var(--sans); letter-spacing: -0.02em; }
 svg .halo { stroke: var(--paper); stroke-width: 5px; paint-order: stroke; }
 

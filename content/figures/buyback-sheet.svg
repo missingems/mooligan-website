@@ -1,0 +1,24 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The Buy Back sheet: what Card Kingdom pays for each finish, and a button to sell to it.</title>
+  <rect class="ln" x="4" y="8" width="112" height="104" rx="10"/>
+  <text class="t" x="60" y="19" font-size="9" text-anchor="middle" dominant-baseline="central" font-weight="600">Buy Back</text>
+  <circle class="ln" cx="104" cy="19" r="4"/>
+  <line class="ln" x1="102.4" y1="17.4" x2="105.6" y2="20.6"/>
+  <line class="ln" x1="105.6" y1="17.4" x2="102.4" y2="20.6"/>
+  <text class="t" x="12" y="36" font-size="7" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">Source</text>
+  <text class="t" x="108" y="36" font-size="7" text-anchor="end" dominant-baseline="central">Card Kingdom</text>
+  <line class="ln faint" x1="12" y1="44" x2="108" y2="44"/>
+  <circle class="fill" cx="14" cy="52" r="1.8"/>
+  <text class="t" x="19" y="52.3" font-size="7" text-anchor="start" dominant-baseline="central">Regular</text>
+  <text class="t" x="86" y="52.3" font-size="7" text-anchor="end" dominant-baseline="central" font-weight="600">$1.00</text>
+  <text class="t" x="108" y="52.3" font-size="7" text-anchor="end" dominant-baseline="central" fill-opacity="0.55">50%</text>
+  <circle class="ln" cx="14" cy="63" r="1.8"/>
+  <text class="t" x="19" y="63.3" font-size="7" text-anchor="start" dominant-baseline="central">Foil</text>
+  <text class="t" x="86" y="63.3" font-size="7" text-anchor="end" dominant-baseline="central" font-weight="600">$3.20</text>
+  <text class="t" x="108" y="63.3" font-size="7" text-anchor="end" dominant-baseline="central" fill-opacity="0.55">52%</text>
+  <line class="ln faint" x1="12" y1="76" x2="104" y2="76"/>
+  <line class="ln faint" x1="12" y1="81" x2="98" y2="81"/>
+  <rect class="soft" x="16" y="90" width="88" height="14" rx="7"/>
+  <rect class="ln" x="16" y="90" width="88" height="14" rx="7"/>
+  <text class="t" x="60" y="97.3" font-size="7.5" text-anchor="middle" dominant-baseline="central" font-weight="600">Sell to Card Kingdom</text>
+</svg>

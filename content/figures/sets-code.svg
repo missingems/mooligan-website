@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>One set’s row: its symbol, its name, its code, TDM, and its number of cards, 286.</title>
+  <rect class="ln" x="6" y="36" width="108" height="44" rx="9"/>
+  <path class="fill" d="M15 53.05 L24 49 L33 53.05 L29.58 64.75 L24 67 L18.42 64.75 Z"/>
+  <line class="ln bold" x1="42" y1="50" x2="104" y2="50"/>
+  <rect class="soft" x="42" y="58.5" width="22" height="11" rx="5.5"/>
+  <text class="t" x="53" y="64.3" font-size="7.5" text-anchor="middle" dominant-baseline="central" font-weight="600">TDM</text>
+  <text class="t" x="68" y="64.3" font-size="7.5" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">286 Cards</text>
+</svg>

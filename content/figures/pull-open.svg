@@ -1,5 +1,5 @@
 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-  <title>Pull Rate: a booster’s odds of holding the card, 1 in 168 packs, 1 in 840 foil, beside the pack.</title>
+  <title>Open Pack, at the foot of a booster’s odds, being tapped.</title>
   <rect class="soft" x="6" y="14" width="108" height="90" rx="10"/>
   <rect class="ln" x="6" y="14" width="108" height="90" rx="10"/>
   <text class="t" x="14" y="24" font-size="8.5" text-anchor="start" dominant-baseline="central" font-weight="600">Play Booster</text>
@@ -12,4 +12,6 @@
   </g>
   <line class="ln dash" x1="6" y1="82" x2="114" y2="82"/>
   <text class="t" x="60" y="93" font-size="8" text-anchor="middle" dominant-baseline="central" font-weight="600">Open Pack</text>
+  <circle class="fill" cx="97" cy="93" r="2.2"/>
+  <circle class="ln" cx="97" cy="93" r="7"/>
 </svg>

@@ -16,48 +16,53 @@ files, visit links, skip review), don’t; mention it in the pull request.
 
 ## The page
 
-One page of IKEA-style instructions. The page is a list of tasks, each an underlined name with
-a one-line summary, grouped by section (the section names aren’t shown), in as many columns as
-it takes to fit the screen. Opening a
-task shows its steps: a few
-numbered steps, each with a picture and a caption of a few words. That’s all. No introductions,
-no paragraphs, no marketing.
+One page of IKEA-style instructions. The page lists the app’s features, grouped by section (the
+section names aren’t shown), in as many columns as it takes to fit the screen. Each feature is a
+name, a one-line summary, and a small directory of its parts; opening a part shows its steps: a
+few numbered steps, each with a picture and a caption of a few words. That’s all. No
+introductions, no paragraphs, no marketing.
 
 ```markdown
 ---
-title: Filter
-feature: filtering
-section: Finding cards
-summary: Narrow by colour, type, rarity, mana value or format.
+title: A set
+feature: set
+section: Sets
+summary: Its cards, two to a row, to search, filter and sort.
 new: 1.4.0
 ---
-1. Tap `Filter`. ![](figure:filter-open)
-2. Pick colours, types, formats. ![](asset:filtering/stack-filters/filter-sheet)
-3. Each filter narrows the list. ![](asset:filtering/stack-filters/result)
+## Colour
+1. Tap the mana symbols. ![](figure:chip-colour)
+2. Pick one colour or more. ![](asset:set/filter-by-colour/colour-list)
 
-> `Clear` removes them all.
+> Colour here is colour identity. `Colorless` adds cards with none.
 
-✓ Even light. ![](figure:scan-light)
-✗ Glare. ![](figure:scan-glare)
+## Sort
+1. Tap the order. ![](asset:set/sort/sort-chip)
+2. Pick what, then which way. ![](asset:set/sort/sort-list)
 ```
 
 | Line | Shows as |
 | --- | --- |
+| `## Part` | a part of the feature, in its directory; its steps follow |
 | `1. Caption. ![](asset:feature/use-case/capture)` | a numbered step with a screenshot from the kit |
 | `1. Caption. ![](figure:name)` | a numbered step with a drawing from `content/figures/` |
-| `> Tip.` | a tip, beside the steps |
+| `> Tip.` | a tip, under the steps |
 | `✓ Caption. ![](…)` / `✗ Caption. ![](…)` | a do / don’t pair |
 | `` `Label` `` | a label in the app, in bold |
 
-- `title`: the task as a short imperative (“Scan a card”, “Check prices”).
-- `feature`: the kit’s feature id. Several tasks can share one feature.
-- `section`: one of the sections listed in `content/book.yml`, where the task sits in the
-  contents. Add a section only when no existing one fits, and say so in the pull request.
-- `summary`: the line under the task’s name, up to ten words: what the task covers, not how
-  (“Narrow by colour, type, rarity, mana value or format.”).
-- `new`: the version that introduced the task’s feature. Only the current release’s features
-  carry it; remove older marks.
-- Files are named `<nn>-<slug>.md`; the number sets the order. Renumber when you insert.
+- One file per feature, named `<nn>-<slug>.md`; the number sets the order. Renumber when you
+  insert.
+- `title`: the feature as the app names it, short (“Sets”, “Prices”, “Scanner”).
+- `feature`: the kit’s feature id.
+- `section`: one of the sections listed in `content/book.yml`, where the feature sits on the
+  page. Add a section only when no existing one fits, and say so in the pull request.
+- `summary`: the line under the name, up to ten words: what the feature covers, not how
+  (“Its cards, two to a row, to search, filter and sort.”).
+- `new`: the version that introduced the feature. Only the current release’s features carry
+  it; remove older marks.
+- **Parts** (`## `): one per use case worth showing, named in two or three words, most often a
+  thing on the screen (“Upcoming sets”, “Colour identity”, “Buy back”). A feature with a single
+  use case can skip parts and list its steps straight under the front matter.
 
 ## 1. Get the kit
 
@@ -86,14 +91,15 @@ the site’s device into `media/` and prints a **work order**: that is your plan
 Work through the work order: removed features, changed features, new features, changed
 screenshots, then drawings that could become screenshots.
 
-- **A task comes from a use case’s flow.** Each flow step with a `capture` is a numbered step
+- **A part comes from a use case’s flow.** Each flow step with a `capture` is a numbered step
   with that screenshot. Steps without a capture fold into their neighbours’ captions, or are
-  left out if obvious. Aim for two to four steps; never more than six.
-- **Changed feature:** find its tasks by `feature:`. Change only the steps the change affects.
-- **New feature:** add a task from its main use case, placed next to related tasks. Other use
-  cases worth showing become their own tasks.
-- **Removed feature:** delete its tasks.
-- **Tips** carry what a step can’t show: a limit, a default, a why. One per task at most.
+  left out if obvious. Aim for one to three steps; never more than six. Every step in a part has
+  a picture, or none does.
+- **Changed feature:** find its file by `feature:`. Change only the parts the change affects.
+- **New feature:** add a file, placed next to related features, with a part for each use case
+  worth showing. A new use case of an existing feature is a new part in its file.
+- **Removed feature:** delete its file. A removed use case: delete its part.
+- **Tips** carry what a step can’t show: a limit, a default, a why. One per part at most.
 - **Do / don’t** pairs only where a person commonly gets it wrong, and both halves have a picture.
 - Set `app_version` in `content/book.yml`.
 
@@ -110,8 +116,9 @@ screenshots, then drawings that could become screenshots.
 - Prefer the kit’s screenshots (`asset:`); their descriptions become the alt text. Keep a drawing
   only where no screenshot exists, or for an idea no screen shows (such as filters stacking).
 - A new drawing goes in `content/figures/<name>.svg`: `viewBox="0 0 120 120"`, a `<title>`
-  describing it, and only the classes the others use (`ln`, `faint`, `bold`, `fill`, `soft`, `bg`,
-  `t`). Copy the phone, tap and arrow shapes from an existing drawing.
+  describing it, and only the classes the others use (`ln`, `faint`, `bold`, `dash`, `fill`, `soft`,
+  `bg`, `tick`, `t`). Copy the phone, tap and arrow shapes from an existing drawing, and keep a tap
+  mark off the words it points at.
 - Video (a flow’s `video`) only where the motion is the point.
 
 ## 5. Check
@@ -130,7 +137,7 @@ Commit on `edition/<version>` and open a pull request against `main`. Never push
 never merge. Title it “Instructions for Mooligan <version>”. In the body:
 
 - a line on what the release brings (from the release notes);
-- each task changed, added or removed, with one line on why;
+- each feature or part changed, added or removed, with one line on why;
 - drawings swapped for screenshots;
 - anything in the kit you left out, and why, and anything in the kit that looked wrong;
 - any question for the reviewer.

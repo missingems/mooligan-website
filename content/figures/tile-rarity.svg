@@ -1,0 +1,23 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A set symbol in the four colours of rarity: common, uncommon, rare and mythic.</title>
+  <rect class="soft" x="16" y="14" width="32" height="32" rx="8"/>
+  <rect class="ln" x="16" y="14" width="32" height="32" rx="8"/>
+  <path class="fill" fill-opacity="1" d="M23 25.05 L32 21 L41 25.05 L37.58 36.75 L32 39 L26.42 36.75 Z"/>
+  <path class="ln" d="M23 25.05 L32 21 L41 25.05 L37.58 36.75 L32 39 L26.42 36.75 Z"/>
+  <text class="t" x="32" y="54" font-size="7.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Common</text>
+  <rect class="soft" x="72" y="14" width="32" height="32" rx="8"/>
+  <rect class="ln" x="72" y="14" width="32" height="32" rx="8"/>
+  <path class="fill" fill-opacity="0.25" d="M79 25.05 L88 21 L97 25.05 L93.58 36.75 L88 39 L82.42 36.75 Z"/>
+  <path class="ln" d="M79 25.05 L88 21 L97 25.05 L93.58 36.75 L88 39 L82.42 36.75 Z"/>
+  <text class="t" x="88" y="54" font-size="7.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Uncommon</text>
+  <rect class="soft" x="16" y="66" width="32" height="32" rx="8"/>
+  <rect class="ln" x="16" y="66" width="32" height="32" rx="8"/>
+  <path class="fill" fill-opacity="0.5" d="M23 77.05 L32 73 L41 77.05 L37.58 88.75 L32 91 L26.42 88.75 Z"/>
+  <path class="ln" d="M23 77.05 L32 73 L41 77.05 L37.58 88.75 L32 91 L26.42 88.75 Z"/>
+  <text class="t" x="32" y="106" font-size="7.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Rare</text>
+  <rect class="soft" x="72" y="66" width="32" height="32" rx="8"/>
+  <rect class="ln" x="72" y="66" width="32" height="32" rx="8"/>
+  <path class="fill" fill-opacity="0.75" d="M79 77.05 L88 73 L97 77.05 L93.58 88.75 L88 91 L82.42 88.75 Z"/>
+  <path class="ln" d="M79 77.05 L88 73 L97 77.05 L93.58 88.75 L88 91 L82.42 88.75 Z"/>
+  <text class="t" x="88" y="106" font-size="7.5" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">Mythic</text>
+</svg>

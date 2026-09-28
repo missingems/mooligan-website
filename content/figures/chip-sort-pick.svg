@@ -1,0 +1,42 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The list of orders: Price and Descending picked, Descending being tapped.</title>
+  <rect class="ln" x="4" y="12" width="34" height="15" rx="7.5"/>
+  <circle class="ln bg" cx="12" cy="19.5" r="3.2"/>
+  <text class="t" x="12" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="16.6" cy="19.5" r="3.2"/>
+  <text class="t" x="16.6" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="21.2" cy="19.5" r="3.2"/>
+  <text class="t" x="21.2" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="25.8" cy="19.5" r="3.2"/>
+  <text class="t" x="25.8" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="30.4" cy="19.5" r="3.2"/>
+  <text class="t" x="30.4" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <rect class="ln" x="74" y="12" width="38" height="15" rx="7.5"/>
+  <line class="ln" x1="82" y1="15.5" x2="82" y2="23.5"/>
+  <path class="ln" d="M83.25 21.22 L82 23.5 L80.75 21.22"/>
+  <text class="t" x="87.5" y="19.8" font-size="8" text-anchor="start" dominant-baseline="central">Price</text>
+  <rect class="bg" x="46" y="32" width="70" height="81.4" rx="7"/>
+  <rect class="ln" x="46" y="32" width="70" height="81.4" rx="7"/>
+  <text class="t" x="53" y="38.6" font-size="7" text-anchor="start" dominant-baseline="central">Name</text>
+  <rect class="soft" x="48" y="43.2" width="66" height="7.4" rx="4.5"/>
+  <text class="t" x="53" y="47.2" font-size="7" text-anchor="start" dominant-baseline="central">Price</text>
+  <circle class="fill" cx="108" cy="46.9" r="2.8"/>
+  <path class="ln tick" d="M106.6 46.9 L107.66 47.96 L109.46 45.89"/>
+  <text class="t" x="53" y="55.8" font-size="7" text-anchor="start" dominant-baseline="central">Mana Value</text>
+  <text class="t" x="53" y="64.4" font-size="7" text-anchor="start" dominant-baseline="central">Color</text>
+  <text class="t" x="53" y="73" font-size="7" text-anchor="start" dominant-baseline="central">Rarity</text>
+  <text class="t" x="53" y="81.6" font-size="7" text-anchor="start" dominant-baseline="central">Date</text>
+  <line class="ln faint" x1="51" y1="89.9" x2="111" y2="89.9"/>
+  <text class="t" x="53" y="98.8" font-size="7" text-anchor="start" dominant-baseline="central">Ascending</text>
+  <rect class="soft" x="48" y="103.4" width="66" height="7.4" rx="4.5"/>
+  <text class="t" x="53" y="107.4" font-size="7" text-anchor="start" dominant-baseline="central">Descending</text>
+  <circle class="fill" cx="108" cy="107.1" r="2.8"/>
+  <path class="ln tick" d="M106.6 107.1 L107.66 108.16 L109.46 106.09"/>
+  <circle class="fill" cx="108" cy="108" r="2.2"/>
+  <circle class="ln" cx="108" cy="108" r="7"/>
+</svg>

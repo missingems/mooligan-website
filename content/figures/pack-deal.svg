@@ -1,0 +1,26 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The top card of the pack thrown aside, landing in its slot in the row below.</title>
+  <rect class="ln faint" x="36" y="22" width="38" height="53.08" rx="3"/>
+  <rect class="ln" x="32" y="18" width="38" height="53.08" rx="2.71"/>
+  <rect class="ln faint" x="35.8" y="24.37" width="30.4" height="20.17" rx="1"/>
+  <line class="ln faint" x1="35.8" y1="50.91" x2="66.2" y2="50.91"/>
+  <line class="ln faint" x1="35.8" y1="56.22" x2="60.5" y2="56.22"/>
+  <line class="ln faint" x1="35.8" y1="61.53" x2="63.16" y2="61.53"/>
+  <g transform="rotate(20 92 44)">
+  <rect class="ln" x="78" y="16" width="32" height="44.7" rx="2.29"/>
+  </g>
+  <path class="ln dash" d="M100 72 Q104 90 78 99"/>
+  <path class="ln" d="M82.44 99.75 L78 99 L81.03 95.67"/>
+  <rect class="soft" x="12" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="12" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="soft" x="23" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="23" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="34" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="45" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="56" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="67" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="78" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="89" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="100" y="98" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="34" y="98" width="8.5" height="11.5" rx="1.2"/>
+</svg>

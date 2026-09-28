@@ -1,0 +1,17 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A card, and beside it, under Tokens, the tokens it makes.</title>
+  <rect class="ln" x="4" y="32" width="36" height="50.29" rx="2.57"/>
+  <rect class="ln faint" x="7.6" y="38.03" width="28.8" height="19.11" rx="1"/>
+  <line class="ln faint" x1="7.6" y1="63.18" x2="36.4" y2="63.18"/>
+  <line class="ln faint" x1="7.6" y1="68.21" x2="31" y2="68.21"/>
+  <line class="ln faint" x1="7.6" y1="73.23" x2="33.52" y2="73.23"/>
+  <line class="ln" x1="44" y1="57" x2="56" y2="57"/>
+  <path class="ln" d="M51.61 54.6 L56 57 L51.61 59.4"/>
+  <text class="t" x="60" y="20" font-size="9" text-anchor="start" dominant-baseline="central" font-weight="600">Tokens</text>
+  <rect class="ln" x="60" y="32" width="28" height="39.11" rx="2.2"/>
+  <circle class="ln faint" cx="74" cy="50" r="9"/>
+  <line class="ln faint" x1="64" y1="64" x2="82" y2="64"/>
+  <rect class="ln" x="88" y="32" width="28" height="39.11" rx="2.2"/>
+  <circle class="ln faint" cx="102" cy="50" r="9"/>
+  <line class="ln faint" x1="92" y1="64" x2="110" y2="64"/>
+</svg>

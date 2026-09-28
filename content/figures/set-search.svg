@@ -1,5 +1,5 @@
 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-  <title>A set’s cards, one being tapped.</title>
+  <title>The search field at the foot of a set’s page, being tapped.</title>
   <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
   <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
   <path class="fill" d="M47.6 16.68 L50 15.6 L52.4 16.68 L51.49 19.8 L50 20.4 L48.51 19.8 Z"/>
@@ -42,6 +42,6 @@
   <circle class="ln" cx="53.5" cy="103.6" r="1.7"/>
   <line class="ln" x1="54.69" y1="104.79" x2="56.39" y2="106.49"/>
   <path class="ln" d="M74.5 101 L75.58 100 L76.67 101 L77.75 100 L78.83 101 L79.92 100 L81 101 L81 107 L79.92 108 L78.83 107 L77.75 108 L76.67 107 L75.58 108 L74.5 107 Z"/>
-  <circle class="fill" cx="50" cy="46" r="2.2"/>
-  <circle class="ln" cx="50" cy="46" r="7"/>
+  <circle class="fill" cx="60" cy="104" r="2.2"/>
+  <circle class="ln" cx="60" cy="104" r="7"/>
 </svg>

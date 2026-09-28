@@ -1,0 +1,24 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Under the prices, the Buy Back share, being tapped.</title>
+  <rect class="soft" x="6" y="20" width="50" height="14" rx="7"/>
+  <rect class="ln" x="6" y="20" width="50" height="14" rx="7"/>
+  <text class="t" x="31" y="27.3" font-size="8.5" text-anchor="middle" dominant-baseline="central" font-weight="600">$2.40</text>
+  <circle class="fill" cx="11" cy="41" r="1.8"/>
+  <text class="t" x="15" y="41.3" font-size="6.5" text-anchor="start" dominant-baseline="central">Regular</text>
+  <rect class="soft" x="64" y="20" width="50" height="14" rx="7"/>
+  <rect class="ln" x="64" y="20" width="50" height="14" rx="7"/>
+  <text class="t" x="89" y="27.3" font-size="8.5" text-anchor="middle" dominant-baseline="central" font-weight="600">$6.10</text>
+  <circle class="ln" cx="69" cy="41" r="1.8"/>
+  <text class="t" x="73" y="41.3" font-size="6.5" text-anchor="start" dominant-baseline="central">Foil</text>
+  <rect class="soft" x="6" y="60" width="50" height="14" rx="7"/>
+  <rect class="ln" x="6" y="60" width="50" height="14" rx="7"/>
+  <text class="t" x="31" y="67.3" font-size="8.5" text-anchor="middle" dominant-baseline="central" font-weight="600">$9.80</text>
+  <circle class="soft" cx="11" cy="81" r="1.8"/>
+  <text class="t" x="15" y="81.3" font-size="6.5" text-anchor="start" dominant-baseline="central">Etched</text>
+  <rect class="soft" x="64" y="60" width="50" height="14" rx="7"/>
+  <rect class="ln" x="64" y="60" width="50" height="14" rx="7"/>
+  <text class="t" x="89" y="67.3" font-size="8.5" text-anchor="middle" dominant-baseline="central" font-weight="600">64%</text>
+  <text class="t" x="64" y="81.3" font-size="6.5" text-anchor="start" dominant-baseline="central">Buy Back</text>
+  <circle class="fill" cx="110" cy="74" r="2.2"/>
+  <circle class="ln" cx="110" cy="74" r="7"/>
+</svg>

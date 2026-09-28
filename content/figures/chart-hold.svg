@@ -1,0 +1,12 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A price chart, a finger held on it.</title>
+  <line class="ln faint" x1="8" y1="92" x2="110" y2="92"/>
+  <line class="ln faint dash" x1="8" y1="70" x2="110" y2="70"/>
+  <line class="ln faint dash" x1="8" y1="48" x2="110" y2="48"/>
+  <line class="ln faint" x1="40" y1="38" x2="40" y2="92"/>
+  <path class="ln" d="M37 31.35 L40 30 L43 31.35 L41.86 35.25 L40 36 L38.14 35.25 Z"/>
+  <polyline class="ln bold" points="10,80 18,78 26,81 34,73 42,75 50,67 58,69 66,60 74,63 82,55 90,58 98,50 108,52"/>
+  <circle class="fill" cx="66" cy="60" r="2.2"/>
+  <circle class="ln" cx="66" cy="60" r="7"/>
+  <path class="ln bold" d="M66 49 A11 11 0 1 1 55 60"/>
+</svg>

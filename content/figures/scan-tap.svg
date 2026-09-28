@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The card on screen, its set and prices below, being tapped.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="45" y="20" width="30" height="42" rx="2.14"/>
+  <rect class="ln faint" x="48" y="25.04" width="24" height="15.96" rx="1"/>
+  <line class="ln faint" x1="48" y1="46.04" x2="72" y2="46.04"/>
+  <line class="ln faint" x1="48" y1="50.24" x2="67.5" y2="50.24"/>
+  <line class="ln faint" x1="48" y1="54.44" x2="69.6" y2="54.44"/>
+  <line class="ln" x1="48" y1="70" x2="72" y2="70"/>
+  <rect class="ln" x="45" y="76" width="13" height="5.5" rx="2.75"/>
+  <rect class="soft" x="62" y="76" width="13" height="5.5" rx="2.75"/>
+  <circle class="fill" cx="60" cy="40" r="2.2"/>
+  <circle class="ln" cx="60" cy="40" r="7"/>
+</svg>

@@ -1,20 +1,21 @@
 # mooligan-website
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**:
-one page of instructions for the app, in the manner of an IKEA manual. The page is a list of
-tasks, nothing else: each an underlined name with a one-line summary beneath. It sits in one
+one page of instructions for the app, in the manner of an IKEA manual. The page is a list of the
+app’s features, nothing else: each a name with a one-line summary beneath, and under it a small
+directory of its parts (for Sets: release dates, upcoming sets, set codes, search…). It sits in one
 column when it fits the screen, and in as many columns as it needs to fit otherwise (as the width
-allows; `src/page.js`), re-measured on resize. Tap a
-task to open its steps in place, each a picture and a caption of a few words. Task names are set
-in New York (SF Serif), summaries and steps in SF Pro; one ink; no scrolling sideways at any
-width. A link such as `mooligan.com/#filter` opens that task.
+allows; `src/page.js`), re-measured on resize. Tap a part to open its steps in place, each a
+picture and a caption of a few words. Names are set in New York (SF Serif), summaries and steps
+in SF Pro; one ink; no scrolling sideways at any width. A link such as `mooligan.com/#a-set-colour`
+opens that part.
 
 The page is written in Markdown under `content/`, and `npm run build` turns it into `dist/`.
 
 ```
 content/
   book.yml             name, description, section order, and the device screenshots come from
-  tasks/01-start-a-game.md   one file per task, in order
+  tasks/01-sets.md     one file per feature, in order
   figures/*.svg        the drawings (120 × 120, one line weight)
 media/                 screenshots imported from release kits (created by the first import)
 src/style.css          the page’s design
@@ -26,37 +27,43 @@ schemas/release-kit/   its JSON Schemas
 examples/release-kit/  an example kit
 ```
 
-## Writing a task
+## Writing a feature
 
 ```markdown
 ---
-title: Scan a card
+title: Scanner
 feature: scanner
 section: Scanning
-summary: Point the camera at a card; the card comes up.
+summary: Point the camera at a card, and up it comes.
 ---
-1. Point the camera at a card. ![](figure:scan-point)
-2. Tap the card that floats up. ![](figure:scan-open)
-
-> Sleeves are fine.
+## Scan
+1. Tap the camera on `Sets`. ![](figure:scan-camera)
+2. Hold one card in view. ![](figure:scan-point)
 
 ✓ Even light. ![](figure:scan-light)
 ✗ Glare. ![](figure:scan-glare)
+
+## Printings
+1. Swipe to your printing. ![](figure:scan-printings)
+
+> Reprints with the same art look alike to the camera.
 ```
 
 | Line | Shows as |
 | --- | --- |
+| `## Part` | a part of the feature, in its directory; the lines after it are its steps |
 | `1. Caption. ![](figure:name)` | a numbered step with a drawing from `content/figures/` |
 | `1. Caption. ![](asset:feature/use-case/capture)` | a numbered step with a screenshot from a release kit |
-| `> Tip.` | a tip beside the steps |
+| `> Tip.` | a tip under the steps |
 | `✓ Caption. ![](…)`, `✗ Caption. ![](…)` | a do / don’t pair |
 | `` `Label` `` | a label in the app, in bold |
 
-`feature` is the app feature the task covers, as release kits name it; `section` is one of the
-sections listed in `content/book.yml` (it keeps related tasks together; its name isn’t shown);
-`summary` is the line under the task’s name. Add
-`new: 1.4.0` to mark a task as new in that release. Captions are imperative and short:
-“Tap `Start`.”
+A file without `## ` parts is a single task: its name opens straight onto its steps (as Pull rate
+does). `feature` is the app feature the file covers, as release kits name it; `section` is one of
+the sections listed in `content/book.yml` (it keeps related features together; its name isn’t
+shown); `summary` is the line under the name. Add `new: 1.4.0` to mark a feature as new in that
+release. Captions are imperative and short: “Tap `Reveal All`.” Give every step in a part a
+picture, or none: a part without pictures reads as a plain numbered list.
 
 The build stops with a clear message, naming the file and line, on anything it can’t resolve: a
 missing drawing or screenshot, a malformed line, a task without steps or with an unknown section.

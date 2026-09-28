@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Builds mooligan.com from content/ into dist/: one page of illustrated instructions.
-// The page is a single column of tasks, grouped by section; each task opens in place
-// to show its steps. Each file in content/tasks is a task, in file order: a short run of
-// numbered steps, each with a drawing (content/figures) or a capture from a release kit
-// (media/), plus tips and do/don’t panels. The build fails on anything it can’t resolve.
+// Each file in content/tasks is a feature of the app, in file order: its name, a line of summary,
+// and a small directory of its parts, each opening in place to show its steps (or, without parts,
+// the steps themselves). A step is a caption with a drawing (content/figures) or a capture from a
+// release kit (media/); tips and do/don’t panels sit among them. The build fails on anything it
+// can’t resolve.
 
 import { readFile, readdir, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -53,7 +54,9 @@ const slugify = s => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ’']/g, '
 
 function parseTask(src, file) {
   const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
-  const data = m ? YAML.parse(m[1]) ?? {} : {};
+  let data = {};
+  try { data = m ? YAML.parse(m[1]) ?? {} : {}; }
+  catch (e) { fail(file, `the front matter isn’t valid YAML (${e.message.split('\n')[0]}); quote a value that holds “: ”`); }
   if (!data.title) fail(file, '“title” is required in the front matter');
   if (!data.feature) fail(file, '“feature” is required in the front matter (the feature id release kits use)');
   if (!data.summary) fail(file, '“summary” is required in the front matter (one line, shown in the contents)');
