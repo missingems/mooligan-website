@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mooligan.com/schemas/release-kit/changes.schema.json",
+  "title": "Release kit: changes.json",
+  "description": "What changed since the previous kit: features from the code, assets from the pixels. See docs/release-kit.md.",
+  "type": "object",
+  "required": ["from", "to", "features", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "from": { "oneOf": [{ "$ref": "#/definitions/version" }, { "type": "null" }] },
+    "to": { "$ref": "#/definitions/version" },
+    "features": {
+      "type": "object",
+      "required": ["new", "changed", "removed"],
+      "additionalProperties": false,
+      "properties": {
+        "new": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/definitions/id" } },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "summary"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/definitions/id" },
+              "use_cases": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/definitions/id" } },
+              "summary": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "summary"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/definitions/id" },
+              "summary": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "required": ["new", "changed", "removed"],
+      "additionalProperties": false,
+      "properties": {
+        "new": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/definitions/assetId" } },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "difference"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/definitions/assetId" },
+              "difference": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "removed": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/definitions/assetId" } }
+      }
+    }
+  },
+  "definitions": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "assetId": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+(\\.\\d+)?$" }
+  }
+}

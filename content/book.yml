@@ -1,0 +1,24 @@
+# The Mooligan Companion: the book-wide settings.
+# Chapters live in content/parts, one folder per part; the build works out page
+# numbers, contents, figures and the index from them.
+
+name: The Mooligan Companion
+title: Mooligan
+subtitle: "A guide to the app for players of Magic: The Gathering, in five parts."
+url: https://mooligan.com/
+description: "Mooligan is a companion for Magic: The Gathering. This is its guide, a small book in five parts, one for each colour of Magic."
+
+# Bump `edition` for a major release of the app; `app_version` is the release the book describes.
+edition: First
+year: 2026
+app_version:
+
+epigraph:
+  text: "Every game begins with a choice: keep the seven cards you were dealt, or shuffle them away and begin again."
+  source: On the mulligan
+  aside: …from which Mooligan borrows its name.
+  index: [mulligan]
+
+# Which captured device the book shows when a figure comes from a release kit.
+figures:
+  device: iphone-17-pro

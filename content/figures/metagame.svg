@@ -1,0 +1,17 @@
+<svg viewBox="0 0 320 196" xmlns="http://www.w3.org/2000/svg">
+  <title>Horizontal bars showing the share of results for aggro, midrange, control and combo, and the rest.</title>
+  <g class="lab" text-anchor="end">
+    <text x="78" y="26">AGGRO</text>
+    <text x="78" y="60">MIDRANGE</text>
+    <text x="78" y="94">CONTROL</text>
+    <text x="78" y="128">COMBO</text>
+    <text x="78" y="162">THE REST</text>
+  </g>
+  <rect class="fill" x="88" y="14" width="204" height="16" fill-opacity="0.85"/>
+  <rect class="fill" x="88" y="48" width="158" height="16" fill-opacity="0.6"/>
+  <rect class="fill" x="88" y="82" width="112" height="16" fill-opacity="0.4"/>
+  <rect class="fill" x="88" y="116" width="68" height="16" fill-opacity="0.22"/>
+  <rect class="ln" x="88" y="150" width="128" height="16"/>
+  <line class="ln faint" x1="88" y1="6" x2="88" y2="174"/>
+  <text class="ital" x="88" y="192" style="font-size:12px">share of recent results →</text>
+</svg>

@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schemas/release-kit/manifest.schema.json",
+  "kit_version": 1,
+  "app": {
+    "version": "1.4.0",
+    "build": "212",
+    "commit": "3f2a9c1",
+    "released": "2026-10-01"
+  },
+  "previous": "1.3.0",
+  "locale": "en-GB",
+  "devices": [
+    {
+      "id": "iphone-17-pro",
+      "name": "iPhone 17 Pro",
+      "family": "iphone",
+      "points": [
+        402,
+        874
+      ],
+      "scale": 3
+    }
+  ],
+  "appearances": [
+    "light",
+    "dark"
+  ],
+  "assets": [
+    {
+      "id": "starting-a-game/two-player-game/seats",
+      "feature": "starting-a-game",
+      "use_case": "two-player-game",
+      "capture": "seats",
+      "kind": "screenshot",
+      "description": "The screen split into two seats, each showing 20 and turned to face its player.",
+      "files": [
+        {
+          "device": "iphone-17-pro",
+          "appearance": "light",
+          "framed": "assets/starting-a-game/two-player-game/seats.iphone-17-pro.light.png",
+          "web": "assets/starting-a-game/two-player-game/seats.iphone-17-pro.light.web.png",
+          "width": 600,
+          "height": 1226
+        },
+        {
+          "device": "iphone-17-pro",
+          "appearance": "dark",
+          "framed": "assets/starting-a-game/two-player-game/seats.iphone-17-pro.dark.png",
+          "web": "assets/starting-a-game/two-player-game/seats.iphone-17-pro.dark.web.png",
+          "width": 600,
+          "height": 1226
+        }
+      ]
+    },
+    {
+      "id": "filtering/stack-filters/filter-sheet",
+      "feature": "filtering",
+      "use_case": "stack-filters",
+      "capture": "filter-sheet",
+      "kind": "screenshot",
+      "description": "The filter sheet, with colour, type, rarity, mana value and format sections.",
+      "files": [
+        {
+          "device": "iphone-17-pro",
+          "appearance": "light",
+          "framed": "assets/filtering/stack-filters/filter-sheet.iphone-17-pro.light.png",
+          "web": "assets/filtering/stack-filters/filter-sheet.iphone-17-pro.light.web.png",
+          "width": 600,
+          "height": 1226
+        },
+        {
+          "device": "iphone-17-pro",
+          "appearance": "dark",
+          "framed": "assets/filtering/stack-filters/filter-sheet.iphone-17-pro.dark.png",
+          "web": "assets/filtering/stack-filters/filter-sheet.iphone-17-pro.dark.web.png",
+          "width": 600,
+          "height": 1226
+        }
+      ]
+    },
+    {
+      "id": "filtering/stack-filters/result",
+      "feature": "filtering",
+      "use_case": "stack-filters",
+      "capture": "result",
+      "kind": "screenshot",
+      "description": "A list of blue cards legal in Modern, with the two filters in a row above it.",
+      "files": [
+        {
+          "device": "iphone-17-pro",
+          "appearance": "light",
+          "framed": "assets/filtering/stack-filters/result.iphone-17-pro.light.png",
+          "web": "assets/filtering/stack-filters/result.iphone-17-pro.light.web.png",
+          "width": 600,
+          "height": 1226
+        },
+        {
+          "device": "iphone-17-pro",
+          "appearance": "dark",
+          "framed": "assets/filtering/stack-filters/result.iphone-17-pro.dark.png",
+          "web": "assets/filtering/stack-filters/result.iphone-17-pro.dark.web.png",
+          "width": 600,
+          "height": 1226
+        }
+      ]
+    }
+  ]
+}
