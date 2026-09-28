@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <style>
-    rect { fill: #f4f1ea; }
-    text { fill: #1a1917; }
-    @media (prefers-color-scheme: dark) { rect { fill: #141412; } text { fill: #e8e4da; } }
+    rect { fill: #ffffff; }
+    text { fill: #111111; }
+    @media (prefers-color-scheme: dark) { rect { fill: #0f0f0f; } text { fill: #f0f0f0; } }
   </style>
   <rect width="64" height="64" rx="14"/>
-  <text x="32" y="47" text-anchor="middle" font-family="ui-serif, 'New York', 'Iowan Old Style', Georgia, serif" font-style="italic" font-size="44">M</text>
+  <text x="32" y="46" text-anchor="middle" font-family="ui-serif, 'New York', 'Iowan Old Style', Georgia, serif" font-weight="600" font-size="40" letter-spacing="-2">M</text>
 </svg>

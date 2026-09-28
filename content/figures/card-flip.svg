@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A double-faced card with an arrow showing it being turned over.</title>
+  <rect class="ln" x="40" y="22" width="40" height="56" rx="2.857142857142857"/>
+  <rect class="ln faint" x="44" y="28.72" width="32" height="21.28" rx="1"/>
+  <line class="ln faint" x1="44" y1="56.72" x2="76" y2="56.72"/>
+  <line class="ln faint" x1="44" y1="62.32" x2="70" y2="62.32"/>
+  <line class="ln faint" x1="44" y1="67.91999999999999" x2="72.8" y2="67.91999999999999"/>
+  <path class="ln" d="M32 34 C 20 50, 20 70, 32 86"/>
+  <path class="ln" d="M28 84 L32 86 L33 81"/>
+  <path class="ln faint" d="M88 34 C 100 50, 100 70, 88 86"/>
+</svg>

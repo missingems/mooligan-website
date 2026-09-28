@@ -6,7 +6,7 @@ in one folder. It is the only thing passed between the two halves of the pipelin
 - **The marketing engineer** (in `missingems/Mooligan`) writes the release notes, keeps the
   feature catalogue current, and writes the UI tours; the capture job on a macOS runner replays
   the tours and adds the screenshots and videos. Together they **produce** the kit.
-- **The article writer** (in this repository) **consumes** the kit and updates the book. It never
+- **The article writer** (in this repository) **consumes** the kit and updates the instructions. It never
   reads the app’s code, so everything it needs must be in the kit.
 
 This document is the contract. Version 1 is described here; the JSON Schemas in
@@ -46,7 +46,7 @@ Ids are stable across releases. Renaming one is a removal plus an addition.
 ## `features/<feature>.md`
 
 The feature catalogue is **cumulative**: every kit carries every feature the app has, not just the
-ones that changed. The article writer needs the whole catalogue to keep the book complete, and
+ones that changed. The article writer needs the whole catalogue to keep the instructions complete, and
 `changes.json` to know where to look first. The catalogue lives in the app repository and is
 updated alongside the code.
 

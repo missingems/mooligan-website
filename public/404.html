@@ -3,36 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mooligan — Page not found</title>
+<title>Mooligan · Not found</title>
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
-  :root {
-    --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
-    --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
-    --paper: #f4f1ea; --ink: #1a1917; --ink-2: #5f5a52; --rule: #d6cfc0; --rubric: #1a1917;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --paper: #141412; --ink: #e8e4da; --ink-2: #9a948a; --rule: #312e29; --rubric: #e8e4da; }
-  }
+  :root { --paper: #ffffff; --ink: #111111; --ink-2: #6e6e6e; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #0f0f0f; --ink: #f0f0f0; --ink-2: #9a9a9a; } }
   body {
     margin: 0; min-height: 100dvh; display: grid; place-items: center;
     background: var(--paper); color: var(--ink);
-    font-family: var(--serif); -webkit-font-smoothing: antialiased;
+    font: 0.9375rem/1.25 ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+    letter-spacing: -0.012em; -webkit-font-smoothing: antialiased;
   }
-  main { width: min(30rem, 100% - 32px); text-align: center; }
-  h1 { margin: 0; font-weight: 400; font-style: italic; font-size: clamp(4rem, 18vw, 7rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: oldstyle-nums; }
-  p { margin: 1.5rem 0 0; font-size: 1.125rem; line-height: 1.5; color: var(--ink-2); }
-  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
-  a:hover { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-  .runner { margin-top: 2.5rem; padding-top: 0.8rem; border-top: 1px solid var(--rule); font-family: var(--sans); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+  main { width: min(20rem, 100% - 32px); }
+  h1 { margin: 0 0 0.5rem; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.04em; }
+  p { margin: 0; color: var(--ink-2); }
+  a { color: var(--ink); text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
 </style>
 </head>
 <body>
 <main>
   <h1>404</h1>
-  <p>This page was never printed. The contents list every page there is.</p>
-  <p class="runner"><a href="/#contents">Return to the contents</a></p>
+  <p>This page isn’t in the instructions. <a href="/">Back to the start.</a></p>
 </main>
 </body>
 </html>

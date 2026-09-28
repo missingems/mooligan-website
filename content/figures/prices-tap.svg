@@ -1,0 +1,14 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Price rows for each finish; one being tapped.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="48" y="16" width="24" height="33" rx="2"/>
+  <line class="ln faint" x1="41" y1="60" x2="58" y2="60"/>
+  <line class="ln" x1="68" y1="60" x2="79" y2="60"/>
+  <line class="ln faint" x1="41" y1="72" x2="58" y2="72"/>
+  <line class="ln" x1="68" y1="72" x2="79" y2="72"/>
+  <line class="ln faint" x1="41" y1="84" x2="58" y2="84"/>
+  <line class="ln" x1="68" y1="84" x2="79" y2="84"/>
+  <circle class="fill" cx="73" cy="72" r="2.2"/>
+  <circle class="ln" cx="73" cy="72" r="7"/>
+</svg>

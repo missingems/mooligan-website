@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A card with a bright glare across it.</title>
+  <rect class="ln" x="42" y="36" width="36" height="50" rx="2.5714285714285716"/>
+  <rect class="ln faint" x="45.6" y="42" width="28.8" height="19" rx="1"/>
+  <line class="ln faint" x1="45.6" y1="67" x2="74.4" y2="67"/>
+  <line class="ln faint" x1="45.6" y1="72" x2="69" y2="72"/>
+  <line class="ln faint" x1="45.6" y1="77" x2="71.52" y2="77"/>
+  <path class="bg" d="M44 70 L70 38 L78 38 L78 46 L52 78 Z"/>
+  <path class="ln" d="M47 76 L76 42 M53 80 L78 51"/>
+  <path class="ln" d="M84 26 l4 -4 M88 32 h6 M82 20 v-6"/>
+</svg>

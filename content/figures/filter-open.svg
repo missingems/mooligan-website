@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A list of cards with the Filter button at the top being tapped.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="63" y="15" width="18" height="11" rx="5.5"/>
+  <path class="ln" d="M67.5 18 h9 l-3.4 3.6 v2.6 l-2.2 1 v-3.6 z"/>
+  <line class="ln faint" x1="39" y1="42" x2="81" y2="42"/>
+  <line class="ln faint" x1="39" y1="52" x2="75" y2="52"/>
+  <line class="ln faint" x1="39" y1="62" x2="69" y2="62"/>
+  <line class="ln faint" x1="39" y1="72" x2="81" y2="72"/>
+  <line class="ln faint" x1="39" y1="82" x2="75" y2="82"/>
+  <line class="ln faint" x1="39" y1="92" x2="69" y2="92"/>
+  <circle class="fill" cx="75" cy="29" r="2.2"/>
+  <circle class="ln" cx="75" cy="29" r="7"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Two players chosen, and the 20 life option being tapped.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <text class="t" x="60" y="38" font-size="22" text-anchor="middle" dominant-baseline="central">2</text>
+  <text class="t" x="46" y="38" font-size="14" text-anchor="middle" dominant-baseline="central">−</text>
+  <text class="t" x="74" y="38" font-size="14" text-anchor="middle" dominant-baseline="central">+</text>
+  <line class="ln faint" x1="42" y1="54" x2="78" y2="54"/>
+  <rect class="soft" x="42" y="64" width="16" height="11" rx="5.5"/>
+  <rect class="ln" x="42" y="64" width="16" height="11" rx="5.5"/>
+  <text class="t" x="50" y="69.8" font-size="7" text-anchor="middle" dominant-baseline="central">20</text>
+  <rect class="ln" x="62" y="64" width="16" height="11" rx="5.5"/>
+  <text class="t" x="70" y="69.8" font-size="7" text-anchor="middle" dominant-baseline="central">40</text>
+  <circle class="fill" cx="59" cy="79" r="2.2"/>
+  <circle class="ln" cx="59" cy="79" r="7"/>
+</svg>

@@ -1,7 +1,7 @@
 {
   "name": "mooligan-website",
   "private": true,
-  "description": "The Mooligan Companion, the guide at mooligan.com, built from content/ into dist/.",
+  "description": "Mooligan’s instructions at mooligan.com, built from content/ into dist/.",
   "type": "module",
   "engines": {
     "node": ">=20"

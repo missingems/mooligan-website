@@ -1,24 +1,16 @@
-# The Mooligan Companion: the book-wide settings.
-# Chapters live in content/parts, one folder per part; the build works out page
-# numbers, contents, figures and the index from them.
+# Mooligan: instructions. The page-wide settings.
+# Each file in content/tasks is one task, shown in file order; see README.md for the format.
 
-name: The Mooligan Companion
-title: Mooligan
-subtitle: "A guide to the app for players of Magic: The Gathering, in five parts."
+name: Mooligan
+label: Instructions
 url: https://mooligan.com/
-description: "Mooligan is a companion for Magic: The Gathering. This is its guide, a small book in five parts, one for each colour of Magic."
+description: "How to use Mooligan, the companion app for Magic: The Gathering, in short illustrated steps."
 
-# Bump `edition` for a major release of the app; `app_version` is the release the book describes.
-edition: First
-year: 2026
+# The release the page describes, and the device its screenshots come from (release kits).
 app_version:
-
-epigraph:
-  text: "Every game begins with a choice: keep the seven cards you were dealt, or shuffle them away and begin again."
-  source: On the mulligan
-  aside: …from which Mooligan borrows its name.
-  index: [mulligan]
-
-# Which captured device the book shows when a figure comes from a release kit.
 figures:
   device: iphone-17-pro
+
+source: https://github.com/missingems/Mooligan
+data: Card data from Scryfall and MTGJSON; metagame from MTGGoldfish; Commander usage from EDHREC; events from Wizards and magic.gg.
+legal: Mooligan is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.

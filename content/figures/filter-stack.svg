@@ -1,0 +1,23 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Three lists side by side, each shorter than the last: filters stack.</title>
+  <line class="ln" x1="8" y1="24" x2="34" y2="24"/>
+  <line class="ln faint" x1="8" y1="33" x2="30" y2="33"/>
+  <line class="ln" x1="8" y1="42" x2="26" y2="42"/>
+  <line class="ln faint" x1="8" y1="51" x2="34" y2="51"/>
+  <line class="ln" x1="8" y1="60" x2="30" y2="60"/>
+  <line class="ln faint" x1="8" y1="69" x2="26" y2="69"/>
+  <line class="ln" x1="8" y1="78" x2="34" y2="78"/>
+  <line class="ln faint" x1="8" y1="87" x2="30" y2="87"/>
+  <line class="ln" x1="8" y1="96" x2="26" y2="96"/>
+  <line class="ln" x1="48" y1="42" x2="74" y2="42"/>
+  <line class="ln faint" x1="48" y1="51" x2="70" y2="51"/>
+  <line class="ln" x1="48" y1="60" x2="66" y2="60"/>
+  <line class="ln faint" x1="48" y1="69" x2="74" y2="69"/>
+  <line class="ln" x1="48" y1="78" x2="70" y2="78"/>
+  <line class="ln" x1="88" y1="55.5" x2="114" y2="55.5"/>
+  <line class="ln" x1="88" y1="64.5" x2="110" y2="64.5"/>
+  <line class="ln faint" x1="37" y1="60" x2="45" y2="60"/>
+  <path class="ln faint" d="M40.6 57.6 L45 60 L40.6 62.4"/>
+  <line class="ln faint" x1="77" y1="60" x2="85" y2="60"/>
+  <path class="ln faint" d="M80.6 57.6 L85 60 L80.6 62.4"/>
+</svg>

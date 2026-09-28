@@ -1,0 +1,14 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A card, and a finger swiping sideways to the next one.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="44" y="24" width="32" height="45" rx="2.2857142857142856"/>
+  <rect class="ln faint" x="47.2" y="29.4" width="25.6" height="17.1" rx="1"/>
+  <line class="ln faint" x1="47.2" y1="51.9" x2="72.8" y2="51.9"/>
+  <line class="ln faint" x1="47.2" y1="56.4" x2="68" y2="56.4"/>
+  <line class="ln faint" x1="47.2" y1="60.9" x2="70.24" y2="60.9"/>
+  <line class="ln" x1="76" y1="88" x2="46" y2="88"/>
+  <path class="ln" d="M50.4 90.4 L46 88 L50.4 85.6"/>
+  <circle class="fill" cx="76" cy="88" r="2.2"/>
+  <circle class="ln" cx="76" cy="88" r="7"/>
+</svg>

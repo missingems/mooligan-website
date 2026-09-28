@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The screen split into two seats, each total turned to face its player.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <line class="ln" x1="35" y1="60" x2="85" y2="60"/>
+  <rect class="soft" x="38" y="13" width="44" height="45" rx="6"/>
+  <text class="t" x="60" y="36" font-size="18" text-anchor="middle" dominant-baseline="central" transform="rotate(180 60 36)">20</text>
+  <text class="t" x="60" y="85" font-size="18" text-anchor="middle" dominant-baseline="central">20</text>
+</svg>

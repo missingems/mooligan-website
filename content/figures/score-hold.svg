@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Holding the bottom half counts down quickly; a small tally shows the change.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <line class="ln faint" x1="38" y1="60" x2="82" y2="60"/>
+  <text class="t halo" x="56" y="60" font-size="18" text-anchor="middle" dominant-baseline="central">13</text>
+  <text class="t" x="73" y="51" font-size="7" text-anchor="middle" dominant-baseline="central" font-weight="600">−7</text>
+  <circle class="fill" cx="60" cy="92" r="2.2"/>
+  <circle class="ln" cx="60" cy="92" r="7"/>
+  <path class="ln bold" d="M60 81 A11 11 0 1 1 49 92"/>
+</svg>

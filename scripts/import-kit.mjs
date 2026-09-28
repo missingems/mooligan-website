@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// Brings a release kit into the site, and says what the book needs as a result.
+// Brings a release kit into the site, and says what the instructions need as a result.
 //
-//   npm run import-kit -- <release kit folder>   validate the kit, copy its captures for the book’s
+//   npm run import-kit -- <release kit folder>   validate the kit, copy its captures for the site’s
 //                                                device into media/, and print a work order
-//   npm run import-kit -- --prune                drop media no chapter uses (run before committing)
+//   npm run import-kit -- --prune                drop media no task uses (run before committing)
 //
-// The work order maps the kit onto the book through each chapter’s `feature:` front matter:
-// which chapters to revise, which features have no chapter yet, which figures could become
+// The work order maps the kit onto the page through each task’s `feature:` front matter:
+// which tasks to revise, which features have no task yet, which drawings could become
 // captures. It is written for the article writer (see .claude/skills/write-edition).
 
 import { readFile, readdir, writeFile, mkdir, cp, rm } from 'node:fs/promises';
@@ -19,26 +19,22 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const MEDIA = path.join(ROOT, 'media');
 const MANIFEST = path.join(MEDIA, 'manifest.json');
 
-// Every chapter, with its feature and the figures it uses.
-async function chapters() {
+// Every task, with its feature and the figures it uses.
+async function tasks() {
   const out = [];
-  const partsDir = path.join(ROOT, 'content/parts');
-  for (const part of (await readdir(partsDir)).sort()) {
-    const dir = path.join(partsDir, part);
-    if (!/^\d+-/.test(part)) continue;
-    for (const name of (await readdir(dir)).filter(f => /^\d+-.*\.md$/.test(f)).sort()) {
-      const file = path.join(dir, name);
-      const src = await readFile(file, 'utf8');
-      const fm = src.match(/^---\n([\s\S]*?)\n---/);
-      const data = fm ? YAML.parse(fm[1]) ?? {} : {};
-      out.push({
-        file: path.relative(ROOT, file),
-        title: data.title,
-        feature: data.feature,
-        assets: [...src.matchAll(/\]\(asset:([^)\s]+)\)/g)].map(m => m[1]),
-        drawings: [...src.matchAll(/\]\(figure:([^)\s]+)\)/g)].map(m => m[1]),
-      });
-    }
+  const dir = path.join(ROOT, 'content/tasks');
+  for (const name of (await readdir(dir)).filter(f => /^\d+-.*\.md$/.test(f)).sort((a, b) => parseInt(a, 10) - parseInt(b, 10))) {
+    const file = path.join(dir, name);
+    const src = await readFile(file, 'utf8');
+    const fm = src.match(/^---\n([\s\S]*?)\n---/);
+    const data = fm ? YAML.parse(fm[1]) ?? {} : {};
+    out.push({
+      file: path.relative(ROOT, file),
+      title: data.title,
+      feature: data.feature,
+      assets: [...src.matchAll(/\]\(asset:([^)\s]+)\)/g)].map(m => m[1]),
+      drawings: [...src.matchAll(/\]\(figure:([^)\s]+)\)/g)].map(m => m[1]),
+    });
   }
   return out;
 }
@@ -46,14 +42,14 @@ async function chapters() {
 async function prune() {
   if (!existsSync(MANIFEST)) return console.log('No media/manifest.json; nothing to prune.');
   const manifest = JSON.parse(await readFile(MANIFEST, 'utf8'));
-  const used = new Set((await chapters()).flatMap(c => c.assets));
+  const used = new Set((await tasks()).flatMap(c => c.assets));
   const keep = manifest.assets.filter(a => used.has(a.id));
   for (const a of manifest.assets.filter(a => !used.has(a.id))) {
     for (const f of a.files) for (const p of [f.web, f.poster].filter(Boolean)) await rm(path.join(MEDIA, p), { force: true });
   }
   await removeEmptyDirs(path.join(MEDIA, 'assets'));
   await writeFile(MANIFEST, JSON.stringify({ ...manifest, assets: keep }, null, 2) + '\n');
-  console.log(`Kept ${keep.length} of ${manifest.assets.length} assets in media/ (the ones chapters use).`);
+  console.log(`Kept ${keep.length} of ${manifest.assets.length} assets in media/ (the ones tasks use).`);
 }
 
 async function removeEmptyDirs(dir) {
@@ -74,11 +70,11 @@ async function importKit(dir) {
   const book = YAML.parse(await readFile(path.join(ROOT, 'content/book.yml'), 'utf8'));
   const device = book.figures?.device;
   if (!kit.manifest.devices.some(d => d.id === device)) {
-    console.error(`error  the book shows ${device} (content/book.yml › figures.device), which this kit did not capture`);
+    console.error(`error  the site shows ${device} (content/book.yml › figures.device), which this kit did not capture`);
     process.exit(1);
   }
 
-  // Mirror the kit’s captures for the book’s device into media/.
+  // Mirror the kit’s captures for the site’s device into media/.
   await rm(path.join(MEDIA, 'assets'), { recursive: true, force: true });
   await mkdir(MEDIA, { recursive: true });
   const assets = [];
@@ -95,7 +91,7 @@ async function importKit(dir) {
   }
   await writeFile(MANIFEST, JSON.stringify({ kit_version: kit.manifest.kit_version, app: kit.manifest.app, device, assets }, null, 2) + '\n');
 
-  console.log(workOrder(kit, await chapters()));
+  console.log(workOrder(kit, await tasks()));
 }
 
 function workOrder(kit, chs) {
@@ -108,32 +104,32 @@ function workOrder(kit, chs) {
 
   lines.push(`# Work order: Mooligan ${manifest.app.version}`,
     '', `Kit: ${kit.dir}`, `Previous: ${manifest.previous ?? 'none (first kit)'} · build ${manifest.app.build} · commit ${manifest.app.commit} · released ${manifest.app.released}`,
-    `Captures for ${manifest.devices.length} device${manifest.devices.length === 1 ? '' : 's'} copied to media/ (the book’s device only).`);
+    `Captures for ${manifest.devices.length} device${manifest.devices.length === 1 ? '' : 's'} in the kit; the site’s device copied to media/.`);
 
-  section('What’s new', [
-    `Write content/front/whats-new.md from the kit’s release-notes.md, and set app_version: ${manifest.app.version} in content/book.yml.`,
+  section('Version', [
+    `Set app_version: ${manifest.app.version} in content/book.yml. Mark tasks for new features with new: ${manifest.app.version}, and clear older marks.`,
   ]);
 
-  section('New features: need a chapter', (changes.features.new ?? []).map(id => {
+  section('New features: need a task', (changes.features.new ?? []).map(id => {
     const f = features.get(id);
     const has = byFeature.get(id);
-    return has ? `${id}: already has ${list(has)}; revise it` : `${id} (“${f.title}”): ${f.summary} Give it a chapter in the part it belongs to.`;
+    return has ? `${id}: already has ${list(has)}; revise it` : `${id} (“${f.title}”): ${f.summary} Give it a task, from its main use case’s flow.`;
   }));
 
-  section('Changed features: revise these chapters', (changes.features.changed ?? []).map(c => {
+  section('Changed features: revise these tasks', (changes.features.changed ?? []).map(c => {
     const has = byFeature.get(c.id);
-    const where = has ? list(has) : 'no chapter yet: give it one';
+    const where = has ? list(has) : 'no task yet: give it one';
     return `${c.id}: ${c.summary}${c.use_cases?.length ? ` (use cases: ${c.use_cases.join(', ')})` : ''}. ${where}`;
   }));
 
   section('Removed features: take out or rewrite', (changes.features.removed ?? []).map(r => {
     const has = byFeature.get(r.id);
-    return `${r.id}: ${r.summary}${has ? ` ${list(has)}` : ' (no chapter)'}`;
+    return `${r.id}: ${r.summary}${has ? ` ${list(has)}` : ' (no task)'}`;
   }));
 
   const usedAssets = new Map();
   for (const c of chs) for (const a of c.assets) (usedAssets.get(a) ?? usedAssets.set(a, []).get(a)).push(c);
-  section('Changed captures: check the text around them still matches', (changes.assets.changed ?? [])
+  section('Changed captures: check their captions still match', (changes.assets.changed ?? [])
     .filter(c => usedAssets.has(c.id))
     .map(c => `${c.id} (${Math.round(c.difference * 100)}% of pixels): ${list(usedAssets.get(c.id))}`));
 
@@ -141,15 +137,15 @@ function workOrder(kit, chs) {
   section('Figures that point at captures no longer in the kit', [...usedAssets]
     .filter(([id]) => !gone.has(id)).map(([id, cs]) => `${id}: ${list(cs)}`));
 
-  section('Drawn figures that could become captures', chs
+  section('Drawings that could become captures', chs
     .filter(c => c.drawings.length && manifest.assets.some(a => a.feature === c.feature))
     .map(c => `${c.file}: draws ${c.drawings.join(', ')}; the kit has ${manifest.assets.filter(a => a.feature === c.feature).map(a => a.id).join(', ')}`));
 
-  section('Chapters whose feature is not in the kit’s catalogue', chs
+  section('Tasks whose feature is not in the kit’s catalogue', chs
     .filter(c => c.feature && !features.has(c.feature) && !(changes.features.removed ?? []).some(r => r.id === c.feature))
     .map(c => `${c.file}: feature “${c.feature}”. Check the id, or whether the feature is gone.`));
 
-  section('Features with no chapter', [...features.keys()]
+  section('Features with no task', [...features.keys()]
     .filter(id => !byFeature.has(id) && !(changes.features.new ?? []).includes(id))
     .map(id => `${id} (“${features.get(id).title}”)`));
 

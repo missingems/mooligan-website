@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A sealed booster pack with the odds of opening a card: one in n.</title>
+  <path class="ln" d="M34 18 l6 -4 l6 4 l6 -4 l6 4 l6 -4 l6 4 l6 -4 l6 4 v84 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 z"/>
+  <line class="ln faint" x1="34" y1="26" x2="86" y2="26"/>
+  <line class="ln faint" x1="34" y1="94" x2="86" y2="94"/>
+  <text class="t" x="60" y="60" font-size="16" text-anchor="middle" dominant-baseline="central" font-style="italic">1 : n</text>
+</svg>
