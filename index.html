@@ -6,8 +6,8 @@
 <title>The Mooligan Companion</title>
 <meta name="description" content="Mooligan is a companion for Magic: The Gathering. This is its guide, a small book in five parts, one for each colour of Magic.">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#161512" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://mooligan.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -23,42 +23,26 @@
     --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
     --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
 
-    --paper: #f5f1e8;
-    --ink: #1c1a16;
-    --ink-2: #6b6457;
-    --ink-3: #b3ab9b;
-    --rule: #dcd4c3;
-    --rubric: #a4321f;
-    --mark: #efd9a8;
+    /* One ink, one paper. */
+    --paper: #f4f1ea;
+    --ink: #1a1917;
+    --ink-2: #5f5a52;
+    --ink-3: #aaa293;
+    --rule: #d6cfc0;
+    --mark: #e3dccb;
 
-    /* The five colours, mixed for paper. */
-    --w: #b08a2c;
-    --u: #2d5d8c;
-    --b: #56445e;
-    --r: #b3391f;
-    --g: #3f6e3b;
-    --pip: var(--rubric);
-
-    --text: 34rem;
-    --note: 14rem;
-    --gap: 3.5rem;
-    --margin: 5rem;
-    --gutter: clamp(16px, 5vw, 48px);
+    --sheet: 76rem;
+    --gutter: clamp(16px, 4vw, 40px);
+    --col-gap: 2.5rem;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #161512;
-      --ink: #ebe5d8;
-      --ink-2: #a0978a;
-      --ink-3: #5b554b;
-      --rule: #34302a;
-      --rubric: #e27b62;
-      --mark: #5a4523;
-      --w: #d9bb6e;
-      --u: #7ea7d4;
-      --b: #b8a3c6;
-      --r: #ec8466;
-      --g: #8fbf7f;
+      --paper: #141412;
+      --ink: #e8e4da;
+      --ink-2: #9a948a;
+      --ink-3: #5a554d;
+      --rule: #312e29;
+      --mark: #3a362f;
     }
   }
 
@@ -70,50 +54,30 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--serif);
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    line-height: 1.5;
     font-kerning: normal;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   a { color: inherit; }
   ::selection { background: var(--mark); }
-  :focus-visible { outline: 2px solid var(--pip); outline-offset: 3px; border-radius: 2px; }
+  :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
 
-  [data-colour="w"] { --pip: var(--w); }
-  [data-colour="u"] { --pip: var(--u); }
-  [data-colour="b"] { --pip: var(--b); }
-  [data-colour="r"] { --pip: var(--r); }
-  [data-colour="g"] { --pip: var(--g); }
-
-  .pip {
-    display: inline-block;
-    width: 0.62em;
-    height: 0.62em;
-    border-radius: 50%;
-    background: var(--pip);
-    vertical-align: 0.05em;
-  }
-  .pips { display: inline-flex; gap: 0.55rem; }
-  .pips .pip { width: 0.7rem; height: 0.7rem; }
-  .pips .pip:nth-child(1) { background: var(--w); }
-  .pips .pip:nth-child(2) { background: var(--u); }
-  .pips .pip:nth-child(3) { background: var(--b); }
-  .pips .pip:nth-child(4) { background: var(--r); }
-  .pips .pip:nth-child(5) { background: var(--g); }
+  .sheet { width: min(var(--sheet), 100% - 2 * var(--gutter)); margin-inline: auto; }
 
   .smallcaps, .kicker {
     font-family: var(--sans);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
-  /* ——— Measures ——— */
-  .text, .wide { position: relative; margin-inline: auto; }
-  .text { width: min(var(--text), 100% - 2 * var(--gutter)); }
-  .wide { width: min(58rem, 100% - 2 * var(--gutter)); }
+  /* Five circles, one per colour; the current part’s is filled. */
+  .pips { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .pips i { width: 0.5rem; height: 0.5rem; border: 1px solid currentColor; border-radius: 50%; }
+  .pips i.on { background: currentColor; }
 
   /* ——— Running head ——— */
   .runhead { display: none; }
@@ -125,8 +89,8 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: max(0.8rem, env(safe-area-inset-top)) var(--gutter) 0.7rem;
-    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    padding: max(0.7rem, env(safe-area-inset-top)) var(--gutter) 0.6rem;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
@@ -137,11 +101,11 @@
   .js .runhead.shown { transform: none; }
   .runhead a { text-decoration: none; }
   .runhead a:hover { color: var(--ink); }
-  .runhead .where { display: flex; gap: 0.9rem; align-items: baseline; min-width: 0; }
+  .runhead .where { display: flex; gap: 0.8rem; align-items: baseline; min-width: 0; }
   .runhead .where span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .runhead .n {
     font-family: var(--serif);
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-style: italic;
     letter-spacing: 0;
     text-transform: none;
@@ -149,231 +113,171 @@
     color: var(--ink);
   }
 
-  /* ——— Folios in the margin ——— */
-  [data-folio] { position: relative; scroll-margin-top: 4.5rem; }
+  /* ——— Folios ——— */
+  [data-folio] { scroll-margin-top: 3.5rem; }
   [data-folio]::before {
     content: attr(data-folio);
     float: right;
-    margin: 0.1rem 0 0 1rem;
+    margin: 0.05rem 0 0 0.75rem;
     font-family: var(--serif);
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 1.6;
+    line-height: 1.5;
     text-transform: none;
+    text-indent: 0;
     font-variant-numeric: oldstyle-nums;
     color: var(--ink-2);
   }
-  [data-folio]:target::before { color: var(--pip); }
-  [data-folio]:target > h2, [data-folio]:target > h3, h3[data-folio]:target { animation: mark 2.4s ease-out; }
+  .band::before { display: none; }
+  :target > .run, :target > h3, .band:target h2, .gl-e:target dt, .entry:target .head { animation: mark 2.4s ease-out; }
   @keyframes mark {
-    0%, 30% { background: var(--mark); box-shadow: -0.25em 0 0 var(--mark), 0.25em 0 0 var(--mark); }
+    0%, 30% { background: var(--mark); box-shadow: -0.2em 0 0 var(--mark), 0.2em 0 0 var(--mark); }
     100% { background: transparent; box-shadow: none; }
   }
 
-  /* ——— Cover ——— */
-  .cover {
-    position: relative;
-    display: grid;
-    grid-template-rows: 1fr auto 1fr;
-    min-height: 100svh;
-    padding: var(--gutter);
-    text-align: center;
-    overflow: hidden;
+  /* ——— Title page ——— */
+  .title-page { position: relative; padding-bottom: clamp(2rem, 5vw, 3rem); }
+  .title-page .runner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-2);
   }
-  .cover-title { grid-row: 2; }
-  .cover .the, .cover .companion { display: block; color: var(--ink-2); }
-  .cover h1 {
-    margin: 0.9rem 0 1rem;
+  .tp {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 2rem var(--col-gap);
+    align-items: end;
+    padding-top: clamp(3rem, 9vw, 6.5rem);
+  }
+  .tp .the, .tp .companion { display: block; color: var(--ink-2); }
+  .tp h1 {
+    margin: 0.5rem 0 0.6rem -0.04em;
     font-weight: 400;
-    font-size: clamp(4.25rem, 17vw, 9.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-size: clamp(3.75rem, 12.5vw, 9.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
   }
-  .cover .subtitle {
-    max-width: 22em;
-    margin: 2.25rem auto 0;
-    font-style: italic;
-    font-size: clamp(1.0625rem, 2vw, 1.25rem);
-    line-height: 1.45;
-    color: var(--ink-2);
-  }
-  .cover .pips { margin-top: 2.25rem; }
-  .cover-foot {
-    grid-row: 3;
-    align-self: end;
-    display: grid;
-    gap: 1.4rem;
-    justify-items: center;
-    color: var(--ink-2);
-  }
-  .cover-foot a { text-decoration: none; }
-  .cover-foot a:hover { color: var(--ink); }
+  .tp .subtitle { margin: 1.4rem 0 0; font-style: italic; font-size: 1.125rem; line-height: 1.4; color: var(--ink-2); max-width: 24em; }
+  .tp-side { padding-left: var(--col-gap); border-left: 1px solid var(--rule); }
+  .tp-side blockquote { margin: 0; }
+  .tp-side blockquote p { margin: 0; font-style: italic; font-size: 1.1875rem; line-height: 1.4; text-wrap: pretty; }
+  .tp-side cite { display: block; margin-top: 0.8rem; font-style: normal; color: var(--ink-2); }
+  .tp-side .aside { margin: 0.4rem 0 0; font-family: var(--sans); font-size: 0.75rem; color: var(--ink-2); }
+  .tp-side .pips { margin-top: 1.4rem; color: var(--ink); }
   .ribbon {
     position: absolute;
     top: 0;
-    right: clamp(1.5rem, 12vw, 9rem);
-    width: 1.5rem;
-    height: clamp(7rem, 26vh, 17rem);
+    right: clamp(0.5rem, 6vw, 5rem);
+    width: 1.25rem;
+    height: clamp(6rem, 18vh, 10rem);
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 1.4rem;
-    background: var(--rubric);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.7rem), 0 100%);
+    padding-bottom: 1.1rem;
+    background: var(--ink);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.6rem), 0 100%);
     color: var(--paper);
     text-decoration: none;
     transition: height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .ribbon:hover { height: calc(clamp(7rem, 26vh, 17rem) + 0.75rem); }
+  .ribbon:hover { height: calc(clamp(6rem, 18vh, 10rem) + 0.6rem); }
   .ribbon span {
     writing-mode: vertical-rl;
     font-family: var(--sans);
-    font-size: 0.625rem;
+    font-size: 0.5625rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     white-space: nowrap;
   }
 
-  /* ——— Front matter ——— */
-  .front { padding: clamp(5rem, 16vh, 9rem) 0; border-top: 1px solid var(--rule); }
-  .epigraph { display: grid; place-items: center; min-height: 70svh; text-align: center; }
-  .epigraph blockquote { max-width: 24em; margin: 0; }
-  .epigraph blockquote p {
+  /* ——— Section bands ——— */
+  .part, .section { margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .band {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "kicker meta" "title motto";
+    align-items: end;
+    gap: 0.35rem 2rem;
+    margin-bottom: 1.4rem;
+    padding: 0.55rem 0 0.8rem;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .band .kicker { grid-area: kicker; margin: 0; color: var(--ink-2); }
+  .band .meta {
+    grid-area: meta;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 0;
+  }
+  .band .folio { font-style: italic; font-size: 0.875rem; font-variant-numeric: oldstyle-nums; color: var(--ink-2); }
+  .band h2 {
+    grid-area: title;
+    margin: 0;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .band.small h2 { font-size: clamp(1.75rem, 3.5vw, 2.25rem); }
+  .band .motto {
+    grid-area: motto;
+    max-width: 21em;
     margin: 0;
     font-style: italic;
-    font-size: clamp(1.375rem, 3.2vw, 1.875rem);
-    line-height: 1.4;
-    text-wrap: balance;
-  }
-  .epigraph cite { display: block; margin-top: 1.5rem; font-style: normal; color: var(--ink-2); }
-  .epigraph .aside { margin: 1rem 0 0; font-family: var(--sans); font-size: 0.8125rem; color: var(--ink-2); }
-  .centre-folio {
-    margin: 3rem 0 0;
-    text-align: center;
-    font-style: italic;
-    font-variant-numeric: oldstyle-nums;
-    color: var(--ink-2);
-  }
-  .epigraph[data-folio]::before { display: none; }
-
-  .section-title {
-    margin: 0 0 2.5rem;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(2.75rem, 7vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-  }
-
-  /* ——— Contents ——— */
-  .toc ol { list-style: none; margin: 0; padding: 0; }
-  .toc > ol { max-width: 36rem; }
-  .toc a {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    padding: 0.2rem 0;
-    text-decoration: none;
-  }
-  .toc a:hover .t { color: var(--pip); }
-  .toc .dots { flex: 1; min-width: 1.5rem; border-bottom: 1px dotted var(--ink-3); transform: translateY(-0.3em); }
-  .toc .n { font-style: italic; font-variant-numeric: oldstyle-nums; color: var(--ink-2); }
-  .toc .num {
-    width: 1.75rem;
-    flex: none;
-    font-variant-numeric: oldstyle-nums;
-    color: var(--ink-2);
-  }
-  .toc > ol > li { margin-top: 1.4rem; }
-  .toc > ol > li:first-child { margin-top: 0; }
-  .toc .part-row .t { font-style: italic; font-size: 1.3125rem; }
-  .toc .part-row .kicker { width: 7.25rem; flex: none; color: var(--pip); }
-  .toc .part-row .kicker .pip { margin-right: 0.5rem; }
-  .toc .chapters { padding-left: 7.75rem; }
-  @media (max-width: 34rem) {
-    .toc .part-row { flex-wrap: wrap; }
-    .toc .part-row .kicker { width: 100%; }
-    .toc .chapters { padding-left: 0; }
-  }
-
-  /* ——— Parts ——— */
-  .part { border-top: 1px solid var(--rule); }
-  .opener { padding: clamp(6rem, 22vh, 12rem) 0 clamp(4rem, 12vh, 7rem); }
-  .opener .pip { width: 1rem; height: 1rem; margin-bottom: 2rem; }
-  .opener .kicker { margin: 0; color: var(--pip); }
-  .opener h2 {
-    margin: 0.6rem 0 0;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(3.5rem, 12vw, 6.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-  }
-  .opener .motto {
-    max-width: 22em;
-    margin: 1.75rem 0 0;
-    font-style: italic;
-    font-size: 1.1875rem;
-    line-height: 1.45;
-    color: var(--ink-2);
-  }
-  .opener .motto b { font-weight: 400; font-style: normal; color: var(--pip); }
-  .opener ol {
-    list-style: none;
-    margin: 2.5rem 0 0;
-    padding: 1rem 0 0;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.75rem;
-  }
-  .opener ol a { text-decoration: none; color: var(--ink-2); }
-  .opener ol a:hover { color: var(--pip); }
-  .opener ol .num { margin-right: 0.45rem; font-family: var(--serif); letter-spacing: 0; font-style: italic; font-variant-numeric: oldstyle-nums; }
-
-  /* ——— Chapters ——— */
-  .chapter { padding: 3.5rem 0 3rem; }
-  .chapter + .chapter { border-top: 1px solid var(--rule); }
-  .chapter-head { margin-bottom: 2rem; }
-  .chapter-head .kicker { margin: 0; color: var(--pip); }
-  .chapter-head h2 {
-    margin: 0.5rem 0 0;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(2.25rem, 6vw, 3rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-  }
-  .chapter h3 {
-    margin: 2.25rem 0 0.6rem;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 1.3125rem;
+    font-size: 1rem;
     line-height: 1.35;
+    text-align: right;
+    color: var(--ink-2);
   }
-  .chapter-head + h3 { margin-top: 0; }
-  .chapter p, .preface p { margin: 0; text-wrap: pretty; hanging-punctuation: first; }
-  .chapter p + p, .preface p + p { text-indent: 1.5em; }
-  .chapter .note + p, .preface .note + p { text-indent: 0; }
-  .chapter p + .note + p, .preface p + .note + p { text-indent: 1.5em; }
-  @media (min-width: 48rem) {
-    .chapter p, .preface p { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+
+  /* ——— Columns ——— */
+  .cols {
+    columns: 3 17rem;
+    column-gap: var(--col-gap);
+    column-rule: 1px solid var(--rule);
   }
-  .first::first-letter {
+  .cols p { margin: 0; text-indent: 1em; text-wrap: pretty; hanging-punctuation: first; }
+  .cols p.first, .cols p.sub, .cols .note + p, .cols .fig + p, .ch p { text-indent: 0; }
+  .cols p.sub { margin-top: 0.55em; }
+  @media (min-width: 40rem) {
+    .cols p { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+  }
+  .keep { break-inside: avoid; }
+  .run { font-style: italic; }
+
+  .chapter + .chapter .ch { margin-top: 1.3rem; padding-top: 0.85rem; border-top: 1px solid var(--rule); }
+  .ch { margin-bottom: 0.45rem; }
+  .ch .kicker { margin: 0; color: var(--ink-2); }
+  .ch h3 {
+    margin: 0.15rem 0 0;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.375rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .ch[data-folio]::before { font-size: 0.875rem; margin-top: 0.9rem; }
+
+  .drop::first-letter {
     float: left;
-    margin: 0.04em 0.08em 0 0;
-    font-size: 2.75em;
+    margin: 0.04em 0.07em 0 0;
+    font-size: 2.7em;
     line-height: 0.85;
     font-style: normal;
-    color: var(--pip);
   }
   @supports (initial-letter: 3 2) or (-webkit-initial-letter: 3 2) {
-    .first::first-letter {
+    .drop::first-letter {
       float: none;
-      margin: 0 0.1em 0 0;
+      margin: 0 0.08em 0 0;
       font-size: inherit;
       line-height: inherit;
       /* Three lines tall, sunk two: it never needs more than two lines beside it. */
@@ -381,161 +285,138 @@
       initial-letter: 3 2;
     }
   }
-  .gl {
-    text-decoration: underline dotted var(--ink-3);
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 1px;
-  }
-  .gl:hover { color: var(--pip); text-decoration-color: var(--pip); }
-  .xr { color: var(--pip); text-decoration: none; font-variant-numeric: oldstyle-nums; }
-  .xr:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+  .gl { text-decoration: underline dotted var(--ink-3); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .gl:hover { text-decoration-color: var(--ink); }
+  .xr { text-decoration: underline; text-decoration-color: var(--ink-3); text-underline-offset: 0.2em; text-decoration-thickness: 1px; font-variant-numeric: oldstyle-nums; }
+  .xr:hover { text-decoration-color: var(--ink); }
   .ui { font-family: var(--sans); font-size: 0.86em; font-weight: 500; letter-spacing: 0.01em; }
 
-  /* ——— Notes ——— */
   .note {
-    margin: 1.4rem 0;
-    padding-left: 0.9rem;
-    border-left: 2px solid var(--pip);
+    break-inside: avoid;
+    margin: 0.7rem 0;
+    padding: 0.05rem 0 0.05rem 0.7rem;
+    border-left: 1px solid var(--ink-3);
     font-family: var(--sans);
-    font-size: 0.8125rem;
-    line-height: 1.55;
+    font-size: 0.75rem;
+    line-height: 1.5;
     color: var(--ink-2);
   }
   .note b { font-weight: 600; color: var(--ink); }
 
   /* ——— Figures ——— */
-  .fig { margin: 2.25rem 0; }
-  .fig svg { display: block; width: 100%; height: auto; color: var(--ink); overflow: visible; }
-  .fig svg * { vector-effect: non-scaling-stroke; }
-  .fig .ln { fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
-  .fig .thin { stroke-width: 1; }
+  .fig { break-inside: avoid; margin: 1rem 0 1.1rem; }
+  .fig svg { display: block; width: 100%; max-width: 22rem; height: auto; margin-inline: auto; color: var(--ink); overflow: visible; }
+  .fig .ln { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+  .fig .bold { stroke-width: 1.6; }
   .fig .faint { stroke: var(--ink-3); }
-  .fig .dash { stroke-dasharray: 3 4; }
-  .fig .acc { stroke: var(--pip); }
-  .fig .fill { fill: var(--pip); stroke: none; }
-  .fig .wash { fill: var(--pip); fill-opacity: 0.1; stroke: none; }
-  .fig .lab { font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; fill: var(--ink-2); }
-  .fig .big { font-family: var(--serif); font-size: 46px; fill: var(--ink); }
-  .fig .ital { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--ink-2); }
-  .fig .tally { font-family: var(--sans); font-size: 14px; font-weight: 600; fill: var(--pip); }
+  .fig .dash { stroke-dasharray: 3 3; }
+  .fig .fill { fill: currentColor; stroke: none; }
+  .fig .wash { fill: currentColor; fill-opacity: 0.07; stroke: none; }
+  .fig .lab { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.08em; fill: var(--ink-2); }
+  .fig .big { font-family: var(--serif); font-size: 36px; fill: currentColor; }
+  .fig .ital { font-family: var(--serif); font-style: italic; font-size: 13px; fill: var(--ink-2); }
+  .fig .tally { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: currentColor; }
   .fig figcaption {
-    margin-top: 1rem;
-    padding-top: 0.6rem;
+    margin-top: 0.6rem;
+    padding-top: 0.4rem;
     border-top: 1px solid var(--rule);
     font-style: italic;
-    font-size: 0.9375rem;
-    line-height: 1.5;
+    font-size: 0.8125rem;
+    line-height: 1.45;
     color: var(--ink-2);
   }
-  .fig figcaption .kicker { margin-right: 0.6rem; font-style: normal; color: var(--pip); }
+  .fig figcaption .kicker { margin-right: 0.5rem; font-style: normal; color: var(--ink); }
+
+  /* ——— Contents and preface ——— */
+  .front {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0 var(--col-gap);
+  }
+  .front > * + * { padding-left: var(--col-gap); border-left: 1px solid var(--rule); }
+  .toc { columns: 2 15rem; column-gap: var(--col-gap); margin: 0; padding: 0; list-style: none; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc > li { break-inside: avoid; margin-bottom: 1rem; }
+  .toc a { display: flex; align-items: baseline; gap: 0.4rem; padding: 0.08rem 0; text-decoration: none; }
+  .toc a:hover .t { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .toc .dots { flex: 1; min-width: 1rem; border-bottom: 1px dotted var(--ink-3); transform: translateY(-0.3em); }
+  .toc .n { font-style: italic; font-variant-numeric: oldstyle-nums; color: var(--ink-2); }
+  .toc .num { width: 1.4rem; flex: none; font-variant-numeric: oldstyle-nums; color: var(--ink-2); }
+  .toc .kicker { display: block; margin-bottom: 0.1rem; color: var(--ink-2); }
+  .toc .part-row .t { font-style: italic; font-size: 1.125rem; }
+  .preface p { margin: 0; text-indent: 1em; hanging-punctuation: first; text-wrap: pretty; }
+  .preface p.first, .band p { text-indent: 0; }
+  @media (min-width: 40rem) { .preface p { text-align: justify; -webkit-hyphens: auto; hyphens: auto; } }
 
   /* ——— Glossary ——— */
-  .glossary { margin: 0; }
-  .glossary dt {
-    margin-top: 1.1rem;
-    font-style: italic;
-    scroll-margin-top: 4.5rem;
-  }
-  .glossary dt:first-child { margin-top: 0; }
-  .glossary dt:target { animation: mark 2.4s ease-out; }
-  .glossary dd { margin: 0.1rem 0 0 1.5em; color: var(--ink-2); text-wrap: pretty; }
+  .glossary { columns: 3 15rem; column-gap: var(--col-gap); column-rule: 1px solid var(--rule); margin: 0; }
+  .gl-e { break-inside: avoid; margin: 0 0 0.4rem; padding-left: 1em; text-indent: -1em; scroll-margin-top: 3.5rem; }
+  .gl-e dt, .gl-e dd { display: inline; margin: 0; }
+  .gl-e dt { font-style: italic; }
+  .gl-e dt::after { content: " "; }
+  .gl-e dd { color: var(--ink-2); }
 
   /* ——— Index ——— */
   .thumbs {
     display: grid;
     grid-template-columns: repeat(26, 1fr);
-    margin: 0 0 2.5rem;
-    padding: 0.8rem 0;
-    border-top: 1px solid var(--rule);
+    margin: 0 0 1.4rem;
+    padding: 0.5rem 0;
     border-bottom: 1px solid var(--rule);
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 500;
   }
-  .thumbs > * { padding: 0.35rem 0; text-align: center; text-decoration: none; }
-  .thumbs a:hover { color: var(--rubric); }
+  .thumbs > * { padding: 0.25rem 0; text-align: center; text-decoration: none; }
+  .thumbs a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
   .thumbs span { color: var(--ink-3); }
   .index-cols {
-    columns: 2 17rem;
-    column-gap: clamp(2.5rem, 6vw, 4.5rem);
+    columns: 4 12rem;
+    column-gap: 2rem;
     column-rule: 1px solid var(--rule);
-    font-size: 1.0625rem;
-    line-height: 1.55;
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
-  .letter { break-inside: avoid; padding-bottom: 1.5rem; scroll-margin-top: 4.5rem; }
-  .letter h3 { margin: 0 0 0.3rem; font-weight: 400; font-size: 1.5rem; line-height: 1.3; color: var(--rubric); }
+  .letter { break-inside: avoid; padding-bottom: 1rem; scroll-margin-top: 3.5rem; }
+  .letter h3 { margin: 0 0 0.15rem; font-weight: 400; font-size: 1.125rem; line-height: 1.3; }
   .entries, .subs { list-style: none; margin: 0; padding: 0; }
-  .entry { break-inside: avoid; scroll-margin-top: 4.5rem; }
-  .entry + .entry { margin-top: 0.15rem; }
+  .entry { break-inside: avoid; scroll-margin-top: 3.5rem; }
   .head, .subs li { margin: 0; padding-left: 2em; text-indent: -2em; }
   .subs li { margin-left: 1em; }
-  .entry:target .head { animation: mark 2.4s ease-out; }
-  .loc {
-    color: var(--rubric);
-    text-decoration: none;
-    font-variant-numeric: oldstyle-nums proportional-nums;
-    white-space: nowrap;
-  }
+  .loc { text-decoration: none; font-variant-numeric: oldstyle-nums proportional-nums; white-space: nowrap; }
   a.loc:hover { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-  .xref {
-    text-decoration: underline;
-    text-decoration-color: var(--ink-3);
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 1px;
-  }
-  .xref:hover { color: var(--rubric); text-decoration-color: var(--rubric); }
+  .xref { text-decoration: underline; text-decoration-color: var(--ink-3); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .xref:hover { text-decoration-color: var(--ink); }
 
   /* ——— Colophon ——— */
-  .colophon { text-align: center; }
-  .colophon .body {
+  .colophon .cols p { font-family: var(--sans); font-size: 0.75rem; line-height: 1.6; color: var(--ink-2); text-indent: 0; text-align: left; margin-bottom: 0.6rem; break-inside: avoid; }
+  .colophon .cols a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; text-decoration-color: var(--ink-3); }
+  .finis {
     display: grid;
-    gap: 0.9rem;
-    max-width: 34rem;
-    margin: 0 auto;
-    font-family: var(--sans);
-    font-size: 0.8125rem;
-    line-height: 1.65;
-    color: var(--ink-2);
+    gap: 0.8rem;
+    justify-items: center;
+    margin: 3rem 0 0;
+    padding: 1.5rem 0 3.5rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
   }
-  .colophon .body p { margin: 0; }
-  .colophon .body a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; text-decoration-color: var(--ink-3); }
-  .colophon .body a:hover { color: var(--ink); }
-  .finis { margin: 4.5rem 0 0; display: grid; gap: 1.25rem; justify-items: center; }
   .finis p { margin: 0; font-style: italic; color: var(--ink-2); }
   .finis a { text-decoration: none; color: var(--ink-2); }
   .finis a:hover { color: var(--ink); }
 
-  /* ——— Wide screens: folios in the left margin, notes in the right ——— */
-  @media (min-width: 70rem) {
-    .text {
-      width: var(--text);
-      margin-left: calc(50% - (var(--margin) + var(--text) + var(--gap) + var(--note)) / 2 + var(--margin));
-    }
-    [data-folio]::before {
-      float: none;
-      position: absolute;
-      top: 0;
-      left: calc(-1 * var(--margin));
-      width: calc(var(--margin) - 1.5rem);
-      margin: 0;
-      text-align: right;
-    }
-    .chapter-head[data-folio]::before, .opener > [data-folio]::before { top: 0.05rem; }
-    .note {
-      float: right;
-      clear: right;
-      width: var(--note);
-      margin: 0.35rem calc(-1 * (var(--note) + var(--gap))) 1rem 0;
-      padding: 0.55rem 0 0;
-      border-left: 0;
-      border-top: 2px solid var(--pip);
-    }
-    .fig { clear: right; }
+  /* ——— Narrow screens ——— */
+  @media (max-width: 52rem) {
+    .front { grid-template-columns: 1fr; gap: 2.5rem; }
+    .front > * + * { padding-left: 0; border-left: 0; }
   }
-
   @media (max-width: 40rem) {
-    body { font-size: 1.0625rem; }
-    .thumbs { grid-template-columns: repeat(13, 1fr); font-size: 0.6875rem; }
+    body { font-size: 1rem; }
+    .tp { grid-template-columns: 1fr; padding-top: 3rem; }
+    .tp-side { padding: 1.25rem 0 0; border-left: 0; border-top: 1px solid var(--rule); }
+    .band { grid-template-columns: 1fr auto; grid-template-areas: "kicker meta" "title title" "motto motto"; }
+    .band .motto { text-align: left; margin-top: 0.35rem; }
+    .thumbs { grid-template-columns: repeat(13, 1fr); }
     .runhead .brand-long { display: none; }
   }
   @media (min-width: 40.01rem) { .runhead .brand-short { display: none; } }
@@ -545,10 +426,9 @@
   }
 
   @media print {
-    .runhead, .ribbon, .thumbs, .cover-foot a { display: none !important; }
-    body { background: #fff; color: #000; font-size: 11pt; }
-    .front, .part, .chapter { break-before: page; }
-    .opener { min-height: 0; }
+    .runhead, .ribbon, .thumbs { display: none !important; }
+    body { background: #fff; color: #000; font-size: 9.5pt; }
+    .part { break-before: page; }
   }
 </style>
 <script>document.documentElement.classList.add('js');</script>
@@ -560,55 +440,55 @@
   <span class="where" aria-hidden="true"><span id="rh-title"></span><span class="n" id="rh-folio"></span></span>
 </div>
 
-<!-- ═══════════════════════════ Cover ═══════════════════════════ -->
+<div class="sheet">
 
-<section class="cover" id="cover" aria-label="Cover">
+<!-- ═══════════════════════════ Title page ═══════════════════════════ -->
+
+<header class="title-page" id="cover">
   <a class="ribbon" id="ribbon" href="#contents" aria-label="Open to the contents"><span></span></a>
-  <div class="cover-title">
-    <span class="the smallcaps">The</span>
-    <h1>Mooligan</h1>
-    <span class="companion smallcaps">Companion</span>
-    <p class="subtitle">A guide to the app for players of Magic: The Gathering, in five parts</p>
-    <div class="pips" aria-hidden="true"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+  <div class="runner smallcaps"><span>mooligan.com · First Edition</span></div>
+  <div class="tp">
+    <div>
+      <span class="the smallcaps">The</span>
+      <h1>Mooligan</h1>
+      <span class="companion smallcaps">Companion</span>
+      <p class="subtitle">A guide to the app for players of Magic: The Gathering, in five parts.</p>
+    </div>
+    <div class="tp-side" id="pv" data-folio="v" data-head="Epigraph">
+      <blockquote>
+        <p>Every game begins with a choice: keep the seven cards you were dealt, or shuffle them away and begin again.</p>
+        <cite class="smallcaps">On the mulligan</cite>
+      </blockquote>
+      <p class="aside">…from which Mooligan borrows its name.</p>
+      <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    </div>
   </div>
-  <div class="cover-foot">
-    <a class="smallcaps" href="#pv">Open ↓</a>
-    <span class="smallcaps">mooligan.com · First Edition</span>
-  </div>
-</section>
+</header>
 
 <main>
 
-<!-- ═══════════════════════════ Front matter ═══════════════════════════ -->
+<!-- ═══════════════════════════ Contents · Preface ═══════════════════════════ -->
 
-<section class="front epigraph" id="pv" data-folio="v" data-head="Epigraph">
-  <div>
-    <blockquote>
-      <p>Every game begins with a choice: keep the seven cards you were dealt, or shuffle them away and begin again.</p>
-      <cite class="smallcaps">On the mulligan</cite>
-    </blockquote>
-    <p class="aside">…from which Mooligan borrows its name.</p>
-    <p class="centre-folio" aria-hidden="true">v</p>
-  </div>
-</section>
-
-<section class="front" id="contents" data-head="Contents">
-  <div class="wide toc">
-    <h2 class="section-title" id="pvii" data-folio="vii">Contents</h2>
-    <ol>
-      <li><a href="#pix"><span class="num"></span><span class="t">Preface</span><span class="dots"></span><span class="n">ix</span></a></li>
-
-      <li class="toc-part" data-colour="w">
-        <a class="part-row" href="#p1"><span class="kicker"><span class="pip"></span>Part One</span><span class="t">The Table</span><span class="dots"></span><span class="n">1</span></a>
+<div class="front section">
+  <section id="contents" data-head="Contents">
+    <header class="band small" id="pvii" data-folio="vii">
+      <p class="kicker">Front matter</p>
+      <p class="meta"><span class="folio">vii</span></p>
+      <h2>Contents</h2>
+    </header>
+    <ol class="toc">
+      <li>
+        <span class="kicker">Part One · White</span>
+        <a class="part-row" href="#p1"><span class="t">The Table</span><span class="dots"></span><span class="n">1</span></a>
         <ol class="chapters">
           <li><a href="#p3"><span class="num">1</span><span class="t">Starting a Game</span><span class="dots"></span><span class="n">3</span></a></li>
           <li><a href="#p5"><span class="num">2</span><span class="t">Keeping Score</span><span class="dots"></span><span class="n">5</span></a></li>
           <li><a href="#p7"><span class="num">3</span><span class="t">Ending a Game</span><span class="dots"></span><span class="n">7</span></a></li>
         </ol>
       </li>
-
-      <li class="toc-part" data-colour="u">
-        <a class="part-row" href="#p9"><span class="kicker"><span class="pip"></span>Part Two</span><span class="t">The Library</span><span class="dots"></span><span class="n">9</span></a>
+      <li>
+        <span class="kicker">Part Two · Blue</span>
+        <a class="part-row" href="#p9"><span class="t">The Library</span><span class="dots"></span><span class="n">9</span></a>
         <ol class="chapters">
           <li><a href="#p11"><span class="num">4</span><span class="t">Browsing</span><span class="dots"></span><span class="n">11</span></a></li>
           <li><a href="#p13"><span class="num">5</span><span class="t">Searching</span><span class="dots"></span><span class="n">13</span></a></li>
@@ -616,856 +496,805 @@
           <li><a href="#p19"><span class="num">7</span><span class="t">The Card Page</span><span class="dots"></span><span class="n">19</span></a></li>
         </ol>
       </li>
-
-      <li class="toc-part" data-colour="b">
-        <a class="part-row" href="#p23"><span class="kicker"><span class="pip"></span>Part Three</span><span class="t">The Ledger</span><span class="dots"></span><span class="n">23</span></a>
+      <li>
+        <span class="kicker">Part Three · Black</span>
+        <a class="part-row" href="#p23"><span class="t">The Ledger</span><span class="dots"></span><span class="n">23</span></a>
         <ol class="chapters">
           <li><a href="#p25"><span class="num">8</span><span class="t">Printings</span><span class="dots"></span><span class="n">25</span></a></li>
           <li><a href="#p27"><span class="num">9</span><span class="t">Prices</span><span class="dots"></span><span class="n">27</span></a></li>
           <li><a href="#p29"><span class="num">10</span><span class="t">Pull Rates</span><span class="dots"></span><span class="n">29</span></a></li>
         </ol>
       </li>
-
-      <li class="toc-part" data-colour="r">
-        <a class="part-row" href="#p31"><span class="kicker"><span class="pip"></span>Part Four</span><span class="t">The Eye</span><span class="dots"></span><span class="n">31</span></a>
+      <li>
+        <span class="kicker">Part Four · Red</span>
+        <a class="part-row" href="#p31"><span class="t">The Eye</span><span class="dots"></span><span class="n">31</span></a>
         <ol class="chapters">
           <li><a href="#p33"><span class="num">11</span><span class="t">The Scanner</span><span class="dots"></span><span class="n">33</span></a></li>
         </ol>
       </li>
-
-      <li class="toc-part" data-colour="g">
-        <a class="part-row" href="#p37"><span class="kicker"><span class="pip"></span>Part Five</span><span class="t">The Field</span><span class="dots"></span><span class="n">37</span></a>
+      <li>
+        <span class="kicker">Part Five · Green</span>
+        <a class="part-row" href="#p37"><span class="t">The Field</span><span class="dots"></span><span class="n">37</span></a>
         <ol class="chapters">
           <li><a href="#p39"><span class="num">12</span><span class="t">The Metagame</span><span class="dots"></span><span class="n">39</span></a></li>
           <li><a href="#p41"><span class="num">13</span><span class="t">Decklists and Usage</span><span class="dots"></span><span class="n">41</span></a></li>
           <li><a href="#p43"><span class="num">14</span><span class="t">Events</span><span class="dots"></span><span class="n">43</span></a></li>
         </ol>
       </li>
-
-      <li><a href="#p45"><span class="num"></span><span class="t">Glossary</span><span class="dots"></span><span class="n">45</span></a></li>
-      <li><a href="#p47"><span class="num"></span><span class="t">Index</span><span class="dots"></span><span class="n">47</span></a></li>
-      <li><a href="#p51"><span class="num"></span><span class="t">Colophon</span><span class="dots"></span><span class="n">51</span></a></li>
+      <li>
+        <span class="kicker">Back matter</span>
+        <ol class="chapters">
+          <li><a href="#p45"><span class="num"></span><span class="t">Glossary</span><span class="dots"></span><span class="n">45</span></a></li>
+          <li><a href="#p47"><span class="num"></span><span class="t">Index</span><span class="dots"></span><span class="n">47</span></a></li>
+          <li><a href="#p51"><span class="num"></span><span class="t">Colophon</span><span class="dots"></span><span class="n">51</span></a></li>
+        </ol>
+      </li>
     </ol>
-  </div>
-</section>
+  </section>
 
-<section class="front preface" data-head="Preface">
-  <div class="text">
-    <h2 class="section-title" id="pix" data-folio="ix">Preface</h2>
-    <p class="first">Mooligan is a companion for Magic: The Gathering. It keeps the score at your table, holds a library of every card ever printed, reads cards through your phone’s camera, and follows what is winning in tournaments this week.</p>
-    <p>This book is its guide, arranged in five parts, one for each colour of Magic. <em>White</em>, the colour of order and of rules agreed on, sits at the table and keeps the score. <em>Blue</em>, the colour of knowledge, keeps the library. <em>Black</em>, which knows the price of everything, keeps the ledger. <em>Red</em>, quick and impulsive, is the eye of the camera. <em>Green</em>, which watches what grows and what thrives, walks the field of the metagame.</p>
-    <div class="note" role="note">Words with a dotted underline, like <a class="gl" href="#g-mana-value">mana value</a>, are defined in the Glossary on <a class="xr" href="#p45">p. 45</a>.</div>
-    <p>Nothing here needs to be read in order. Turn to the part you came for, and let the index at the back find the rest. Notes in the margin are asides. The figures are drawn, not photographed: they show the shape of things rather than every detail.</p>
-  </div>
-</section>
+  <section class="preface" data-head="Preface">
+    <header class="band small" id="pix" data-folio="ix">
+      <p class="kicker">Front matter</p>
+      <p class="meta"><span class="folio">ix</span></p>
+      <h2>Preface</h2>
+    </header>
+    <p class="first drop">Mooligan is a companion for Magic: The Gathering. It keeps the score at your table, holds a library of every card ever printed, reads cards through your phone’s camera, and follows what is winning in tournaments this week.</p>
+    <p>This book is its guide, in five parts, one for each colour of Magic. <em>White</em>, the colour of order, sits at the table and keeps the score. <em>Blue</em>, the colour of knowledge, keeps the library. <em>Black</em>, which knows the price of everything, keeps the ledger. <em>Red</em>, quick and impulsive, is the eye of the camera. <em>Green</em>, which watches what thrives, walks the field of the metagame.</p>
+    <p>Nothing here needs to be read in order. Turn to the part you came for, and let the index find the rest. Words with a dotted underline, like <a class="gl" href="#g-mana-value">mana value</a>, are in the glossary on <a class="xr" href="#p45">p. 45</a>.</p>
+  </section>
+</div>
 
 <!-- ═══════════════════════════ Part One · White ═══════════════════════════ -->
 
-<section class="part" id="part-1" data-colour="w" data-head="The Table">
-  <div class="text opener">
-    <header id="p1" data-folio="1">
-      <span class="pip" aria-hidden="true"></span>
-      <p class="kicker">Part One</p>
-      <h2>The Table</h2>
-      <p class="motto"><b>White.</b> Order, fairness, and the rules everyone at the table agrees to.</p>
-    </header>
-    <ol class="smallcaps">
-      <li><a href="#p3"><span class="num">1</span>Starting a Game</a></li>
-      <li><a href="#p5"><span class="num">2</span>Keeping Score</a></li>
-      <li><a href="#p7"><span class="num">3</span>Ending a Game</a></li>
-    </ol>
-  </div>
+<section class="part" id="part-1">
+  <header class="band" id="p1" data-folio="1" data-head="The Table">
+    <p class="kicker">Part One · White</p>
+    <p class="meta"><span class="pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="folio">1</span></p>
+    <h2>The Table</h2>
+    <p class="motto">Order, fairness, and the rules everyone at the table agrees to.</p>
+  </header>
 
-  <article class="chapter" id="ch-1" data-head="Starting a Game">
-    <div class="text">
-      <header class="chapter-head" id="p3" data-folio="3">
-        <p class="kicker">Chapter 1</p>
-        <h2>Starting a Game</h2>
-      </header>
-      <h3>Players and life</h3>
-      <p class="first">Open <span class="ui">Play</span>. Before anything else, Mooligan asks two questions: how many are at the table, and how much life each player begins with.</p>
-      <div class="note" role="note"><b>Why forty?</b> Commander games seat more players and run longer, so each player starts with twice the usual life.</div>
+  <div class="cols">
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p3" data-folio="3">
+          <p class="kicker">Chapter 1</p>
+          <h3>Starting a Game</h3>
+        </header>
+        <p class="first drop">Open <span class="ui">Play</span>. Before anything else, Mooligan asks two questions: how many are at the table, and how much life each player begins with.</p>
+      </div>
       <p>Twenty is the number for most formats. <a class="gl" href="#g-commander">Commander</a> begins at forty; choose it and every seat starts there.</p>
-
-      <h3 id="p4" data-folio="4">Seats</h3>
-      <p>Tap <span class="ui">Start</span>. The screen divides into one seat for each player, and each seat turns to face whoever sits behind it. Lay the phone flat in the middle of the table and everyone reads their own total the right way up.</p>
+      <div class="note" role="note"><b>Why forty?</b> Commander games seat more players and run longer, so each player starts with twice the usual life.</div>
+      <p class="sub" id="p4" data-folio="4"><span class="run">Seats.</span> Tap <span class="ui">Start</span>. The screen divides into one seat for each player, and each seat turns to face whoever sits behind it. Lay the phone flat in the middle of the table and everyone reads their own total the right way up.</p>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 300" role="img" aria-labelledby="fig1">
+        <svg viewBox="0 0 320 250" role="img" aria-labelledby="fig1">
           <title id="fig1">A phone lying flat between two players, its screen split into two seats, each total facing its player.</title>
-          <text class="lab" x="260" y="14" text-anchor="middle" transform="rotate(180 260 10)">PLAYER TWO</text>
-          <rect class="ln" x="200" y="30" width="120" height="240" rx="20"/>
-          <rect class="wash" x="206" y="36" width="108" height="110" rx="14"/>
-          <line class="ln thin faint" x1="206" y1="150" x2="314" y2="150"/>
-          <text class="big" x="260" y="92" text-anchor="middle" dominant-baseline="central" transform="rotate(180 260 92)">20</text>
-          <text class="big" x="260" y="208" text-anchor="middle" dominant-baseline="central">20</text>
-          <text class="lab" x="260" y="294" text-anchor="middle">PLAYER ONE</text>
-          <line class="ln thin faint" x1="328" y1="92" x2="360" y2="92"/>
-          <text class="lab" x="368" y="96">EACH SEAT FACES</text>
-          <text class="lab" x="368" y="112">ITS PLAYER</text>
-          <line class="ln thin faint" x1="160" y1="150" x2="192" y2="150"/>
-          <text class="lab" x="152" y="154" text-anchor="end">ONE SEAT EACH</text>
+          <text class="lab" x="160" y="10" text-anchor="middle" transform="rotate(180 160 7)">PLAYER TWO</text>
+          <rect class="ln bold" x="110" y="24" width="100" height="200" rx="16"/>
+          <rect class="wash" x="115" y="29" width="90" height="92" rx="11"/>
+          <line class="ln faint" x1="115" y1="124" x2="205" y2="124"/>
+          <text class="big" x="160" y="76" text-anchor="middle" dominant-baseline="central" transform="rotate(180 160 76)">20</text>
+          <text class="big" x="160" y="172" text-anchor="middle" dominant-baseline="central">20</text>
+          <text class="lab" x="160" y="244" text-anchor="middle">PLAYER ONE</text>
+          <line class="ln faint" x1="216" y1="76" x2="234" y2="76"/>
+          <text class="lab" x="240" y="73">FACES ITS</text>
+          <text class="lab" x="240" y="86">PLAYER</text>
+          <line class="ln faint" x1="86" y1="124" x2="104" y2="124"/>
+          <text class="lab" x="80" y="121" text-anchor="end">ONE SEAT</text>
+          <text class="lab" x="80" y="134" text-anchor="end">EACH</text>
         </svg>
         <figcaption><span class="kicker">Fig. 1</span>Two seats, one phone, lying flat between the players.</figcaption>
       </figure>
-    </div>
-  </article>
+    </article>
 
-  <article class="chapter" id="ch-2" data-head="Keeping Score">
-    <div class="text">
-      <header class="chapter-head" id="p5" data-folio="5">
-        <p class="kicker">Chapter 2</p>
-        <h2>Keeping Score</h2>
-      </header>
-      <h3>Tapping</h3>
-      <p class="first">Tap the upper half of your seat to gain a life, the lower half to lose one. Press and hold to count faster, which saves a good deal of tapping when something large connects.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p5" data-folio="5">
+          <p class="kicker">Chapter 2</p>
+          <h3>Keeping Score</h3>
+        </header>
+        <p class="first">Tap the upper half of your seat to gain a life, the lower half to lose one. Press and hold to count faster, which saves a good deal of tapping when something large connects.</p>
+      </div>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 260" role="img" aria-labelledby="fig2">
+        <svg viewBox="0 0 320 226" role="img" aria-labelledby="fig2">
           <title id="fig2">One seat, its upper half for gaining life and its lower half for losing it, with a small tally reading minus seven beside the total.</title>
-          <rect class="ln" x="170" y="16" width="180" height="228" rx="18"/>
-          <rect class="wash" x="176" y="22" width="168" height="96" rx="13"/>
-          <line class="ln thin faint dash" x1="176" y1="130" x2="222" y2="130"/>
-          <line class="ln thin faint dash" x1="298" y1="130" x2="344" y2="130"/>
-          <text class="ital" x="260" y="72" text-anchor="middle" style="font-size:26px">+</text>
-          <text class="ital" x="260" y="206" text-anchor="middle" style="font-size:26px">−</text>
-          <text class="big" x="260" y="130" text-anchor="middle" dominant-baseline="central">13</text>
-          <text class="tally" x="306" y="112">−7</text>
-          <line class="ln thin faint" x1="358" y1="64" x2="390" y2="64"/>
-          <text class="lab" x="398" y="68">TAP TO GAIN</text>
-          <line class="ln thin faint" x1="330" y1="108" x2="390" y2="108"/>
-          <text class="lab" x="398" y="112">THE TALLY</text>
-          <line class="ln thin faint" x1="358" y1="200" x2="390" y2="200"/>
-          <text class="lab" x="398" y="204">TAP TO LOSE</text>
+          <rect class="ln bold" x="70" y="8" width="150" height="210" rx="14"/>
+          <rect class="wash" x="75" y="13" width="140" height="95" rx="10"/>
+          <line class="ln faint dash" x1="75" y1="113" x2="116" y2="113"/>
+          <line class="ln faint dash" x1="174" y1="113" x2="215" y2="113"/>
+          <text class="ital" x="145" y="64" text-anchor="middle" style="font-size:22px">+</text>
+          <text class="ital" x="145" y="178" text-anchor="middle" style="font-size:22px">−</text>
+          <text class="big" x="145" y="113" text-anchor="middle" dominant-baseline="central">13</text>
+          <text class="tally" x="178" y="96">−7</text>
+          <line class="ln faint" x1="226" y1="58" x2="238" y2="58"/>
+          <text class="lab" x="244" y="61">GAIN</text>
+          <line class="ln faint" x1="200" y1="92" x2="238" y2="92"/>
+          <text class="lab" x="244" y="95">TALLY</text>
+          <line class="ln faint" x1="226" y1="172" x2="238" y2="172"/>
+          <text class="lab" x="244" y="175">LOSE</text>
         </svg>
         <figcaption><span class="kicker">Fig. 2</span>A seat, halved. Twenty, less a hit for seven.</figcaption>
       </figure>
 
-      <h3 id="p6" data-folio="6">The tally</h3>
+      <p class="sub" id="p6" data-folio="6"><span class="run">The tally.</span> Beside each total, a small tally keeps count of what has just changed. A hit for seven reads as −7 for a moment, so everyone can check the arithmetic before it settles into the total.</p>
       <div class="note" role="note">Useful when two things happen at once and someone asks, <em>what was that?</em></div>
-      <p>Beside each total, a small tally keeps count of what has just changed. A hit for seven reads as −7 for a moment, so everyone can check the arithmetic before it settles into the total.</p>
-    </div>
-  </article>
+    </article>
 
-  <article class="chapter" id="ch-3" data-head="Ending a Game">
-    <div class="text">
-      <header class="chapter-head" id="p7" data-folio="7">
-        <p class="kicker">Chapter 3</p>
-        <h2>Ending a Game</h2>
-      </header>
-      <p class="first">When the game is decided, choose <span class="ui">Rematch</span> to reset every total and keep the same seats. It is the usual choice, since Magic is so often played best of three.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p7" data-folio="7">
+          <p class="kicker">Chapter 3</p>
+          <h3>Ending a Game</h3>
+        </header>
+        <p class="first">When the game is decided, choose <span class="ui">Rematch</span> to reset every total and keep the same seats. It is the usual choice, since Magic is so often played best of three.</p>
+      </div>
       <p>Choose <span class="ui">New Game</span> instead to start again with different players or a different starting life.</p>
-    </div>
-  </article>
+    </article>
+  </div>
 </section>
 
 <!-- ═══════════════════════════ Part Two · Blue ═══════════════════════════ -->
 
-<section class="part" id="part-2" data-colour="u" data-head="The Library">
-  <div class="text opener">
-    <header id="p9" data-folio="9">
-      <span class="pip" aria-hidden="true"></span>
-      <p class="kicker">Part Two</p>
-      <h2>The Library</h2>
-      <p class="motto"><b>Blue.</b> Knowledge, patience, and the wish to know every card there is.</p>
-    </header>
-    <ol class="smallcaps">
-      <li><a href="#p11"><span class="num">4</span>Browsing</a></li>
-      <li><a href="#p13"><span class="num">5</span>Searching</a></li>
-      <li><a href="#p15"><span class="num">6</span>Filtering</a></li>
-      <li><a href="#p19"><span class="num">7</span>The Card Page</a></li>
-    </ol>
-  </div>
+<section class="part" id="part-2">
+  <header class="band" id="p9" data-folio="9" data-head="The Library">
+    <p class="kicker">Part Two · Blue</p>
+    <p class="meta"><span class="pips" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i></span><span class="folio">9</span></p>
+    <h2>The Library</h2>
+    <p class="motto">Knowledge, patience, and the wish to know every card there is.</p>
+  </header>
 
-  <article class="chapter" id="ch-4" data-head="Browsing">
-    <div class="text">
-      <header class="chapter-head" id="p11" data-folio="11">
-        <p class="kicker">Chapter 4</p>
-        <h2>Browsing</h2>
-      </header>
-      <h3>By set</h3>
-      <p class="first">Every card belongs to a <a class="gl" href="#g-set">set</a>, and sets are where browsing begins. They are listed newest first, each with its symbol and the date it was released.</p>
+  <div class="cols">
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p11" data-folio="11">
+          <p class="kicker">Chapter 4</p>
+          <h3>Browsing</h3>
+        </header>
+        <p class="first drop">Every card belongs to a <a class="gl" href="#g-set">set</a>, and sets are where browsing begins. They are listed newest first, each with its symbol and the date it was released.</p>
+      </div>
       <p>Open one to see its cards in <a class="gl" href="#g-collector-number">collector number</a> order, the way they would sit in a binder.</p>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 384" role="img" aria-labelledby="fig3">
+        <svg viewBox="0 0 320 330" role="img" aria-labelledby="fig3">
           <title id="fig3">A binder page of nine cards, numbered 001 to 009 in order.</title>
-          <rect class="ln" x="120" y="8" width="300" height="368" rx="6"/>
-          <circle class="ln thin" cx="136" cy="84" r="5"/>
-          <circle class="ln thin" cx="136" cy="192" r="5"/>
-          <circle class="ln thin" cx="136" cy="300" r="5"/>
           <defs>
             <g id="card3">
-              <rect class="ln" x="0" y="0" width="64" height="89" rx="4"/>
-              <rect class="ln thin faint" x="6" y="12" width="52" height="36" rx="1"/>
-              <line class="ln thin faint" x1="6" y1="58" x2="48" y2="58"/>
-              <line class="ln thin faint" x1="6" y1="66" x2="54" y2="66"/>
-              <line class="ln thin faint" x1="6" y1="74" x2="38" y2="74"/>
+              <rect class="ln" x="0" y="0" width="56" height="78" rx="4"/>
+              <rect class="ln faint" x="5" y="10" width="46" height="32" rx="1"/>
+              <line class="ln faint" x1="5" y1="50" x2="42" y2="50"/>
+              <line class="ln faint" x1="5" y1="57" x2="48" y2="57"/>
+              <line class="ln faint" x1="5" y1="64" x2="34" y2="64"/>
             </g>
           </defs>
-          <rect class="wash" x="156" y="28" width="64" height="89" rx="4"/>
-          <use href="#card3" x="156" y="28"/>
-          <use href="#card3" x="236" y="28"/>
-          <use href="#card3" x="316" y="28"/>
-          <use href="#card3" x="156" y="142"/>
-          <use href="#card3" x="236" y="142"/>
-          <use href="#card3" x="316" y="142"/>
-          <use href="#card3" x="156" y="256"/>
-          <use href="#card3" x="236" y="256"/>
-          <use href="#card3" x="316" y="256"/>
+          <rect class="ln bold" x="40" y="4" width="250" height="322" rx="5"/>
+          <circle class="ln" cx="54" cy="70" r="4"/>
+          <circle class="ln" cx="54" cy="165" r="4"/>
+          <circle class="ln" cx="54" cy="260" r="4"/>
+          <rect class="wash" x="74" y="18" width="56" height="78" rx="4" style="fill-opacity:0.14"/>
+          <use href="#card3" x="74" y="18"/><use href="#card3" x="146" y="18"/><use href="#card3" x="218" y="18"/>
+          <use href="#card3" x="74" y="118"/><use href="#card3" x="146" y="118"/><use href="#card3" x="218" y="118"/>
+          <use href="#card3" x="74" y="218"/><use href="#card3" x="146" y="218"/><use href="#card3" x="218" y="218"/>
           <g class="lab" text-anchor="middle">
-            <text x="188" y="134">001</text><text x="268" y="134">002</text><text x="348" y="134">003</text>
-            <text x="188" y="248">004</text><text x="268" y="248">005</text><text x="348" y="248">006</text>
-            <text x="188" y="362">007</text><text x="268" y="362">008</text><text x="348" y="362">009</text>
+            <text x="102" y="109">001</text><text x="174" y="109">002</text><text x="246" y="109">003</text>
+            <text x="102" y="209">004</text><text x="174" y="209">005</text><text x="246" y="209">006</text>
+            <text x="102" y="309">007</text><text x="174" y="309">008</text><text x="246" y="309">009</text>
           </g>
         </svg>
         <figcaption><span class="kicker">Fig. 3</span>A set, in the order it was numbered.</figcaption>
       </figure>
 
-      <h3 id="p12" data-folio="12">Card to card</h3>
-      <p>Open any card, then swipe sideways to reach its neighbour in the list you came from. A whole set can be walked this way, one card after another, as you would turn the pages of a book.</p>
-    </div>
-  </article>
+      <p class="sub" id="p12" data-folio="12"><span class="run">Card to card.</span> Open any card, then swipe sideways to reach its neighbour in the list you came from. A whole set can be walked this way, one card after another, as you would turn the pages of a book.</p>
+    </article>
 
-  <article class="chapter" id="ch-5" data-head="Searching">
-    <div class="text">
-      <header class="chapter-head" id="p13" data-folio="13">
-        <p class="kicker">Chapter 5</p>
-        <h2>Searching</h2>
-      </header>
-      <p class="first">Type part of a card’s name and results gather as you type. Search looks across every set at once, so a single name leads to every <a class="gl" href="#g-printing">printing</a> of that card.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p13" data-folio="13">
+          <p class="kicker">Chapter 5</p>
+          <h3>Searching</h3>
+        </header>
+        <p class="first">Type part of a card’s name and results gather as you type. Search looks across every set at once, so a single name leads to every <a class="gl" href="#g-printing">printing</a> of that card.</p>
+      </div>
+      <p>When you know roughly what you want but not what it is called, filter instead.</p>
       <div class="note" role="note">Searching finds a card by what it is called. Filtering finds cards by what they are.</div>
-      <p>When you know roughly what you want but not what it is called, filter instead. That is the next chapter.</p>
-    </div>
-  </article>
+    </article>
 
-  <article class="chapter" id="ch-6" data-head="Filtering">
-    <div class="text">
-      <header class="chapter-head" id="p15" data-folio="15">
-        <p class="kicker">Chapter 6</p>
-        <h2>Filtering</h2>
-      </header>
-      <h3>Several at once</h3>
-      <p class="first">Filters narrow whatever list is in front of you: a set, or the results of a search. Choose by colour, by card type, by <a class="gl" href="#g-rarity">rarity</a>, or by a range of <a class="gl" href="#g-mana-value">mana value</a>.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p15" data-folio="15">
+          <p class="kicker">Chapter 6</p>
+          <h3>Filtering</h3>
+        </header>
+        <p class="first">Filters narrow whatever list is in front of you: a set, or the results of a search. Choose by colour, by card type, by <a class="gl" href="#g-rarity">rarity</a>, or by a range of <a class="gl" href="#g-mana-value">mana value</a>.</p>
+      </div>
       <p>Filters stack. Each one you add narrows the list further, and each stays until you take it away.</p>
 
       <figure class="fig">
-        <svg viewBox="0 0 540 240" role="img" aria-labelledby="fig4">
+        <svg viewBox="0 0 320 196" role="img" aria-labelledby="fig4">
           <title id="fig4">A list of twelve cards narrowed by a colour filter to seven, then by a format filter to three.</title>
-          <g class="ln thin">
-            <line class="faint" x1="30" y1="30" x2="110" y2="30"/>
-            <line class="acc" x1="30" y1="44" x2="100" y2="44"/>
-            <line class="faint" x1="30" y1="58" x2="118" y2="58"/>
-            <line class="acc" x1="30" y1="72" x2="94" y2="72"/>
-            <line class="acc" x1="30" y1="86" x2="112" y2="86"/>
-            <line class="faint" x1="30" y1="100" x2="88" y2="100"/>
-            <line class="acc" x1="30" y1="114" x2="104" y2="114"/>
-            <line class="faint" x1="30" y1="128" x2="116" y2="128"/>
-            <line class="acc" x1="30" y1="142" x2="96" y2="142"/>
-            <line class="acc" x1="30" y1="156" x2="110" y2="156"/>
-            <line class="faint" x1="30" y1="170" x2="92" y2="170"/>
-            <line class="acc" x1="30" y1="184" x2="106" y2="184"/>
-          </g>
-          <line class="ln thin faint" x1="134" y1="107" x2="152" y2="107"/>
-          <rect class="ln thin" x="152" y="95" width="56" height="24" rx="12"/>
-          <text class="lab" x="180" y="111" text-anchor="middle">BLUE</text>
-          <path class="ln thin faint" d="M208 107 H 226 M221 102 l5 5 -5 5"/>
-          <g class="ln thin">
-            <line class="faint" x1="246" y1="65" x2="316" y2="65"/>
-            <line class="acc" x1="246" y1="79" x2="310" y2="79"/>
-            <line class="faint" x1="246" y1="93" x2="328" y2="93"/>
-            <line class="acc" x1="246" y1="107" x2="320" y2="107"/>
-            <line class="faint" x1="246" y1="121" x2="312" y2="121"/>
-            <line class="faint" x1="246" y1="135" x2="326" y2="135"/>
-            <line class="acc" x1="246" y1="149" x2="322" y2="149"/>
-          </g>
-          <line class="ln thin faint" x1="346" y1="107" x2="362" y2="107"/>
-          <rect class="ln thin" x="362" y="95" width="70" height="24" rx="12"/>
-          <text class="lab" x="397" y="111" text-anchor="middle">MODERN</text>
-          <path class="ln thin faint" d="M432 107 H 450 M445 102 l5 5 -5 5"/>
           <g class="ln">
-            <line class="acc" x1="470" y1="93" x2="534" y2="93"/>
-            <line class="acc" x1="470" y1="107" x2="528" y2="107"/>
-            <line class="acc" x1="470" y1="121" x2="530" y2="121"/>
+            <line class="faint" x1="8" y1="20" x2="58" y2="20"/>
+            <line x1="8" y1="34" x2="52" y2="34"/>
+            <line class="faint" x1="8" y1="48" x2="62" y2="48"/>
+            <line x1="8" y1="62" x2="48" y2="62"/>
+            <line x1="8" y1="76" x2="60" y2="76"/>
+            <line class="faint" x1="8" y1="90" x2="44" y2="90"/>
+            <line x1="8" y1="104" x2="56" y2="104"/>
+            <line class="faint" x1="8" y1="118" x2="62" y2="118"/>
+            <line x1="8" y1="132" x2="50" y2="132"/>
+            <line x1="8" y1="146" x2="58" y2="146"/>
+            <line class="faint" x1="8" y1="160" x2="46" y2="160"/>
+            <line x1="8" y1="174" x2="54" y2="174"/>
           </g>
-          <text class="ital" x="74" y="222" text-anchor="middle">every card</text>
-          <text class="ital" x="287" y="222" text-anchor="middle">blue</text>
-          <text class="ital" x="534" y="222" text-anchor="end">blue, in Modern</text>
+          <rect class="ln" x="72" y="87" width="42" height="20" rx="10"/>
+          <text class="lab" x="93" y="100.5" text-anchor="middle">BLUE</text>
+          <path class="ln faint" d="M117 97 H 127 M123 93 l4 4 -4 4"/>
+          <g class="ln">
+            <line class="faint" x1="136" y1="55" x2="180" y2="55"/>
+            <line x1="136" y1="69" x2="176" y2="69"/>
+            <line class="faint" x1="136" y1="83" x2="186" y2="83"/>
+            <line x1="136" y1="97" x2="182" y2="97"/>
+            <line class="faint" x1="136" y1="111" x2="178" y2="111"/>
+            <line class="faint" x1="136" y1="125" x2="184" y2="125"/>
+            <line x1="136" y1="139" x2="180" y2="139"/>
+          </g>
+          <rect class="ln" x="198" y="87" width="56" height="20" rx="10"/>
+          <text class="lab" x="226" y="100.5" text-anchor="middle">MODERN</text>
+          <path class="ln faint" d="M257 97 H 267 M263 93 l4 4 -4 4"/>
+          <g class="ln bold">
+            <line x1="276" y1="83" x2="316" y2="83"/>
+            <line x1="276" y1="97" x2="312" y2="97"/>
+            <line x1="276" y1="111" x2="314" y2="111"/>
+          </g>
+          <text class="ital" x="35" y="194" text-anchor="middle">every card</text>
+          <text class="ital" x="161" y="194" text-anchor="middle">blue</text>
+          <text class="ital" x="296" y="194" text-anchor="middle">in Modern</text>
         </svg>
         <figcaption><span class="kicker">Fig. 4</span>Filters stack: each narrows what the last one left.</figcaption>
       </figure>
 
-      <h3 id="p16" data-folio="16">By format</h3>
-      <p>Choose a <a class="gl" href="#g-format">format</a> — Standard, Pioneer, Modern, Legacy, Vintage, Pauper or Commander — to see only the cards legal in it. Combined with colour, it answers the kind of question deckbuilders ask: every blue instant legal in Modern, say.</p>
+      <p class="sub" id="p16" data-folio="16"><span class="run">By format.</span> Choose a <a class="gl" href="#g-format">format</a> (Standard, Pioneer, Modern, Legacy, Vintage, Pauper or Commander) to see only the cards legal in it. Combined with colour, it answers the kind of question deckbuilders ask: every blue instant legal in Modern, say.</p>
+      <p class="sub" id="p17" data-folio="17"><span class="run">Sorting, and starting over.</span> Sort any list by name, mana value, price or release date. The filters in use sit in a row above the results; tap one to remove it, or <span class="ui">Clear</span> to begin again.</p>
+    </article>
 
-      <h3 id="p17" data-folio="17">Sorting, and starting over</h3>
-      <p>Sort any list by name, mana value, price or release date. The filters in use sit in a row above the results; tap one to remove it, or <span class="ui">Clear</span> to begin again.</p>
-    </div>
-  </article>
-
-  <article class="chapter" id="ch-7" data-head="The Card Page">
-    <div class="text">
-      <header class="chapter-head" id="p19" data-folio="19">
-        <p class="kicker">Chapter 7</p>
-        <h2>The Card Page</h2>
-      </header>
-      <h3>Everything in one place</h3>
-      <p class="first">Open a card and everything about it is on one page: the art, the rules text, whether it is legal in each format, and its <a class="gl" href="#g-rulings">rulings</a>, newest first.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p19" data-folio="19">
+          <p class="kicker">Chapter 7</p>
+          <h3>The Card Page</h3>
+        </header>
+        <p class="first">Open a card and everything about it is on one page: the art, the rules text, whether it is legal in each format, and its <a class="gl" href="#g-rulings">rulings</a>, newest first.</p>
+      </div>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 280" role="img" aria-labelledby="fig5">
+        <svg viewBox="0 0 320 206" role="img" aria-labelledby="fig5">
           <title id="fig5">A card beside four tiles labelled legality, prices, pull rates and usage, with an arrow showing the card can be turned over.</title>
-          <rect class="ln" x="60" y="24" width="160" height="223" rx="9"/>
-          <rect class="ln thin faint" x="74" y="46" width="132" height="96" rx="2"/>
-          <line class="ln thin faint" x1="74" y1="162" x2="190" y2="162"/>
-          <line class="ln thin faint" x1="74" y1="176" x2="200" y2="176"/>
-          <line class="ln thin faint" x1="74" y1="190" x2="170" y2="190"/>
-          <path class="ln thin acc" d="M228 42 C 252 60, 252 100, 232 118"/>
-          <path class="ln thin acc" d="M238 116 L 232 118 L 234 111"/>
-          <text class="lab" x="140" y="268" text-anchor="middle">TURN IT OVER FOR THE OTHER FACE</text>
-          <g class="ln thin">
-            <rect x="290" y="30" width="96" height="96" rx="6"/>
-            <rect x="398" y="30" width="96" height="96" rx="6"/>
-            <rect x="290" y="138" width="96" height="96" rx="6"/>
-            <rect x="398" y="138" width="96" height="96" rx="6"/>
+          <rect class="ln bold" x="10" y="12" width="120" height="167" rx="7"/>
+          <rect class="ln faint" x="20" y="28" width="100" height="70" rx="1"/>
+          <line class="ln faint" x1="20" y1="114" x2="108" y2="114"/>
+          <line class="ln faint" x1="20" y1="125" x2="116" y2="125"/>
+          <line class="ln faint" x1="20" y1="136" x2="92" y2="136"/>
+          <path class="ln" d="M137 26 C 154 40, 154 72, 140 86"/>
+          <path class="ln" d="M145 85 L 140 86 L 141 80"/>
+          <text class="lab" x="70" y="198" text-anchor="middle">TURN IT OVER</text>
+          <g class="ln">
+            <rect x="166" y="12" width="70" height="70" rx="5"/>
+            <rect x="246" y="12" width="70" height="70" rx="5"/>
+            <rect x="166" y="92" width="70" height="70" rx="5"/>
+            <rect x="246" y="92" width="70" height="70" rx="5"/>
           </g>
           <g class="fill">
-            <circle cx="310" cy="64" r="4"/><circle cx="324" cy="64" r="4"/><circle cx="338" cy="64" r="4" fill-opacity="0.3"/><circle cx="352" cy="64" r="4"/>
+            <circle cx="178" cy="36" r="3"/><circle cx="189" cy="36" r="3"/><circle cx="200" cy="36" r="3" fill-opacity="0.25"/><circle cx="211" cy="36" r="3"/>
           </g>
-          <polyline class="ln thin acc" points="414,76 426,70 438,74 450,58 462,62 476,50"/>
-          <text class="ital" x="310" y="186" style="font-size:18px">1 : n</text>
+          <polyline class="ln" points="256,46 266,41 275,44 284,32 294,35 306,26"/>
+          <text class="ital" x="176" y="128" style="font-size:15px">1 : n</text>
           <g class="fill">
-            <rect x="416" y="176" width="10" height="16" rx="1"/><rect x="430" y="166" width="10" height="26" rx="1"/><rect x="444" y="172" width="10" height="20" rx="1"/><rect x="458" y="160" width="10" height="32" rx="1"/>
+            <rect x="258" y="113" width="8" height="13" rx="1"/><rect x="270" y="105" width="8" height="21" rx="1"/><rect x="282" y="110" width="8" height="16" rx="1"/><rect x="294" y="100" width="8" height="26" rx="1"/>
           </g>
-          <g class="lab">
-            <text x="302" y="112">LEGALITY</text><text x="410" y="112">PRICES</text>
-            <text x="302" y="220">PULL RATES</text><text x="410" y="220">USAGE</text>
+          <g class="lab" style="font-size:8.5px">
+            <text x="173" y="72">LEGALITY</text><text x="253" y="72">PRICES</text>
+            <text x="173" y="152">PULL RATES</text><text x="253" y="152">USAGE</text>
           </g>
         </svg>
         <figcaption><span class="kicker">Fig. 5</span>The card, and the tiles that tell you about it.</figcaption>
       </figure>
 
-      <h3 id="p20" data-folio="20">Tiles</h3>
-      <p>Below the card, the page is laid out in tiles: legality, prices, pull rates, usage. Tap any tile to open it at full size, then swipe to move between them without returning to the card.</p>
-
-      <h3 id="p21" data-folio="21">Double-faced cards</h3>
-      <p>Some cards have two faces and no back. Turn a <a class="gl" href="#g-double-faced">double-faced card</a> over to read its other side; the rest of the page follows whichever face is showing.</p>
-    </div>
-  </article>
+      <p class="sub" id="p20" data-folio="20"><span class="run">Tiles.</span> Below the card, the page is laid out in tiles: legality, prices, pull rates, usage. Tap any tile to open it at full size, then swipe to move between them without returning to the card.</p>
+      <p class="sub" id="p21" data-folio="21"><span class="run">Double-faced cards.</span> Some cards have two faces and no back. Turn a <a class="gl" href="#g-double-faced">double-faced card</a> over to read its other side; the rest of the page follows whichever face is showing.</p>
+    </article>
+  </div>
 </section>
 
 <!-- ═══════════════════════════ Part Three · Black ═══════════════════════════ -->
 
-<section class="part" id="part-3" data-colour="b" data-head="The Ledger">
-  <div class="text opener">
-    <header id="p23" data-folio="23">
-      <span class="pip" aria-hidden="true"></span>
-      <p class="kicker">Part Three</p>
-      <h2>The Ledger</h2>
-      <p class="motto"><b>Black.</b> Ambition, and the price of everything.</p>
-    </header>
-    <ol class="smallcaps">
-      <li><a href="#p25"><span class="num">8</span>Printings</a></li>
-      <li><a href="#p27"><span class="num">9</span>Prices</a></li>
-      <li><a href="#p29"><span class="num">10</span>Pull Rates</a></li>
-    </ol>
-  </div>
+<section class="part" id="part-3">
+  <header class="band" id="p23" data-folio="23" data-head="The Ledger">
+    <p class="kicker">Part Three · Black</p>
+    <p class="meta"><span class="pips" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></span><span class="folio">23</span></p>
+    <h2>The Ledger</h2>
+    <p class="motto">Ambition, and the price of everything.</p>
+  </header>
 
-  <article class="chapter" id="ch-8" data-head="Printings">
-    <div class="text">
-      <header class="chapter-head" id="p25" data-folio="25">
-        <p class="kicker">Chapter 8</p>
-        <h2>Printings</h2>
-      </header>
-      <p class="first">Most cards have been printed more than once: in different sets, with different art, in different <a class="gl" href="#g-finish">finishes</a>. <span class="ui">Printings</span> lists every one.</p>
+  <div class="cols">
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p25" data-folio="25">
+          <p class="kicker">Chapter 8</p>
+          <h3>Printings</h3>
+        </header>
+        <p class="first drop">Most cards have been printed more than once: in different sets, with different art, in different <a class="gl" href="#g-finish">finishes</a>. <span class="ui">Printings</span> lists every one.</p>
+      </div>
       <p>Choose a printing and the whole page follows it: the art, the collector number, the price. It is the quickest way to find the version you own, or the one you want.</p>
-    </div>
-  </article>
+    </article>
 
-  <article class="chapter" id="ch-9" data-head="Prices">
-    <div class="text">
-      <header class="chapter-head" id="p27" data-folio="27">
-        <p class="kicker">Chapter 9</p>
-        <h2>Prices</h2>
-      </header>
-      <p class="first">Current prices are shown for each finish of the printing in front of you. Open a price to see its history.</p>
-      <div class="note" role="note">Prices are a guide, not an offer. They move daily, and differ from store to store.</div>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p27" data-folio="27">
+          <p class="kicker">Chapter 9</p>
+          <h3>Prices</h3>
+        </header>
+        <p class="first">Current prices are shown for each finish of the printing in front of you. Open a price to see its history.</p>
+      </div>
       <p>History is what turns a number into a story. A card that has doubled overnight has spiked; one that has climbed for months is trending. The first often falls back. The second usually means the card is being played.</p>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 200" role="img" aria-labelledby="fig6">
+        <svg viewBox="0 0 320 140" role="img" aria-labelledby="fig6">
           <title id="fig6">Two price histories: one flat with a single sharp spike, one rising steadily.</title>
-          <line class="ln thin faint" x1="30" y1="150" x2="240" y2="150"/>
-          <line class="ln thin faint" x1="280" y1="150" x2="490" y2="150"/>
-          <polyline class="ln acc" points="30,128 50,127 70,129 90,126 110,128 124,125 136,46 148,120 164,124 184,126 204,123 222,126 240,125"/>
-          <polyline class="ln acc" points="280,140 296,138 312,139 328,131 344,128 360,121 376,118 392,110 408,106 424,97 440,92 456,83 472,78 490,68"/>
-          <text class="ital" x="135" y="182" text-anchor="middle">a spike</text>
-          <text class="ital" x="385" y="182" text-anchor="middle">a trend</text>
+          <line class="ln faint" x1="10" y1="104" x2="150" y2="104"/>
+          <line class="ln faint" x1="170" y1="104" x2="310" y2="104"/>
+          <polyline class="ln bold" points="10,88 24,87 38,89 52,86 66,88 76,85 84,20 92,82 104,85 118,86 132,84 144,86 150,85"/>
+          <polyline class="ln bold" points="170,96 181,94 192,95 203,89 214,87 225,82 236,80 247,74 258,71 269,65 280,61 291,55 302,51 310,44"/>
+          <text class="ital" x="80" y="128" text-anchor="middle">a spike</text>
+          <text class="ital" x="240" y="128" text-anchor="middle">a trend</text>
         </svg>
         <figcaption><span class="kicker">Fig. 6</span>Two histories, and the difference between them.</figcaption>
       </figure>
-    </div>
-  </article>
+      <div class="note" role="note">Prices are a guide, not an offer. They move daily, and differ from store to store.</div>
+    </article>
 
-  <article class="chapter" id="ch-10" data-head="Pull Rates">
-    <div class="text">
-      <header class="chapter-head" id="p29" data-folio="29">
-        <p class="kicker">Chapter 10</p>
-        <h2>Pull Rates</h2>
-      </header>
-      <p class="first">How likely are you to open a card? <a class="gl" href="#g-pull-rate">Pull rates</a> answer with the odds per pack, for each printing, in each product it comes in, and in each finish.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p29" data-folio="29">
+          <p class="kicker">Chapter 10</p>
+          <h3>Pull Rates</h3>
+        </header>
+        <p class="first">How likely are you to open a card? <a class="gl" href="#g-pull-rate">Pull rates</a> answer with the odds per pack, for each printing, in each product it comes in, and in each finish.</p>
+      </div>
       <p>They are worked out from how each product’s boosters are put together. When a new set arrives, its odds follow once that make-up is known.</p>
-    </div>
-  </article>
+    </article>
+  </div>
 </section>
 
 <!-- ═══════════════════════════ Part Four · Red ═══════════════════════════ -->
 
-<section class="part" id="part-4" data-colour="r" data-head="The Eye">
-  <div class="text opener">
-    <header id="p31" data-folio="31">
-      <span class="pip" aria-hidden="true"></span>
-      <p class="kicker">Part Four</p>
-      <h2>The Eye</h2>
-      <p class="motto"><b>Red.</b> Impulse, speed, and the moment in front of you.</p>
-    </header>
-    <ol class="smallcaps">
-      <li><a href="#p33"><span class="num">11</span>The Scanner</a></li>
-    </ol>
-  </div>
+<section class="part" id="part-4">
+  <header class="band" id="p31" data-folio="31" data-head="The Eye">
+    <p class="kicker">Part Four · Red</p>
+    <p class="meta"><span class="pips" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i></span><span class="folio">31</span></p>
+    <h2>The Eye</h2>
+    <p class="motto">Impulse, speed, and the moment in front of you.</p>
+  </header>
 
-  <article class="chapter" id="ch-11" data-head="The Scanner">
-    <div class="text">
-      <header class="chapter-head" id="p33" data-folio="33">
-        <p class="kicker">Chapter 11</p>
-        <h2>The Scanner</h2>
-      </header>
-      <h3>Scanning</h3>
-      <p class="first">Point the camera at a card and hold it steady. Mooligan reads the card on the phone itself, and when it recognises the card, a copy floats up the screen.</p>
+  <div class="cols">
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p33" data-folio="33">
+          <p class="kicker">Chapter 11</p>
+          <h3>The Scanner</h3>
+        </header>
+        <p class="first drop">Point the camera at a card and hold it steady. Mooligan reads the card on the phone itself, and when it recognises the card, a copy floats up the screen.</p>
+      </div>
       <div class="note" role="note"><b>For a clean read:</b> good light and a flat card. Sleeves are fine; glare is not.</div>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 320" role="img" aria-labelledby="fig7">
+        <svg viewBox="0 0 320 276" role="img" aria-labelledby="fig7">
           <title id="fig7">A phone framing a card in its viewfinder, and a small copy of the card floating up the screen once recognised.</title>
-          <rect class="ln" x="180" y="10" width="160" height="300" rx="24"/>
-          <path class="ln acc" d="M206 150 v-12 h12 M314 150 v-12 h-12 M206 274 v12 h12 M314 274 v12 h-12"/>
-          <rect class="ln" x="216" y="148" width="88" height="128" rx="5"/>
-          <rect class="ln thin faint" x="224" y="160" width="72" height="50" rx="1"/>
-          <line class="ln thin faint" x1="224" y1="222" x2="288" y2="222"/>
-          <line class="ln thin faint" x1="224" y1="232" x2="296" y2="232"/>
-          <line class="ln thin faint" x1="224" y1="242" x2="270" y2="242"/>
-          <line class="ln thin acc dash" x1="260" y1="130" x2="260" y2="98"/>
-          <rect class="wash" x="238" y="34" width="44" height="60" rx="3" style="fill-opacity:0.18"/>
-          <rect class="ln acc" x="238" y="34" width="44" height="60" rx="3"/>
-          <line class="ln thin faint" x1="352" y1="64" x2="386" y2="64"/>
-          <text class="lab" x="394" y="68">RECOGNISED</text>
-          <line class="ln thin faint" x1="324" y1="212" x2="386" y2="212"/>
-          <text class="lab" x="394" y="216">HOLD STEADY</text>
+          <rect class="ln bold" x="90" y="6" width="130" height="264" rx="20"/>
+          <path class="ln bold" d="M112 130 v-10 h10 M198 130 v-10 h-10 M112 234 v10 h10 M198 234 v10 h-10"/>
+          <rect class="ln" x="120" y="128" width="70" height="108" rx="4"/>
+          <rect class="ln faint" x="127" y="138" width="56" height="42" rx="1"/>
+          <line class="ln faint" x1="127" y1="192" x2="176" y2="192"/>
+          <line class="ln faint" x1="127" y1="201" x2="182" y2="201"/>
+          <line class="ln faint" x1="127" y1="210" x2="160" y2="210"/>
+          <line class="ln dash" x1="155" y1="112" x2="155" y2="84"/>
+          <rect class="wash" x="137" y="28" width="36" height="50" rx="3" style="fill-opacity:0.14"/>
+          <rect class="ln" x="137" y="28" width="36" height="50" rx="3"/>
+          <line class="ln faint" x1="180" y1="53" x2="232" y2="53"/>
+          <text class="lab" x="238" y="56">RECOGNISED</text>
+          <line class="ln faint" x1="204" y1="182" x2="232" y2="182"/>
+          <text class="lab" x="238" y="185">HOLD STEADY</text>
         </svg>
         <figcaption><span class="kicker">Fig. 7</span>Framed, read, and lifted.</figcaption>
       </figure>
 
-      <h3 id="p34" data-folio="34">After a scan</h3>
-      <p>Tap a scanned card to open it among its printings, showing the same face that was in front of the camera. From there it is an ordinary card page: turn it over, check its price, see where it is played.</p>
-
-      <h3 id="p35" data-folio="35">Several in a row</h3>
-      <p>Keep going. Cards can be scanned one after another without stopping, which is the quickest way through a stack of new pulls or a trade binder.</p>
-    </div>
-  </article>
+      <p class="sub" id="p34" data-folio="34"><span class="run">After a scan.</span> Tap a scanned card to open it among its printings, showing the same face that was in front of the camera. From there it is an ordinary card page: turn it over, check its price, see where it is played.</p>
+      <p class="sub" id="p35" data-folio="35"><span class="run">Several in a row.</span> Keep going. Cards can be scanned one after another without stopping, which is the quickest way through a stack of new pulls or a trade binder.</p>
+    </article>
+  </div>
 </section>
 
 <!-- ═══════════════════════════ Part Five · Green ═══════════════════════════ -->
 
-<section class="part" id="part-5" data-colour="g" data-head="The Field">
-  <div class="text opener">
-    <header id="p37" data-folio="37">
-      <span class="pip" aria-hidden="true"></span>
-      <p class="kicker">Part Five</p>
-      <h2>The Field</h2>
-      <p class="motto"><b>Green.</b> Growth, instinct, and what thrives.</p>
-    </header>
-    <ol class="smallcaps">
-      <li><a href="#p39"><span class="num">12</span>The Metagame</a></li>
-      <li><a href="#p41"><span class="num">13</span>Decklists and Usage</a></li>
-      <li><a href="#p43"><span class="num">14</span>Events</a></li>
-    </ol>
-  </div>
+<section class="part" id="part-5">
+  <header class="band" id="p37" data-folio="37" data-head="The Field">
+    <p class="kicker">Part Five · Green</p>
+    <p class="meta"><span class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i></span><span class="folio">37</span></p>
+    <h2>The Field</h2>
+    <p class="motto">Growth, instinct, and what thrives.</p>
+  </header>
 
-  <article class="chapter" id="ch-12" data-head="The Metagame">
-    <div class="text">
-      <header class="chapter-head" id="p39" data-folio="39">
-        <p class="kicker">Chapter 12</p>
-        <h2>The Metagame</h2>
-      </header>
-      <p class="first">Choose a format to see what is being played in it. <a class="gl" href="#g-archetype">Archetypes</a>, families of decks that share a plan, are ranked by their share of recent tournament results.</p>
+  <div class="cols">
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p39" data-folio="39">
+          <p class="kicker">Chapter 12</p>
+          <h3>The Metagame</h3>
+        </header>
+        <p class="first drop">Choose a format to see what is being played in it. <a class="gl" href="#g-archetype">Archetypes</a>, families of decks that share a plan, are ranked by their share of recent tournament results.</p>
+      </div>
+      <p>The field you see is this week’s, not last season’s. Watch it long enough and it grows and changes like anything living: one deck thrives, another adapts to beat it, and the balance moves.</p>
       <div class="note" role="note">Results are gathered from published tournaments, the numbers refreshed twice a day.</div>
-      <p>The field you see is this week’s, not last season’s. Watch it for long enough and you will see it grow and change like anything living: one deck thrives, another adapts to beat it, and the balance moves.</p>
 
       <figure class="fig">
-        <svg viewBox="0 0 520 236" role="img" aria-labelledby="fig8">
+        <svg viewBox="0 0 320 196" role="img" aria-labelledby="fig8">
           <title id="fig8">Horizontal bars showing the share of results for aggro, midrange, control and combo, and the rest.</title>
           <g class="lab" text-anchor="end">
-            <text x="150" y="35">AGGRO</text>
-            <text x="150" y="75">MIDRANGE</text>
-            <text x="150" y="115">CONTROL</text>
-            <text x="150" y="155">COMBO</text>
-            <text x="150" y="195">THE REST</text>
+            <text x="78" y="26">AGGRO</text>
+            <text x="78" y="60">MIDRANGE</text>
+            <text x="78" y="94">CONTROL</text>
+            <text x="78" y="128">COMBO</text>
+            <text x="78" y="162">THE REST</text>
           </g>
-          <rect class="fill" x="164" y="22" width="250" height="18" rx="1" fill-opacity="0.9"/>
-          <rect class="fill" x="164" y="62" width="196" height="18" rx="1" fill-opacity="0.7"/>
-          <rect class="fill" x="164" y="102" width="138" height="18" rx="1" fill-opacity="0.5"/>
-          <rect class="fill" x="164" y="142" width="84" height="18" rx="1" fill-opacity="0.35"/>
-          <rect class="ln thin acc" x="164" y="182" width="162" height="18" rx="1"/>
-          <line class="ln thin faint" x1="164" y1="12" x2="164" y2="210"/>
-          <text class="ital" x="164" y="230" style="font-size:14px">share of recent results →</text>
+          <rect class="fill" x="88" y="14" width="204" height="16" fill-opacity="0.85"/>
+          <rect class="fill" x="88" y="48" width="158" height="16" fill-opacity="0.6"/>
+          <rect class="fill" x="88" y="82" width="112" height="16" fill-opacity="0.4"/>
+          <rect class="fill" x="88" y="116" width="68" height="16" fill-opacity="0.22"/>
+          <rect class="ln" x="88" y="150" width="128" height="16"/>
+          <line class="ln faint" x1="88" y1="6" x2="88" y2="174"/>
+          <text class="ital" x="88" y="192" style="font-size:12px">share of recent results →</text>
         </svg>
         <figcaption><span class="kicker">Fig. 8</span>A format, drawn as the share each kind of deck has taken.</figcaption>
       </figure>
-    </div>
-  </article>
+    </article>
 
-  <article class="chapter" id="ch-13" data-head="Decklists and Usage">
-    <div class="text">
-      <header class="chapter-head" id="p41" data-folio="41">
-        <p class="kicker">Chapter 13</p>
-        <h2>Decklists and Usage</h2>
-      </header>
-      <h3>Decklists</h3>
-      <p class="first">Open an archetype to see the decklists behind it, each with the event it came from and how it finished. Any card in a list opens its own page.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p41" data-folio="41">
+          <p class="kicker">Chapter 13</p>
+          <h3>Decklists and Usage</h3>
+        </header>
+        <p class="first">Open an archetype to see the decklists behind it, each with the event it came from and how it finished. Any card in a list opens its own page.</p>
+      </div>
+      <p class="sub" id="p42" data-folio="42"><span class="run">Usage.</span> The same question, asked from the other direction. Open a card and see how widely it is played: its share of decks in each format and, for Commander, how often it is chosen across the whole format.</p>
+    </article>
 
-      <h3 id="p42" data-folio="42">Usage</h3>
-      <p>The same question, asked from the other direction. Open a card and see how widely it is played: its share of decks in each format and, for Commander, how often it is chosen across the whole format.</p>
-    </div>
-  </article>
-
-  <article class="chapter" id="ch-14" data-head="Events">
-    <div class="text">
-      <header class="chapter-head" id="p43" data-folio="43">
-        <p class="kicker">Chapter 14</p>
-        <h2>Events</h2>
-      </header>
-      <p class="first">Magic is played in person, too. Find events at stores near you — Friday Night Magic, prereleases, Commander nights — and the premier play calendar of the larger tournaments ahead.</p>
+    <article class="chapter">
+      <div class="keep">
+        <header class="ch" id="p43" data-folio="43">
+          <p class="kicker">Chapter 14</p>
+          <h3>Events</h3>
+        </header>
+        <p class="first">Magic is played in person, too. Find events at stores near you (Friday Night Magic, prereleases, Commander nights) and the premier play calendar of the larger tournaments ahead.</p>
+      </div>
       <div class="note" role="note">Store events come from Wizards’ store locator; the calendar from magic.gg.</div>
       <p>Everything in this book is easier with someone across the table.</p>
-    </div>
-  </article>
-</section>
-
-<!-- ═══════════════════════════ Back matter ═══════════════════════════ -->
-
-<section class="front" data-head="Glossary">
-  <div class="text">
-    <h2 class="section-title" id="p45" data-folio="45">Glossary</h2>
-    <dl class="glossary">
-      <dt id="g-archetype">archetype</dt>
-      <dd>A family of decks that share a plan and most of their cards.</dd>
-      <dt id="g-booster">booster</dt>
-      <dd>A sealed pack of cards. Magic sells several kinds, such as play and collector boosters, each put together differently.</dd>
-      <dt id="g-collector-number">collector number</dt>
-      <dd>The number printed on a card that fixes its place in its set.</dd>
-      <dt id="g-commander">Commander</dt>
-      <dd>A multiplayer format of hundred-card decks, one copy of each card, led by a legendary creature. Players begin at forty life.</dd>
-      <dt id="g-double-faced">double-faced card</dt>
-      <dd>A card with a face on each side and no ordinary back.</dd>
-      <dt id="g-finish">finish</dt>
-      <dd>How a printing is made: nonfoil, foil or etched, among others.</dd>
-      <dt id="g-format">format</dt>
-      <dd>A set of rules for which cards may be played, such as Standard, Modern or Commander.</dd>
-      <dt id="g-mana-value">mana value</dt>
-      <dd>The total amount of mana in a card’s cost. Once called converted mana cost.</dd>
-      <dt id="g-metagame">metagame</dt>
-      <dd>The decks being played in a format at a given time, and the balance between them.</dd>
-      <dt id="g-mulligan">mulligan</dt>
-      <dd>To shuffle away an opening hand and draw a new one, keeping one card fewer each time.</dd>
-      <dt id="g-printing">printing</dt>
-      <dd>One appearance of a card in one set, with its own art, number and finishes.</dd>
-      <dt id="g-pull-rate">pull rate</dt>
-      <dd>The chance of opening a particular card in a particular booster.</dd>
-      <dt id="g-rarity">rarity</dt>
-      <dd>Common, uncommon, rare or mythic rare, shown by the colour of a card’s set symbol.</dd>
-      <dt id="g-rulings">rulings</dt>
-      <dd>Official clarifications of how a card works.</dd>
-      <dt id="g-set">set</dt>
-      <dd>A release of cards sharing a name, a symbol and a short code.</dd>
-    </dl>
+    </article>
   </div>
 </section>
 
-<section class="front" id="index" data-head="Index">
-  <div class="wide">
-    <h2 class="section-title" id="p47" data-folio="47">Index</h2>
+<!-- ═══════════════════════════ Glossary ═══════════════════════════ -->
 
-    <nav class="thumbs smallcaps" aria-label="Index letters">
-      <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a><a href="#E">E</a><a href="#F">F</a><a href="#G">G</a><span aria-hidden="true">H</span><span aria-hidden="true">I</span><span aria-hidden="true">J</span><span aria-hidden="true">K</span><a href="#L">L</a><a href="#M">M</a><span aria-hidden="true">N</span><span aria-hidden="true">O</span><a href="#P">P</a><span aria-hidden="true">Q</span><a href="#R">R</a><a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><span aria-hidden="true">V</span><span aria-hidden="true">W</span><span aria-hidden="true">X</span><span aria-hidden="true">Y</span><span aria-hidden="true">Z</span>
-    </nav>
+<section class="section" data-head="Glossary">
+  <header class="band small" id="p45" data-folio="45">
+    <p class="kicker">Back matter</p>
+    <p class="meta"><span class="folio">45</span></p>
+    <h2>Glossary</h2>
+  </header>
+  <dl class="glossary">
+    <div class="gl-e" id="g-archetype"><dt>archetype</dt><dd>A family of decks that share a plan and most of their cards.</dd></div>
+    <div class="gl-e" id="g-booster"><dt>booster</dt><dd>A sealed pack of cards. Magic sells several kinds, such as play and collector boosters, each put together differently.</dd></div>
+    <div class="gl-e" id="g-collector-number"><dt>collector number</dt><dd>The number printed on a card that fixes its place in its set.</dd></div>
+    <div class="gl-e" id="g-commander"><dt>Commander</dt><dd>A multiplayer format of hundred-card decks, one copy of each card, led by a legendary creature. Players begin at forty life.</dd></div>
+    <div class="gl-e" id="g-double-faced"><dt>double-faced card</dt><dd>A card with a face on each side and no ordinary back.</dd></div>
+    <div class="gl-e" id="g-finish"><dt>finish</dt><dd>How a printing is made: nonfoil, foil or etched, among others.</dd></div>
+    <div class="gl-e" id="g-format"><dt>format</dt><dd>A set of rules for which cards may be played, such as Standard, Modern or Commander.</dd></div>
+    <div class="gl-e" id="g-mana-value"><dt>mana value</dt><dd>The total amount of mana in a card’s cost. Once called converted mana cost.</dd></div>
+    <div class="gl-e" id="g-metagame"><dt>metagame</dt><dd>The decks being played in a format at a given time, and the balance between them.</dd></div>
+    <div class="gl-e" id="g-mulligan"><dt>mulligan</dt><dd>To shuffle away an opening hand and draw a new one, keeping one card fewer each time.</dd></div>
+    <div class="gl-e" id="g-printing"><dt>printing</dt><dd>One appearance of a card in one set, with its own art, number and finishes.</dd></div>
+    <div class="gl-e" id="g-pull-rate"><dt>pull rate</dt><dd>The chance of opening a particular card in a particular booster.</dd></div>
+    <div class="gl-e" id="g-rarity"><dt>rarity</dt><dd>Common, uncommon, rare or mythic rare, shown by the colour of a card’s set symbol.</dd></div>
+    <div class="gl-e" id="g-rulings"><dt>rulings</dt><dd>Official clarifications of how a card works.</dd></div>
+    <div class="gl-e" id="g-set"><dt>set</dt><dd>A release of cards sharing a name, a symbol and a short code.</dd></div>
+  </dl>
+</section>
 
-    <div class="index-cols">
+<!-- ═══════════════════════════ Index ═══════════════════════════ -->
 
-      <section class="letter" id="A" aria-label="A">
-        <h3>A</h3>
-        <ul class="entries">
-          <li class="entry" id="e-archetypes">
-            <p class="head">archetypes, <a class="loc" href="#p39">39</a></p>
-            <ul class="subs">
-              <li>decklists for, <a class="loc" href="#p41">41</a></li>
-              <li>share of the metagame, <a class="loc" href="#p39">39</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+<section class="section" id="index" data-head="Index">
+  <header class="band small" id="p47" data-folio="47">
+    <p class="kicker">Back matter</p>
+    <p class="meta"><span class="folio">47</span></p>
+    <h2>Index</h2>
+  </header>
 
-      <section class="letter" id="B" aria-label="B">
-        <h3>B</h3>
-        <ul class="entries">
-          <li class="entry" id="e-boosters"><p class="head">boosters. <em>See</em> <a class="xref" href="#e-pull-rates">pull rates</a></p></li>
-          <li class="entry" id="e-browsing">
-            <p class="head">browsing, <a class="loc" href="#p11">11–12</a></p>
-            <ul class="subs">
-              <li>by set, <a class="loc" href="#p11">11</a></li>
-              <li>card to card, <a class="loc" href="#p12">12</a></li>
-              <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a>; <a class="xref" href="#e-searching">searching</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+  <nav class="thumbs smallcaps" aria-label="Index letters">
+    <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a><a href="#E">E</a><a href="#F">F</a><a href="#G">G</a><span aria-hidden="true">H</span><span aria-hidden="true">I</span><span aria-hidden="true">J</span><span aria-hidden="true">K</span><a href="#L">L</a><a href="#M">M</a><span aria-hidden="true">N</span><span aria-hidden="true">O</span><a href="#P">P</a><span aria-hidden="true">Q</span><a href="#R">R</a><a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><span aria-hidden="true">V</span><span aria-hidden="true">W</span><span aria-hidden="true">X</span><span aria-hidden="true">Y</span><span aria-hidden="true">Z</span>
+  </nav>
 
-      <section class="letter" id="C" aria-label="C">
-        <h3>C</h3>
-        <ul class="entries">
-          <li class="entry" id="e-calendar"><p class="head">calendar, premier play, <a class="loc" href="#p43">43</a></p></li>
-          <li class="entry" id="e-camera"><p class="head">camera. <em>See</em> <a class="xref" href="#e-scanner">scanner</a></p></li>
-          <li class="entry" id="e-card-page">
-            <p class="head">card page, <a class="loc" href="#p19">19–21</a></p>
-            <ul class="subs">
-              <li>legality on, <a class="loc" href="#p19">19</a></li>
-              <li>opened from a scan, <a class="loc" href="#p34">34</a></li>
-              <li>rulings on, <a class="loc" href="#p19">19</a></li>
-              <li>tiles on, <a class="loc" href="#p20">20</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-collector-number"><p class="head">collector number, <a class="loc" href="#p11">11</a>, <a class="loc" href="#p25">25</a></p></li>
-          <li class="entry" id="e-colour"><p class="head">colour, filtering by, <a class="loc" href="#p15">15</a></p></li>
-          <li class="entry" id="e-colours"><p class="head">colours of Magic, the five, <a class="loc" href="#pix">ix</a></p></li>
-          <li class="entry" id="e-commander">
-            <p class="head">Commander</p>
-            <ul class="subs">
-              <li>card usage in, <a class="loc" href="#p42">42</a></li>
-              <li>legality in, <a class="loc" href="#p16">16</a></li>
-              <li>starting life for, <a class="loc" href="#p3">3</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+  <div class="index-cols">
 
-      <section class="letter" id="D" aria-label="D">
-        <h3>D</h3>
-        <ul class="entries">
-          <li class="entry" id="e-decklists">
-            <p class="head">decklists, <a class="loc" href="#p41">41</a></p>
-            <ul class="subs">
-              <li>opening a card from, <a class="loc" href="#p41">41</a></li>
-              <li><em>See also</em> <a class="xref" href="#e-archetypes">archetypes</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-double-faced">
-            <p class="head">double-faced cards, <a class="loc" href="#p21">21</a></p>
-            <ul class="subs">
-              <li>scanning, <a class="loc" href="#p34">34</a></li>
-              <li>turning over, <a class="loc" href="#p21">21</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <section class="letter" id="A" aria-label="A">
+      <h3>A</h3>
+      <ul class="entries">
+        <li class="entry" id="e-archetypes">
+          <p class="head">archetypes, <a class="loc" href="#p39">39</a></p>
+          <ul class="subs">
+            <li>decklists for, <a class="loc" href="#p41">41</a></li>
+            <li>share of the metagame, <a class="loc" href="#p39">39</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="E" aria-label="E">
-        <h3>E</h3>
-        <ul class="entries">
-          <li class="entry" id="e-events">
-            <p class="head">events, <a class="loc" href="#p43">43</a></p>
-            <ul class="subs">
-              <li>in store, near you, <a class="loc" href="#p43">43</a></li>
-              <li>premier play, <a class="loc" href="#p43">43</a></li>
-              <li>results of, <a class="loc" href="#p39">39</a>, <a class="loc" href="#p41">41</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <section class="letter" id="B" aria-label="B">
+      <h3>B</h3>
+      <ul class="entries">
+        <li class="entry" id="e-boosters"><p class="head">boosters. <em>See</em> <a class="xref" href="#e-pull-rates">pull rates</a></p></li>
+        <li class="entry" id="e-browsing">
+          <p class="head">browsing, <a class="loc" href="#p11">11–12</a></p>
+          <ul class="subs">
+            <li>by set, <a class="loc" href="#p11">11</a></li>
+            <li>card to card, <a class="loc" href="#p12">12</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a>; <a class="xref" href="#e-searching">searching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="F" aria-label="F">
-        <h3>F</h3>
-        <ul class="entries">
-          <li class="entry" id="e-filtering">
-            <p class="head">filtering, <a class="loc" href="#p15">15–17</a></p>
-            <ul class="subs">
-              <li>by colour, <a class="loc" href="#p15">15</a></li>
-              <li>by format, <a class="loc" href="#p16">16</a></li>
-              <li>by mana value, <a class="loc" href="#p15">15</a></li>
-              <li>by rarity, <a class="loc" href="#p15">15</a></li>
-              <li>by type, <a class="loc" href="#p15">15</a></li>
-              <li>clearing, <a class="loc" href="#p17">17</a></li>
-              <li>several at once, <a class="loc" href="#p15">15</a></li>
-              <li><em>See also</em> <a class="xref" href="#e-searching">searching</a>; <a class="xref" href="#e-sorting">sorting</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-finishes"><p class="head">finishes, <a class="loc" href="#p25">25</a>, <a class="loc" href="#p27">27</a>, <a class="loc" href="#p29">29</a></p></li>
-          <li class="entry" id="e-formats">
-            <p class="head">formats, <a class="loc" href="#p16">16</a>, <a class="loc" href="#p39">39</a></p>
-            <ul class="subs">
-              <li>legality in, <a class="loc" href="#p16">16</a>, <a class="loc" href="#p19">19</a></li>
-              <li>metagame of, <a class="loc" href="#p39">39</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <section class="letter" id="C" aria-label="C">
+      <h3>C</h3>
+      <ul class="entries">
+        <li class="entry" id="e-calendar"><p class="head">calendar, premier play, <a class="loc" href="#p43">43</a></p></li>
+        <li class="entry" id="e-camera"><p class="head">camera. <em>See</em> <a class="xref" href="#e-scanner">scanner</a></p></li>
+        <li class="entry" id="e-card-page">
+          <p class="head">card page, <a class="loc" href="#p19">19–21</a></p>
+          <ul class="subs">
+            <li>legality on, <a class="loc" href="#p19">19</a></li>
+            <li>opened from a scan, <a class="loc" href="#p34">34</a></li>
+            <li>rulings on, <a class="loc" href="#p19">19</a></li>
+            <li>tiles on, <a class="loc" href="#p20">20</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-collector-number"><p class="head">collector number, <a class="loc" href="#p11">11</a>, <a class="loc" href="#p25">25</a></p></li>
+        <li class="entry" id="e-colour"><p class="head">colour, filtering by, <a class="loc" href="#p15">15</a></p></li>
+        <li class="entry" id="e-colours"><p class="head">colours of Magic, the five, <a class="loc" href="#pix">ix</a></p></li>
+        <li class="entry" id="e-commander">
+          <p class="head">Commander</p>
+          <ul class="subs">
+            <li>card usage in, <a class="loc" href="#p42">42</a></li>
+            <li>legality in, <a class="loc" href="#p16">16</a></li>
+            <li>starting life for, <a class="loc" href="#p3">3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="G" aria-label="G">
-        <h3>G</h3>
-        <ul class="entries">
-          <li class="entry" id="e-game">
-            <p class="head">game, how to start a, <a class="loc" href="#p3">3–4</a></p>
-            <ul class="subs">
-              <li>choosing players, <a class="loc" href="#p3">3</a></li>
-              <li>ending, <a class="loc" href="#p7">7</a></li>
-              <li>keeping score in, <a class="loc" href="#p5">5–6</a></li>
-              <li>rematch, <a class="loc" href="#p7">7</a></li>
-              <li>seats, <a class="loc" href="#p4">4</a></li>
-              <li>starting life, <a class="loc" href="#p3">3</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-glossary"><p class="head">glossary, <a class="loc" href="#p45">45</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="D" aria-label="D">
+      <h3>D</h3>
+      <ul class="entries">
+        <li class="entry" id="e-decklists">
+          <p class="head">decklists, <a class="loc" href="#p41">41</a></p>
+          <ul class="subs">
+            <li>opening a card from, <a class="loc" href="#p41">41</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-archetypes">archetypes</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-double-faced">
+          <p class="head">double-faced cards, <a class="loc" href="#p21">21</a></p>
+          <ul class="subs">
+            <li>scanning, <a class="loc" href="#p34">34</a></li>
+            <li>turning over, <a class="loc" href="#p21">21</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="L" aria-label="L">
-        <h3>L</h3>
-        <ul class="entries">
-          <li class="entry" id="e-legality"><p class="head">legality. <em>See</em> <a class="xref" href="#e-formats">formats</a></p></li>
-          <li class="entry" id="e-life">
-            <p class="head">life totals, <a class="loc" href="#p5">5</a></p>
-            <ul class="subs">
-              <li>counting faster, <a class="loc" href="#p5">5</a></li>
-              <li>resetting, <a class="loc" href="#p7">7</a></li>
-              <li>starting, <a class="loc" href="#p3">3</a></li>
-              <li>tally of changes, <a class="loc" href="#p6">6</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <section class="letter" id="E" aria-label="E">
+      <h3>E</h3>
+      <ul class="entries">
+        <li class="entry" id="e-events">
+          <p class="head">events, <a class="loc" href="#p43">43</a></p>
+          <ul class="subs">
+            <li>in store, near you, <a class="loc" href="#p43">43</a></li>
+            <li>premier play, <a class="loc" href="#p43">43</a></li>
+            <li>results of, <a class="loc" href="#p39">39</a>, <a class="loc" href="#p41">41</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="M" aria-label="M">
-        <h3>M</h3>
-        <ul class="entries">
-          <li class="entry" id="e-mana-value"><p class="head">mana value, filtering by, <a class="loc" href="#p15">15</a></p></li>
-          <li class="entry" id="e-metagame">
-            <p class="head">metagame, <a class="loc" href="#p39">39–43</a></p>
-            <ul class="subs">
-              <li>archetypes in, <a class="loc" href="#p39">39</a></li>
-              <li>how often refreshed, <a class="loc" href="#p39">39</a></li>
-              <li><em>See also</em> <a class="xref" href="#e-decklists">decklists</a>; <a class="xref" href="#e-usage">usage, card</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-mooligan"><p class="head">Mooligan, <a class="loc" href="#pix">ix</a></p></li>
-          <li class="entry" id="e-mulligan"><p class="head">mulligan, <a class="loc" href="#pv">v</a>. <em>See also</em> <a class="xref" href="#e-mooligan">Mooligan</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="F" aria-label="F">
+      <h3>F</h3>
+      <ul class="entries">
+        <li class="entry" id="e-filtering">
+          <p class="head">filtering, <a class="loc" href="#p15">15–17</a></p>
+          <ul class="subs">
+            <li>by colour, <a class="loc" href="#p15">15</a></li>
+            <li>by format, <a class="loc" href="#p16">16</a></li>
+            <li>by mana value, <a class="loc" href="#p15">15</a></li>
+            <li>by rarity, <a class="loc" href="#p15">15</a></li>
+            <li>by type, <a class="loc" href="#p15">15</a></li>
+            <li>clearing, <a class="loc" href="#p17">17</a></li>
+            <li>several at once, <a class="loc" href="#p15">15</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-searching">searching</a>; <a class="xref" href="#e-sorting">sorting</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-finishes"><p class="head">finishes, <a class="loc" href="#p25">25</a>, <a class="loc" href="#p27">27</a>, <a class="loc" href="#p29">29</a></p></li>
+        <li class="entry" id="e-formats">
+          <p class="head">formats, <a class="loc" href="#p16">16</a>, <a class="loc" href="#p39">39</a></p>
+          <ul class="subs">
+            <li>legality in, <a class="loc" href="#p16">16</a>, <a class="loc" href="#p19">19</a></li>
+            <li>metagame of, <a class="loc" href="#p39">39</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="P" aria-label="P">
-        <h3>P</h3>
-        <ul class="entries">
-          <li class="entry" id="e-players"><p class="head">players, number of, <a class="loc" href="#p3">3</a></p></li>
-          <li class="entry" id="e-premier-play"><p class="head">premier play. <em>See</em> <a class="xref" href="#e-events">events</a></p></li>
-          <li class="entry" id="e-prices">
-            <p class="head">prices, <a class="loc" href="#p27">27</a></p>
-            <ul class="subs">
-              <li>history of, <a class="loc" href="#p27">27</a></li>
-              <li>of each printing, <a class="loc" href="#p25">25</a></li>
-              <li>sorting by, <a class="loc" href="#p17">17</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-printings">
-            <p class="head">printings, <a class="loc" href="#p25">25</a></p>
-            <ul class="subs">
-              <li>choosing between, <a class="loc" href="#p25">25</a></li>
-              <li>of a scanned card, <a class="loc" href="#p34">34</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-pull-rates">
-            <p class="head">pull rates, <a class="loc" href="#p29">29</a></p>
-            <ul class="subs">
-              <li>by product and finish, <a class="loc" href="#p29">29</a></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <section class="letter" id="G" aria-label="G">
+      <h3>G</h3>
+      <ul class="entries">
+        <li class="entry" id="e-game">
+          <p class="head">game, how to start a, <a class="loc" href="#p3">3–4</a></p>
+          <ul class="subs">
+            <li>choosing players, <a class="loc" href="#p3">3</a></li>
+            <li>ending, <a class="loc" href="#p7">7</a></li>
+            <li>keeping score in, <a class="loc" href="#p5">5–6</a></li>
+            <li>rematch, <a class="loc" href="#p7">7</a></li>
+            <li>seats, <a class="loc" href="#p4">4</a></li>
+            <li>starting life, <a class="loc" href="#p3">3</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-glossary"><p class="head">glossary, <a class="loc" href="#p45">45</a></p></li>
+      </ul>
+    </section>
 
-      <section class="letter" id="R" aria-label="R">
-        <h3>R</h3>
-        <ul class="entries">
-          <li class="entry" id="e-rarity"><p class="head">rarity, filtering by, <a class="loc" href="#p15">15</a></p></li>
-          <li class="entry" id="e-rulings"><p class="head">rulings, <a class="loc" href="#p19">19</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="L" aria-label="L">
+      <h3>L</h3>
+      <ul class="entries">
+        <li class="entry" id="e-legality"><p class="head">legality. <em>See</em> <a class="xref" href="#e-formats">formats</a></p></li>
+        <li class="entry" id="e-life">
+          <p class="head">life totals, <a class="loc" href="#p5">5</a></p>
+          <ul class="subs">
+            <li>counting faster, <a class="loc" href="#p5">5</a></li>
+            <li>resetting, <a class="loc" href="#p7">7</a></li>
+            <li>starting, <a class="loc" href="#p3">3</a></li>
+            <li>tally of changes, <a class="loc" href="#p6">6</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="S" aria-label="S">
-        <h3>S</h3>
-        <ul class="entries">
-          <li class="entry" id="e-scanner">
-            <p class="head">scanner, <a class="loc" href="#p33">33–35</a></p>
-            <ul class="subs">
-              <li>holding a card steady for, <a class="loc" href="#p33">33</a></li>
-              <li>opening a scanned card, <a class="loc" href="#p34">34</a></li>
-              <li>several cards in a row, <a class="loc" href="#p35">35</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-score"><p class="head">score, keeping. <em>See</em> <a class="xref" href="#e-life">life totals</a></p></li>
-          <li class="entry" id="e-searching">
-            <p class="head">searching, <a class="loc" href="#p13">13</a></p>
-            <ul class="subs">
-              <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a></li>
-            </ul>
-          </li>
-          <li class="entry" id="e-sets"><p class="head">sets, <a class="loc" href="#p11">11</a></p></li>
-          <li class="entry" id="e-sorting"><p class="head">sorting, <a class="loc" href="#p17">17</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="M" aria-label="M">
+      <h3>M</h3>
+      <ul class="entries">
+        <li class="entry" id="e-mana-value"><p class="head">mana value, filtering by, <a class="loc" href="#p15">15</a></p></li>
+        <li class="entry" id="e-metagame">
+          <p class="head">metagame, <a class="loc" href="#p39">39–43</a></p>
+          <ul class="subs">
+            <li>archetypes in, <a class="loc" href="#p39">39</a></li>
+            <li>how often refreshed, <a class="loc" href="#p39">39</a></li>
+            <li><em>See also</em> <a class="xref" href="#e-decklists">decklists</a>; <a class="xref" href="#e-usage">usage, card</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-mooligan"><p class="head">Mooligan, <a class="loc" href="#pix">ix</a></p></li>
+        <li class="entry" id="e-mulligan"><p class="head">mulligan, <a class="loc" href="#pv">v</a>. <em>See also</em> <a class="xref" href="#e-mooligan">Mooligan</a></p></li>
+      </ul>
+    </section>
 
-      <section class="letter" id="T" aria-label="T">
-        <h3>T</h3>
-        <ul class="entries">
-          <li class="entry" id="e-tiles"><p class="head">tiles, on the card page, <a class="loc" href="#p20">20</a></p></li>
-          <li class="entry" id="e-turning"><p class="head">turning a card over. <em>See</em> <a class="xref" href="#e-double-faced">double-faced cards</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="P" aria-label="P">
+      <h3>P</h3>
+      <ul class="entries">
+        <li class="entry" id="e-players"><p class="head">players, number of, <a class="loc" href="#p3">3</a></p></li>
+        <li class="entry" id="e-premier-play"><p class="head">premier play. <em>See</em> <a class="xref" href="#e-events">events</a></p></li>
+        <li class="entry" id="e-prices">
+          <p class="head">prices, <a class="loc" href="#p27">27</a></p>
+          <ul class="subs">
+            <li>history of, <a class="loc" href="#p27">27</a></li>
+            <li>of each printing, <a class="loc" href="#p25">25</a></li>
+            <li>sorting by, <a class="loc" href="#p17">17</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-printings">
+          <p class="head">printings, <a class="loc" href="#p25">25</a></p>
+          <ul class="subs">
+            <li>choosing between, <a class="loc" href="#p25">25</a></li>
+            <li>of a scanned card, <a class="loc" href="#p34">34</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-pull-rates">
+          <p class="head">pull rates, <a class="loc" href="#p29">29</a></p>
+          <ul class="subs">
+            <li>by product and finish, <a class="loc" href="#p29">29</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <section class="letter" id="U" aria-label="U">
-        <h3>U</h3>
-        <ul class="entries">
-          <li class="entry" id="e-usage"><p class="head">usage, card, <a class="loc" href="#p42">42</a></p></li>
-        </ul>
-      </section>
+    <section class="letter" id="R" aria-label="R">
+      <h3>R</h3>
+      <ul class="entries">
+        <li class="entry" id="e-rarity"><p class="head">rarity, filtering by, <a class="loc" href="#p15">15</a></p></li>
+        <li class="entry" id="e-rulings"><p class="head">rulings, <a class="loc" href="#p19">19</a></p></li>
+      </ul>
+    </section>
 
-    </div>
+    <section class="letter" id="S" aria-label="S">
+      <h3>S</h3>
+      <ul class="entries">
+        <li class="entry" id="e-scanner">
+          <p class="head">scanner, <a class="loc" href="#p33">33–35</a></p>
+          <ul class="subs">
+            <li>holding a card steady for, <a class="loc" href="#p33">33</a></li>
+            <li>opening a scanned card, <a class="loc" href="#p34">34</a></li>
+            <li>several cards in a row, <a class="loc" href="#p35">35</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-score"><p class="head">score, keeping. <em>See</em> <a class="xref" href="#e-life">life totals</a></p></li>
+        <li class="entry" id="e-searching">
+          <p class="head">searching, <a class="loc" href="#p13">13</a></p>
+          <ul class="subs">
+            <li><em>See also</em> <a class="xref" href="#e-filtering">filtering</a></li>
+          </ul>
+        </li>
+        <li class="entry" id="e-sets"><p class="head">sets, <a class="loc" href="#p11">11</a></p></li>
+        <li class="entry" id="e-sorting"><p class="head">sorting, <a class="loc" href="#p17">17</a></p></li>
+      </ul>
+    </section>
+
+    <section class="letter" id="T" aria-label="T">
+      <h3>T</h3>
+      <ul class="entries">
+        <li class="entry" id="e-tiles"><p class="head">tiles, on the card page, <a class="loc" href="#p20">20</a></p></li>
+        <li class="entry" id="e-turning"><p class="head">turning a card over. <em>See</em> <a class="xref" href="#e-double-faced">double-faced cards</a></p></li>
+      </ul>
+    </section>
+
+    <section class="letter" id="U" aria-label="U">
+      <h3>U</h3>
+      <ul class="entries">
+        <li class="entry" id="e-usage"><p class="head">usage, card, <a class="loc" href="#p42">42</a></p></li>
+      </ul>
+    </section>
+
   </div>
 </section>
 
-<footer class="front colophon" data-head="Colophon">
-  <div class="text">
-    <h2 class="section-title" id="p51" data-folio="51">Colophon</h2>
-    <div class="body">
-      <p>This book is set in New York, Apple’s serif, with running heads, notes and labels in SF Pro. Where those are not installed, Iowan Old Style or Georgia stands in.</p>
-      <p>Mooligan is open source, at <a href="https://github.com/missingems/Mooligan">github.com/missingems/Mooligan</a>. Card data comes from Scryfall and MTGJSON, the metagame from MTGGoldfish, Commander usage from EDHREC, store events from Wizards’ store locator, and the premier play calendar from magic.gg.</p>
-      <p>Mooligan is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
-      <p>Printed on the web at mooligan.com. First edition, 2026.</p>
-    </div>
-    <div class="finis">
-      <div class="pips" aria-hidden="true"><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
-      <p>Here ends the Mooligan Companion.</p>
-      <a class="smallcaps" href="#cover">Mulligan to the beginning ↑</a>
-    </div>
+</main>
+
+<!-- ═══════════════════════════ Colophon ═══════════════════════════ -->
+
+<footer class="section colophon" data-head="Colophon">
+  <header class="band small" id="p51" data-folio="51">
+    <p class="kicker">Back matter</p>
+    <p class="meta"><span class="folio">51</span></p>
+    <h2>Colophon</h2>
+  </header>
+  <div class="cols">
+    <p>This book is set in New York, Apple’s serif, with running heads, notes and labels in SF Pro. Where those are not installed, Iowan Old Style or Georgia stands in. It is printed in one ink.</p>
+    <p>Mooligan is open source, at <a href="https://github.com/missingems/Mooligan">github.com/missingems/Mooligan</a>. Card data comes from Scryfall and MTGJSON, the metagame from MTGGoldfish, Commander usage from EDHREC, store events from Wizards’ store locator, and the premier play calendar from magic.gg.</p>
+    <p>Mooligan is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
+    <p>Printed on the web at mooligan.com. First edition, 2026.</p>
+  </div>
+  <div class="finis">
+    <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <p>Here ends the Mooligan Companion.</p>
+    <a class="smallcaps" href="#cover">Mulligan to the beginning ↑</a>
   </div>
 </footer>
 
-</main>
+</div>
 
 <script>
 (() => {
@@ -1474,8 +1303,17 @@
   const folio = document.getElementById('rh-folio');
   const cover = document.getElementById('cover');
   const ribbon = document.getElementById('ribbon');
-  const marks = [...document.querySelectorAll('[data-folio]')];
   const KEY = 'mooligan:page';
+
+  // Only the marks that start a section of the book; pages inside the
+  // columns sit side by side, so the running head gives each part’s range.
+  const marks = [...document.querySelectorAll('[data-folio]')].filter(m => !m.closest('.cols'));
+  const range = m => {
+    const part = m.closest('.part');
+    if (!part) return m.dataset.folio;
+    const inner = part.querySelectorAll('.cols [data-folio]');
+    return inner.length ? m.dataset.folio + '–' + inner[inner.length - 1].dataset.folio : m.dataset.folio;
+  };
 
   const store = {
     get() { try { return localStorage.getItem(KEY); } catch { return null; } },
@@ -1485,7 +1323,7 @@
   // The ribbon keeps your place between visits.
   const saved = store.get();
   const savedMark = saved && document.getElementById(saved);
-  if (savedMark && saved !== 'pv') {
+  if (savedMark && !['pv', 'pvii'].includes(saved)) {
     ribbon.href = '#' + saved;
     ribbon.setAttribute('aria-label', 'Resume reading at page ' + savedMark.dataset.folio);
     ribbon.querySelector('span').textContent = 'p. ' + savedMark.dataset.folio;
@@ -1496,7 +1334,7 @@
 
   function update() {
     ticking = false;
-    runhead.classList.toggle('shown', cover.getBoundingClientRect().bottom < 48);
+    runhead.classList.toggle('shown', cover.getBoundingClientRect().bottom < 40);
 
     const line = innerHeight * 0.3;
     let mark = null;
@@ -1509,8 +1347,8 @@
     if (!mark) { title.textContent = ''; folio.textContent = ''; return; }
 
     const section = mark.closest('[data-head]');
-    title.textContent = section ? section.dataset.head : '';
-    folio.textContent = mark.dataset.folio;
+    title.textContent = mark.dataset.head || (section ? section.dataset.head : '');
+    folio.textContent = range(mark);
     store.set(mark.id);
   }
 

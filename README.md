@@ -3,7 +3,7 @@
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**.
 
 It is written as a small book, *The Mooligan Companion*: a guide to the app in five parts, one for
-each colour of Magic.
+each colour of Magic, printed in one ink and set densely in columns.
 
 | | Part | Chapters |
 | --- | --- | --- |
@@ -13,10 +13,10 @@ each colour of Magic.
 | Red | **The Eye** | The Scanner |
 | Green | **The Field** | The Metagame · Decklists and Usage · Events |
 
-Before the parts come a cover, an epigraph, the contents and a preface, all numbered in roman
-numerals. After them come a glossary, an index and a colophon. Page numbers sit in the margin, notes
-in the side margin on wide screens, and a running head at the top shows the current chapter and page.
-The ribbon on the cover remembers the last page you read.
+A title page with the epigraph opens the book, then the contents and preface side by side (numbered in
+roman). Each part has a banded header, and its chapters flow in up to three columns. After the parts
+come a glossary, an index and a colophon, also in columns. A running head at the top shows the current
+part and its pages, and the ribbon on the title page remembers where you were.
 
 Plain static HTML, with no build step and no dependencies.
 
@@ -33,10 +33,14 @@ Plain static HTML, with no build step and no dependencies.
 number (`id="p15" data-folio="15"`). The contents, the index and cross-references (`a.xr`) all link to
 those ids, so if a page number changes, search for `#p15` and update the links too.
 
-**Parts** are `<section class="part" data-colour="w|u|b|r|g">`. The colour sets the accent for
-everything inside: drop caps, kickers, notes and figures.
+**Parts** are `<section class="part">`: a `header.band` (the filled circle in `.pips` marks which of
+the five parts it is) followed by `div.cols` holding one `article.chapter` per chapter.
 
-**Notes** are `<aside class="note">`, placed just before the paragraph they sit beside.
+**Chapters** open with a `div.keep` (heading plus first paragraph, kept together across columns).
+Sub-sections are run-in paragraphs: `<p class="sub" id="p16" data-folio="16"><span class="run">By
+format.</span> …</p>`. Add `drop` to a first paragraph for a drop cap.
+
+**Notes** are `<div class="note" role="note">`, placed where they should appear in the column.
 
 **Glossary terms** are linked from the text with `<a class="gl" href="#g-term">`.
 
