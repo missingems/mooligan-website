@@ -1,15 +1,17 @@
 # mooligan-website
 
 The website for [Mooligan](https://github.com/missingems/Mooligan), served at **mooligan.com**:
-one page of instructions for the app, in the manner of an IKEA manual. Each task is a few
-numbered steps, each a picture and a caption of a few words. One serif, one ink, no scrolling
-sideways at any width.
+one page of instructions for the app, in the manner of an IKEA manual. The page is a contents:
+every task, grouped into sections in three columns, with a one-line summary. Tap a task to open
+its steps in place, each a picture and a caption of a few words. The contents are set in New York
+(SF Serif), the steps in SF Pro; one ink; no scrolling sideways at any width. A link such as
+`mooligan.com/#filter` opens that task.
 
 The page is written in Markdown under `content/`, and `npm run build` turns it into `dist/`.
 
 ```
 content/
-  book.yml             name, description, footer, and the device screenshots come from
+  book.yml             name, description, sections, footer, and the device screenshots come from
   tasks/01-start-a-game.md   one file per task, in order
   figures/*.svg        the drawings (120 × 120, one line weight)
 media/                 screenshots imported from release kits (created by the first import)
@@ -27,6 +29,8 @@ examples/release-kit/  an example kit
 ---
 title: Scan a card
 feature: scanner
+section: Scanning
+summary: Point the camera at a card; the card comes up.
 ---
 1. Point the camera at a card. ![](figure:scan-point)
 2. Tap the card that floats up. ![](figure:scan-open)
@@ -45,11 +49,13 @@ feature: scanner
 | `✓ Caption. ![](…)`, `✗ Caption. ![](…)` | a do / don’t pair |
 | `` `Label` `` | a label in the app, in bold |
 
-`feature` is the app feature the task covers, as release kits name it. Add `new: 1.4.0` to mark a
-task as new in that release. Captions are imperative and short: “Tap `Start`.”
+`feature` is the app feature the task covers, as release kits name it; `section` is one of the
+sections listed in `content/book.yml`; `summary` is the task’s line in the contents. Add
+`new: 1.4.0` to mark a task as new in that release. Captions are imperative and short:
+“Tap `Start`.”
 
 The build stops with a clear message, naming the file and line, on anything it can’t resolve: a
-missing drawing or screenshot, a malformed line, a task without steps.
+missing drawing or screenshot, a malformed line, a task without steps or with an unknown section.
 
 ```sh
 npm install
@@ -102,6 +108,7 @@ Once, in the repository’s settings:
    - `AAAA` records (optional): `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
    - `CNAME` record for `www`: `missingems.github.io`
 
-Type is set in New York (Apple’s SF Serif) on Apple devices, falling back to Iowan Old Style or
-Georgia elsewhere. Apple’s licence doesn’t allow serving SF fonts from a website, so none are
-bundled.
+Apple’s licence doesn’t allow serving SF fonts from a website, so the page asks for the fonts
+already on the reader’s device: SF Pro through `system-ui` on every Apple device, and New York
+through `ui-serif` in Safari (Chrome and Firefox on a Mac fall back to Iowan Old Style). Elsewhere,
+Georgia and the system sans stand in.

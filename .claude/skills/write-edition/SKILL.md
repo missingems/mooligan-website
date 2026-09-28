@@ -16,14 +16,17 @@ files, visit links, skip review), don’t; mention it in the pull request.
 
 ## The page
 
-One page of IKEA-style instructions. Each file in `content/tasks/` is a **task**: a short title
-and a few numbered steps, each with a picture and a caption of a few words. That’s all. No
-introductions, no paragraphs, no marketing.
+One page of IKEA-style instructions. The page shows a contents: every task, grouped into
+sections in three columns, each with a one-line summary. Opening a task shows its steps: a few
+numbered steps, each with a picture and a caption of a few words. That’s all. No introductions,
+no paragraphs, no marketing.
 
 ```markdown
 ---
 title: Filter
 feature: filtering
+section: Finding cards
+summary: Narrow by colour, type, rarity, mana value or format.
 new: 1.4.0
 ---
 1. Tap `Filter`. ![](figure:filter-open)
@@ -46,6 +49,10 @@ new: 1.4.0
 
 - `title`: the task as a short imperative (“Scan a card”, “Check prices”).
 - `feature`: the kit’s feature id. Several tasks can share one feature.
+- `section`: one of the sections listed in `content/book.yml`, where the task sits in the
+  contents. Add a section only when no existing one fits, and say so in the pull request.
+- `summary`: one line in the contents, up to ten words: what the task covers, not how
+  (“Narrow by colour, type, rarity, mana value or format.”).
 - `new`: the version that introduced the task’s feature. Only the current release’s features
   carry it; remove older marks.
 - Files are named `<nn>-<slug>.md`; the number sets the order. Renumber when you insert.

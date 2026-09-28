@@ -6,6 +6,14 @@ label: Instructions
 url: https://mooligan.com/
 description: "How to use Mooligan, the companion app for Magic: The Gathering, in short illustrated steps."
 
+# The contents are grouped into these sections, in this order; each task names its section.
+sections:
+  - At the table
+  - Finding cards
+  - Value
+  - Scanning
+  - The wider game
+
 # The release the page describes, and the device its screenshots come from (release kits).
 app_version:
 figures:

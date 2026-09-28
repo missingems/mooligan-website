@@ -1,8 +1,9 @@
-/* Mooligan · Instructions. One page, one ink, one serif. */
+/* Mooligan · Instructions. The contents in New York; the steps in SF Pro. One ink. */
 
 :root {
-  /* New York is Apple’s “SF Serif”; ui-serif reaches it in Safari. */
+  /* New York is Apple’s “SF Serif” (reached by ui-serif in Safari); SF Pro is the system sans. */
   --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
 
   --paper: #ffffff;
   --ink: #111111;
@@ -38,116 +39,128 @@ body {
   text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
-p { margin: 0; overflow-wrap: anywhere; }
+p { margin: 0; overflow-wrap: break-word; }
 ::selection { background: var(--ink); color: var(--paper); }
 :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .page { width: min(72rem, 100% - 2 * var(--gutter)); margin-inline: auto; }
 
 /* ——— Top ——— */
-.top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 0.75rem;
-  padding: 1.25rem 0 1rem;
-  border-bottom: 1px solid var(--ink);
-}
-.mark { font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.025em; }
-.mark .v { font-weight: 400; color: var(--ink-2); }
-.label { color: var(--ink-2); }
-.toc {
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 0.9rem;
-  font-size: 0.8125rem;
-}
-.toc a { text-decoration: none; white-space: nowrap; }
-.toc a:hover { text-decoration: underline; }
-.n { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.top { padding: 1.25rem 0 1rem; border-bottom: 1px solid var(--ink); }
+.mark { margin: 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.025em; }
+.mark .v, .mark .label { font-weight: 400; color: var(--ink-2); }
+.mark .label { margin-left: 0.4rem; }
 
-/* ——— Tasks: two to a row on wide screens, all on one four-column rhythm ——— */
-main {
+/* ——— Contents: sections in three columns ——— */
+.contents {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 2.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 2.5rem;
+  align-items: start;
 }
-.task {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0.9rem;
-  padding: 1.25rem 0 1.5rem;
-  border-bottom: 1px solid var(--rule);
-  scroll-margin-top: 0.5rem;
-}
-.task h2 {
-  margin: 0;
-  font-size: 1rem;
+.group h2 {
+  margin: 1.5rem 0 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.8125rem;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
-.task h2 .n { margin-right: 0.3rem; font-weight: 400; }
+.col > .group:first-child h2 { margin-top: 1.25rem; }
+
+/* ——— A task: its line in the contents, and its steps when opened ——— */
+.task { border-bottom: 1px solid var(--rule); scroll-margin-top: 0.5rem; }
+.task summary {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr) 0.75rem;
+  grid-template-areas: "n name icon" ". sum icon";
+  gap: 0.15rem 0.25rem;
+  padding: 0.65rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+.task summary::-webkit-details-marker { display: none; }
+.task .n { grid-area: n; color: var(--ink-3); font-variant-numeric: tabular-nums; line-height: 1.3; }
+.task .name { grid-area: name; font-size: 1rem; line-height: 1.25; letter-spacing: -0.02em; }
+.task .sum { grid-area: sum; font-size: 0.8125rem; line-height: 1.3; color: var(--ink-2); }
+.task summary:hover .name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.task summary::after {
+  content: "";
+  grid-area: icon;
+  align-self: start;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0.3rem;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+}
+.task[open] summary::after { background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat; }
 .new {
   display: inline-block;
-  margin-left: 0.35rem;
+  margin-left: 0.4rem;
   padding: 0 0.35rem;
   border: 1px solid currentColor;
   border-radius: 1rem;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  vertical-align: 0.1rem;
+  font-family: var(--sans);
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  vertical-align: 0.15rem;
 }
 
-/* ——— Panels: a step, a tip, a do or a don’t ——— */
+/* ——— Steps: set in SF Pro ——— */
 .panels {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.35rem 0 1.25rem 1.85rem;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(6.75rem, 1fr));
+  gap: 1.1rem 0.75rem;
+  font-family: var(--sans);
+  letter-spacing: -0.005em;
 }
+.task[open] .panels { animation: open 0.25s ease-out; }
+@keyframes open { from { opacity: 0; transform: translateY(-4px); } }
 .panel { position: relative; min-width: 0; }
 .panel .k {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 1.625rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   font-variant-numeric: lining-nums;
 }
 /* Drawings sit clear of the number in the top-left corner. */
 .panel svg, .panel img, .panel video {
   display: block;
   width: calc(100% - 1.1rem);
-  max-width: 8.5rem;
+  max-width: 8rem;
   height: auto;
   margin-left: 1.1rem;
 }
 /* A screenshot from a release kit: phone-sized like the drawings, in the same one ink. */
-.panel img, .panel video { max-width: 5rem; margin-inline: auto; filter: grayscale(1) contrast(1.04); }
-.panel p { margin-top: 0.4rem; font-size: 0.875rem; }
+.panel img, .panel video { max-width: 4.5rem; margin-inline: auto; filter: grayscale(1) contrast(1.04); }
+.panel p { margin-top: 0.35rem; font-size: 0.8125rem; line-height: 1.3; }
 .ui { font-weight: 600; }
-.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-.tip { display: flex; gap: 0.6rem; align-items: flex-start; padding-top: 0.2rem; }
+.tip { grid-column: 1 / -1; display: flex; gap: 0.5rem; align-items: flex-start; }
 .tip .k, .do .k, .dont .k {
   display: grid;
   place-items: center;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.35rem;
+  height: 1.35rem;
   border: 1.5px solid var(--ink);
   border-radius: 50%;
-  font-size: 0.9375rem;
+  font-size: 0.75rem;
   letter-spacing: 0;
 }
 .tip .k { position: static; flex: none; }
-.tip p { margin-top: 0.2rem; color: var(--ink-2); }
+.tip p { margin-top: 0.1rem; color: var(--ink-2); }
 .dont .k { background: var(--ink); color: var(--paper); }
 
 /* ——— Drawings ——— */
@@ -158,31 +171,31 @@ svg .dash { stroke-dasharray: 2 3; }
 svg .fill { fill: currentColor; }
 svg .soft { fill: currentColor; fill-opacity: 0.08; }
 svg .bg { fill: var(--paper); }
-svg .t { fill: currentColor; font-family: var(--serif); letter-spacing: -0.02em; }
+svg .t { fill: currentColor; font-family: var(--sans); letter-spacing: -0.02em; }
 svg .halo { stroke: var(--paper); stroke-width: 5px; paint-order: stroke; }
 
 /* ——— Foot ——— */
 .foot {
   display: grid;
   gap: 0.4rem;
-  padding: 1.25rem 0 2.5rem;
+  margin-top: 2rem;
+  padding: 1rem 0 2.5rem;
+  border-top: 1px solid var(--rule);
   font-size: 0.75rem;
   line-height: 1.35;
   color: var(--ink-2);
 }
 
 @media (max-width: 64rem) {
-  main { grid-template-columns: minmax(0, 1fr); }
+  .contents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 40rem) {
-  .task { padding: 1rem 0 1.25rem; gap: 0.75rem; }
-  .panels { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem 0.75rem; }
-  .panel .k { font-size: 1.375rem; }
-  .panel p { font-size: 0.8125rem; }
-  .tip { flex-direction: column; gap: 0.4rem; }
+  .contents { grid-template-columns: minmax(0, 1fr); }
+  .col + .col > .group:first-child h2 { margin-top: 1.5rem; }
+  .panels { grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr)); }
 }
 
 @media print {
-  .toc { display: none; }
-  .task { break-inside: avoid; }
+  .task summary::after { display: none; }
+  .group, .task { break-inside: avoid; }
 }

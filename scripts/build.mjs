@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Builds mooligan.com from content/ into dist/: one page of illustrated instructions.
-//
-// Each file in content/tasks is a task, shown in file order. A task is a short run of
+// The page is a contents, grouped into sections in three columns; each task opens in place
+// to show its steps. Each file in content/tasks is a task, in file order: a short run of
 // numbered steps, each with a drawing (content/figures) or a capture from a release kit
 // (media/), plus tips and do/don’t panels. The build fails on anything it can’t resolve.
 
@@ -35,7 +35,8 @@ const inline = text => marked.parseInline(text).trim();
 // ——— Load ———
 
 const book = YAML.parse(await readFile(path.join(CONTENT, 'book.yml'), 'utf8')) ?? {};
-for (const key of ['name', 'url', 'description']) if (!book[key]) fail('content/book.yml', `“${key}” is required`);
+for (const key of ['name', 'url', 'description', 'sections']) if (!book[key]) fail('content/book.yml', `“${key}” is required`);
+if (!Array.isArray(book.sections) || !book.sections.length) fail('content/book.yml', '“sections” should be a list of section names');
 
 const mediaFile = path.join(ROOT, 'media/manifest.json');
 const media = existsSync(mediaFile) ? JSON.parse(await readFile(mediaFile, 'utf8')) : { assets: [] };
@@ -52,6 +53,8 @@ function parseTask(src, file) {
   const data = m ? YAML.parse(m[1]) ?? {} : {};
   if (!data.title) fail(file, '“title” is required in the front matter');
   if (!data.feature) fail(file, '“feature” is required in the front matter (the feature id release kits use)');
+  if (!data.summary) fail(file, '“summary” is required in the front matter (one line, shown in the contents)');
+  if (!book.sections.includes(data.section)) fail(file, `“section” should be one of: ${book.sections.join(', ')}`);
   const panels = [];
   const offset = m ? m[0].split('\n').length - 1 : 0;
   let inTip = false;   // consecutive “>” lines make one tip
@@ -147,20 +150,64 @@ async function renderTask(task, i) {
       items.push(`<li class="panel ${p.type}">\n  <span class="k" aria-hidden="true">${mark}</span>${art}\n  <p><span class="vh">${label}: </span>${inline(p.text)}</p>\n</li>`);
     }
   }
-  const isNew = task.data.new ? ` <span class="new">New</span>` : '';
-  return `<section class="task" id="${task.slug}" aria-labelledby="${task.slug}-t">
-  <h2 id="${task.slug}-t"><span class="n">${two(i + 1)}</span> ${esc(task.data.title)}${isNew}</h2>
+  const isNew = task.data.new ? `<span class="new">New</span>` : '';
+  return `<details class="task" id="${task.slug}">
+  <summary>
+    <span class="n">${two(i + 1)}</span>
+    <span class="name">${esc(task.data.title)}${isNew}</span>
+    <span class="sum">${inline(task.data.summary)}</span>
+  </summary>
   <ol class="panels">
 ${indent(items.join('\n'), 4)}
   </ol>
-</section>`;
+</details>`;
+}
+
+// Sections flow into three columns, kept whole and in order, as evenly as their tasks allow.
+// Fixed columns (rather than CSS columns) so opening a task only lengthens its own column.
+function balance(groups, n) {
+  const weight = g => 1 + g.tasks.length;
+  const target = groups.reduce((s, g) => s + weight(g), 0) / n;
+  const cols = [[]];
+  let sum = 0;
+  for (const [i, g] of groups.entries()) {
+    const mustStart = groups.length - i <= n - cols.length;
+    const better = Math.abs(sum + weight(g) - target) > Math.abs(sum - target);
+    if (cols.at(-1).length && cols.length < n && (better || mustStart)) { cols.push([]); sum = 0; }
+    cols.at(-1).push(g);
+    sum += weight(g);
+  }
+  return cols;
 }
 
 const css = (await readFile(path.join(ROOT, 'src/style.css'), 'utf8')).trimEnd();
-const sections = [];
-for (const [i, t] of tasks.entries()) sections.push(await renderTask(t, i));
-const toc = tasks.map((t, i) => `<a href="#${t.slug}"><span class="n">${two(i + 1)}</span> ${esc(t.data.title)}</a>`).join('\n    ');
+const rendered = new Map();
+for (const [i, t] of tasks.entries()) rendered.set(t, await renderTask(t, i));
+const groups = book.sections
+  .map(name => ({ name, tasks: tasks.filter(t => t.data.section === name) }))
+  .filter(g => g.tasks.length);
+const columns = balance(groups, 3).map(col => `<div class="col">\n${indent(col.map(g => `<section class="group" aria-labelledby="s-${g.tasks[0].slug}">
+  <h2 id="s-${g.tasks[0].slug}">${esc(g.name)}</h2>
+${indent(g.tasks.map(t => rendered.get(t)).join('\n'), 2)}
+</section>`).join('\n\n'), 2)}\n</div>`);
 const version = book.app_version ? ` <span class="v">${esc(book.app_version)}</span>` : '';
+
+// Opens the task named in the address, keeps the address in step with the task opened
+// last, and opens every task before printing.
+const script = `(() => {
+  const tasks = [...document.querySelectorAll('details.task')];
+  const show = () => {
+    const d = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (d && d.matches('details.task')) { d.open = true; d.scrollIntoView({ block: 'start' }); }
+  };
+  for (const d of tasks) d.addEventListener('toggle', () => {
+    if (d.open) history.replaceState(null, '', '#' + d.id);
+    else if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
+  });
+  addEventListener('hashchange', show);
+  addEventListener('beforeprint', () => tasks.forEach(d => { d.open = true; }));
+  show();
+})();`;
 
 const html = `<!doctype html>
 <html lang="en">
@@ -190,15 +237,11 @@ ${indent(css, 2)}
 <div class="page">
 
 <header class="top">
-  <p class="mark">${esc(book.name)}${version}</p>
-  ${book.label ? `<p class="label">${esc(book.label)}</p>` : ''}
-  <nav class="toc" aria-label="Tasks">
-    ${toc}
-  </nav>
+  <h1 class="mark">${esc(book.name)}${version}${book.label ? ` <span class="label">${esc(book.label)}</span>` : ''}</h1>
 </header>
 
-<main>
-${sections.join('\n\n')}
+<main class="contents">
+${columns.join('\n\n')}
 </main>
 
 <footer class="foot">
@@ -207,6 +250,9 @@ ${sections.join('\n\n')}
 </footer>
 
 </div>
+<script>
+${indent(script, 2)}
+</script>
 </body>
 </html>
 `;
