@@ -16,7 +16,7 @@ Under them is one grey line, the notice Wizards’ Fan Content Policy asks for (
 `content/book.yml`). The list sits in one column when it fits the screen, and in as many columns
 as it needs to fit otherwise (as the width allows; `src/page.js`), re-measured on resize. Tap a
 part to open its steps in place, each a picture and a caption of a few words. Everything is set
-in SF Mono; one ink, light or dark with the device; no scrolling sideways at any width. A link
+in New York (SF Serif), with the tree’s marks in SF Mono; one ink, light or dark with the device; no scrolling sideways at any width. A link
 such as `mooligan.com/#a-set-colour` opens that part.
 
 The page is written in Markdown under `content/`, and `npm run build` turns it into `dist/`.
@@ -145,7 +145,9 @@ Nothing is published until the site is launched. To launch, once:
 To take the site down again, set `PUBLISH` to anything else and unpublish it under
 **Settings → Pages**.
 
-Apple’s licence doesn’t allow serving SF fonts from a website, so the page asks for the one
-already on the reader’s device: SF Mono through `ui-monospace` in Safari, and by name elsewhere on
-a Mac (Menlo if it isn’t there). Other systems use their own monospace. The drawings’ labels use
-the system sans, SF Pro on Apple devices, as the app does.
+Apple’s licence doesn’t allow serving SF fonts from a website, so the page asks for the ones
+already on the reader’s device: New York (SF Serif) through `ui-serif` in Safari for the words,
+and SF Mono through `ui-monospace` for the tree’s `├ │ └`, step numbers and tags, so the lines
+join. Chrome and Firefox on a Mac fall back to Iowan Old Style and Menlo; other systems use
+their own serif and monospace. The drawings’ labels use the system sans, SF Pro on Apple
+devices, as the app does.
