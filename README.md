@@ -39,40 +39,42 @@ examples/release-kit/  an example kit
 
 ## Writing a feature
 
+Each file in `content/tasks/` is one feature of the app, as a tree: headings are screens and
+sections, one level further in per `#`, and bullets are the rows on them.
+
 ```markdown
 ---
-title: Scanner
-feature: scanner
-section: Scanning
+title: Metagame
+id: metagame
+feature: metagame
+section: Meta
+status: planned
 ---
-## Scan
-1. Tap the camera on `Sets`. ![](figure:scan-camera)
-2. Hold one card in view. ![](figure:scan-point)
+Where: Explore → `View more` → {#explore}
 
-✓ Even light. ![](figure:scan-light)
-✗ Glare. ![](figure:scan-glare)
+## Popular decks {#popular-decks}
+- Every archetype of the format, by share → {#archetype-row}
+- Tap an archetype → {#archetype}
 
-## Printings
-1. Swipe to your printing. ![](figure:scan-printings)
-
-> Reprints with the same art look alike to the camera.
+### Archetype row {#archetype-row}
+Where: Explore → latest meta; Metagame → popular decks
+- Keycards — usually two, the archetype's most important cards
+- Share — % of the format's decks in the time frame
 ```
 
 | Line | Shows as |
 | --- | --- |
-| `## Part` | a part of the feature, in its directory; the lines after it are its steps |
-| `1. Caption. ![](figure:name)` | a numbered step with a drawing from `content/figures/` |
-| `1. Caption. ![](asset:feature/use-case/capture)` | a numbered step with a screenshot from a release kit |
-| `> Tip.` | a tip under the steps |
-| `✓ Caption. ![](…)`, `✗ Caption. ![](…)` | a do / don’t pair |
+| `## Title {#id} [planned]` | a node of the tree, opening in place; `###` is one level further in |
+| `- Row — what it is` | a row (a leaf), its meaning in grey; indent two spaces to nest |
+| `Where: …` | how the node is reached, under its name |
+| `{#id}` | a link to that node, by its title; opening it opens every node it sits in |
 | `` `Label` `` | a label in the app, in bold |
+| `1. Step.`, `> Tip.` | numbered steps and tips, shown when the node opens |
 
-A file without `## ` parts is a single task: its name opens straight onto its steps. `feature` is
-the app feature the file covers, as release kits name it; `section` is one of the sections listed
-in `content/book.yml` (it keeps related features together; its name isn’t shown). Add
-`new: 1.4.0` to mark a feature as new in that release. Captions are imperative and short: “Tap
-`Reveal All`.” Give every step in a part a picture, or none: a part without pictures reads as a
-plain numbered list.
+Describe a screen reached from several places once, under one id, list its entries in `Where:`,
+and link to it from the rest. `[planned]` (or `status: planned` for a whole feature) and
+`[soon]` show as tags; other bracketed words are notes. Each opened node with rows holds a
+`[ picture ]` placeholder until it has a screenshot.
 
 The build stops with a clear message, naming the file and line, on anything it can’t resolve: a
 missing drawing or screenshot, a malformed line, a task without steps or with an unknown section.

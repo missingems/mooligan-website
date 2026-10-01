@@ -29,7 +29,7 @@ const indent = (s, n) => s.split('\n').map(l => (l ? ' '.repeat(n) + l : l)).joi
 const rel = file => path.relative(ROOT, file);
 
 const marked = new Marked({
-  renderer: { codespan({ text }) { return `<span class="ui">${text}</span>`; } },
+  renderer: { codespan({ text }) { return `<span class="ui">${esc(text)}</span>`; } },
 });
 const inline = text => marked.parseInline(text).trim();
 
@@ -143,7 +143,9 @@ function rich(text, where) {
     refs.push(id);
     return `\u0000${refs.length - 1}\u0000`;
   });
-  return inline(marked_).replace(/\u0000(\d+)\u0000/g, (_, n) => `<a href="#${refs[n]}">${esc(ids.get(refs[n]).title)}</a>`);
+  // Angle brackets outside `code` are text (“<n> cards”), not HTML.
+  const safe = marked_.split(/(`[^`]*`)/).map((part, i) => (i % 2 ? part : part.replace(/</g, '&lt;').replace(/>/g, '&gt;'))).join('');
+  return inline(safe).replace(/\u0000(\d+)\u0000/g, (_, n) => `<a href="#${refs[n]}">${esc(ids.get(refs[n]).title)}</a>`);
 }
 
 const taskFiles = (await readdir(path.join(CONTENT, 'tasks')))
@@ -225,18 +227,21 @@ function renderLeaf(leaf, branch) {
 
 // A node: its name, which opens to show where it is reached from, a placeholder for its picture,
 // its steps, and its rows and children, as a directory one level further in.
-async function renderNode(node, branch) {
-  const tags = node.tags.filter(t => TAGS[t]).map(t => ` <span class="tag">${TAGS[t]}</span>`).join('');
+async function renderNode(node, branch, inherited = []) {
+  // A tag shows once, on the outermost node that carries it.
+  const shown = node.tags.filter(t => TAGS[t]).map(t => TAGS[t]);
+  const tags = shown.filter(t => !inherited.includes(t)).map(t => ` <span class="tag">${t}</span>`).join('');
+  const passed = inherited.concat(shown);
   const leaves = node.items.some(x => x.type === 'leaf');
   const body = [
     node.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(node.from, node.where)}</p>` : '',
     leaves ? `<p class="ph" aria-hidden="true">[ picture ]</p>` : '',
     node.panels.length ? await renderPanels(node.panels) : '',
-    await renderItemsAsync(node.items),
+    await renderItemsAsync(node.items, passed),
   ].filter(Boolean).join('\n');
   return `<li class="node">
   <details id="${node.id}">
-    <summary><span class="br" aria-hidden="true">${branch}</span><span class="name">${esc(node.title)}</span>${tags}</summary>
+    <summary><span class="br" aria-hidden="true">${branch}</span><span><span class="name">${esc(node.title)}</span>${tags}</span></summary>
     <div class="body">
 ${indent(body, 6)}
     </div>
@@ -249,10 +254,10 @@ function renderItems(items) {
   if (!items.length) return '';
   return `<ul class="tree">${items.map((x, i) => renderLeaf(x, branchOf(i, items))).join('')}</ul>`;
 }
-async function renderItemsAsync(items) {
+async function renderItemsAsync(items, inherited = []) {
   if (!items.length) return '';
   const out = [];
-  for (const [i, x] of items.entries()) out.push(x.type === 'node' ? await renderNode(x.node, branchOf(i, items)) : renderLeaf(x, branchOf(i, items)));
+  for (const [i, x] of items.entries()) out.push(x.type === 'node' ? await renderNode(x.node, branchOf(i, items), inherited) : renderLeaf(x, branchOf(i, items)));
   return `<ul class="tree">\n${indent(out.join('\n'), 2)}\n</ul>`;
 }
 
@@ -261,12 +266,13 @@ async function renderTask(task, i) {
   const { root } = task;
   const isNew = task.data.new ? `<span class="new">New</span>` : '';
   const startsSection = i > 0 && tasks[i - 1].data.section !== task.data.section;
-  const tags = root.tags.concat(task.data.status ? [task.data.status] : []).filter(t => TAGS[t]).map(t => ` <span class="tag">${TAGS[t]}</span>`).join('');
+  const rootTags = root.tags.concat(task.data.status ? [task.data.status] : []).filter(t => TAGS[t]).map(t => TAGS[t]);
+  const tags = rootTags.map(t => ` <span class="tag">${t}</span>`).join('');
   const parts = [
     `<h2 class="fname">${esc(root.title)}${isNew}${tags}</h2>`,
     root.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(root.from, task.file)}</p>` : '',
     root.panels.length ? await renderPanels(root.panels) : '',
-    await renderItemsAsync(root.items),
+    await renderItemsAsync(root.items, rootTags),
   ].filter(Boolean).join('\n');
   return `<div class="feature${startsSection ? ' gs' : ''}" id="${root.id}">
 ${indent(parts, 2)}
