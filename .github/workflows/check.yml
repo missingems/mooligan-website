@@ -1,5 +1,6 @@
-# Every pull request, including the article writer’s: the book must build and pass its checks,
-# and the example release kit must still match the kit format.
+# Every pull request, including the article writer’s: the site must build and pass its checks,
+# and the example release kit must still match the kit format. The built site is kept as a
+# “site” artifact, to download and look at before merging.
 name: Check
 
 on:
@@ -21,3 +22,7 @@ jobs:
       - run: npm run build
       - run: npm run check
       - run: npm run validate-kit -- examples/release-kit
+      - uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: dist

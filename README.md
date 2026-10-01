@@ -115,18 +115,26 @@ To run it on every release, create a routine at claude.ai/code/routines:
 
 ## Publishing
 
-Every push to `main` builds the site and publishes it to GitHub Pages
-(`.github/workflows/publish.yml`); every pull request is built and checked first
-(`.github/workflows/check.yml`).
+Every pull request is built and checked (`.github/workflows/check.yml`), and so is every push to
+`main` (`.github/workflows/publish.yml`). Each run keeps the built site as a **site** artifact:
+open the run in the Actions tab, download it, unzip, and open `index.html`.
 
-Once, in the repository’s settings:
+Nothing is published until the site is launched. To launch, once:
 
 1. **Settings → Pages → Build and deployment → Source:** GitHub Actions.
-2. **Settings → Pages → Custom domain:** `mooligan.com`, then **Enforce HTTPS** once the check passes.
-3. At your DNS provider, point the domain at GitHub Pages:
+2. **Settings → Secrets and variables → Actions → Variables:** add `PUBLISH` = `true`. From then
+   on every push to `main` publishes; to publish straight away, run **Publish** from the Actions
+   tab (**Run workflow**).
+3. **Settings → Pages → Custom domain:** `mooligan.com`.
+4. At your DNS provider, point the domain at GitHub Pages (on Cloudflare, set each record to
+   **DNS only**, not proxied, or GitHub can’t issue the certificate):
    - `A` records for `mooligan.com`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `AAAA` records (optional): `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
    - `CNAME` record for `www`: `missingems.github.io`
+5. **Settings → Pages:** tick **Enforce HTTPS** once the DNS check passes.
+
+To take the site down again, set `PUBLISH` to anything else and unpublish it under
+**Settings → Pages**.
 
 Apple’s licence doesn’t allow serving SF fonts from a website, so the page asks for the one
 already on the reader’s device: SF Mono through `ui-monospace` in Safari, and by name elsewhere on

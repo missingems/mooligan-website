@@ -1,5 +1,8 @@
-# Builds the book from content/ and publishes it to GitHub Pages (mooligan.com).
-# Needs Settings → Pages → Build and deployment → Source: GitHub Actions.
+# Builds the site from content/ on every push to main, and publishes it to GitHub Pages
+# (mooligan.com) only once the site is launched: when the repository variable PUBLISH is "true"
+# (Settings → Secrets and variables → Actions → Variables). Until then each run only builds and
+# checks the site, and keeps the result as a “site” artifact to download and look at.
+# Publishing also needs Settings → Pages → Build and deployment → Source: GitHub Actions.
 name: Publish
 
 on:
@@ -28,12 +31,18 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run check
-      - uses: actions/upload-pages-artifact@v5
+      - uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: dist
+      - if: vars.PUBLISH == 'true'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
     needs: build
+    if: vars.PUBLISH == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
