@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// Builds mooligan.com from content/ into dist/: one page of illustrated instructions, under the
-// logo (content/logo.svg). Each file in content/tasks is a feature of the app, in file order: its
-// name and a small directory of its parts, each opening in place to show its steps (or, without
-// parts, the steps themselves). A step is a caption with a drawing (content/figures) or a capture from a
-// release kit (media/); tips and do/don’t panels sit among them. The build fails on anything it
-// can’t resolve.
+// Builds mooligan.com from content/ into dist/: one page that maps the whole app as a directory,
+// under the logo (content/logo.svg). Each file in content/tasks is one feature of the app, in
+// section order: its name and its tree of screens, sections and rows, any of which opens in place.
+// A node may also hold numbered steps, with a drawing (content/figures) or a capture from a
+// release kit (media/). The build fails on anything it can’t resolve, a link to a missing node
+// among them.
 
 import { readFile, readdir, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -42,15 +42,22 @@ if (!Array.isArray(book.sections) || !book.sections.length) fail('content/book.y
 const mediaFile = path.join(ROOT, 'media/manifest.json');
 const media = existsSync(mediaFile) ? JSON.parse(await readFile(mediaFile, 'utf8')) : { assets: [] };
 
-// A task body is a list of lines:
-//   1. Step text. ![](figure:name)        a numbered step, with a drawing or a capture
-//   > Tip text.                           a tip
-//   ✓ Do this. ![](figure:name)           a do/don’t pair
-//   ✗ Not this. ![](figure:name)
-// or, for a feature with several parts, “## Part name” lines, each followed by its own steps.
-// Those parts show as a small directory under the task’s name, each opening on its own.
+// A feature’s file is a tree. Under the front matter:
+//   Where: Explore → an archetype row          where the feature, or a node, is reached from
+//   - `Label` — what it is                      a row of the screen: a leaf of the tree
+//     - a row inside it                        (indent two spaces to nest)
+//   - Swipe to change the format → {#metagame}  an action, and the node it leads to
+//   ## Screen or section {#id} [planned]        a node, one level down per extra #
+//   1. Step. ![](figure:name)                   a numbered step, shown when the node opens
+//   > Tip.                                      a tip
+// {#id} anywhere in text links to that node, by its title. A node without an id is given one
+// from its title and its parent’s. Any node opens in place to show its rows and children; each
+// opened node with rows holds a placeholder for its picture until there is one.
 const FIGURE = /\s*!\[([^\]]*)\]\((figure|asset):([^)\s]+)\)\s*$/;
-const slugify = s => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slugify = s => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ’']/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Tags a node can carry in [brackets]; only these show, the rest are notes for the editor.
+const TAGS = { planned: 'planned', data: 'planned', unfinished: 'unfinished', soon: 'soon' };
+const ids = new Map();   // id → node, across every file
 
 function parseTask(src, file) {
   const m = src.match(/^---\n([\s\S]*?)\n---\n?/);
@@ -60,39 +67,66 @@ function parseTask(src, file) {
   if (!data.title) fail(file, '“title” is required in the front matter');
   if (!data.feature) fail(file, '“feature” is required in the front matter (the feature id release kits use)');
   if (!book.sections.includes(data.section)) fail(file, `“section” should be one of: ${book.sections.join(', ')}`);
-  const own = { panels: [] };   // steps of a task without parts
-  const parts = [];
-  let into = own;
+  const slug = path.basename(file).replace(/^\d+-|\.md$/g, '');
+  const root = { title: data.title, id: data.id ?? slug, depth: 0, items: [], panels: [], tags: [], file };
+  claim(root, file);
+  const stack = [root];
   const offset = m ? m[0].split('\n').length - 1 : 0;
-  let inTip = false;   // consecutive “>” lines make one tip
+  let inTip = false;
+  let leafStack = [];   // the open leaves, by indent level
   for (const [i, raw] of (m ? src.slice(m[0].length) : src).split('\n').entries()) {
-    const line = raw.trim();
     const where = `${file}:${i + 1 + offset}`;
+    const line = raw.trim();
     let k;
     if (!line || /^<!--.*-->$/.test(line)) { inTip = false; continue; }
-    if ((k = line.match(/^##\s+(.+)$/))) {
-      if (own.panels.length) fail(where, 'a task has either its own steps or “## ” parts, not both');
-      into = { title: k[1].trim(), slug: slugify(k[1]), panels: [], where };
-      if (parts.some(p => p.slug === into.slug)) fail(where, `two parts called “${into.title}”`);
-      parts.push(into);
+    if ((k = line.match(/^(#{2,6})\s+(.+)$/))) {
+      const depth = k[1].length - 1;
+      while (stack.at(-1).depth >= depth) stack.pop();
+      const parent = stack.at(-1);
+      if (depth !== parent.depth + 1) fail(where, `a “${k[1]}” heading needs a heading one level up above it`);
+      let title = k[2].trim(), id, tags = [];
+      title = title.replace(/\s*\[([a-z, -]+)\]\s*$/i, (_, t) => { tags = t.split(/[ ,]+/).filter(Boolean).map(s => s.toLowerCase()); return ''; });
+      title = title.replace(/\s*\{#([a-z0-9-]+)\}\s*$/, (_, x) => { id = x; return ''; }).trim();
+      const node = { title, id: id ?? `${parent.id}-${slugify(title)}`, depth, items: [], panels: [], tags, where, file };
+      claim(node, where);
+      parent.items.push({ type: 'node', node });
+      stack.push(node);
+      leafStack = [];
+      inTip = false;
+      continue;
+    }
+    const node = stack.at(-1);
+    if ((k = line.match(/^Where:\s*(.+)$/i))) { node.from = k[1]; continue; }
+    if ((k = raw.match(/^(\s*)[-*]\s+(.+)$/))) {
+      const level = Math.floor(k[1].replace(/\t/g, '  ').length / 2);
+      const leaf = { type: 'leaf', text: k[2].trim(), items: [], where };
+      if (level === 0) { node.items.push(leaf); leafStack = [leaf]; }
+      else {
+        const parent = leafStack[level - 1];
+        if (!parent) fail(where, 'an indented row needs a row above it, one level out');
+        parent.items.push(leaf);
+        leafStack = leafStack.slice(0, level).concat(leaf);
+      }
       inTip = false;
       continue;
     }
     if ((k = line.match(/^>\s?(.*)$/))) {
-      if (inTip) into.panels.at(-1).text += ' ' + k[1];
-      else into.panels.push({ type: 'tip', text: k[1] });
+      if (inTip) node.panels.at(-1).text += ' ' + k[1];
+      else node.panels.push({ type: 'tip', text: k[1], where });
       inTip = true;
       continue;
     }
     inTip = false;
-    if ((k = line.match(/^\d+\.\s+(.+)$/))) into.panels.push({ type: 'step', ...withFigure(k[1], where) });
-    else if ((k = line.match(/^([✓✗])\s+(.+)$/))) into.panels.push({ type: k[1] === '✓' ? 'do' : 'dont', ...withFigure(k[2], where) });
-    else fail(where, `expected a step (“1. …”), a tip (“> …”), a do/don’t (“✓ …”, “✗ …”) or a part (“## …”), not “${line}”`);
+    if ((k = line.match(/^\d+\.\s+(.+)$/))) node.panels.push({ type: 'step', ...withFigure(k[1], where) });
+    else if ((k = line.match(/^([✓✗])\s+(.+)$/))) node.panels.push({ type: k[1] === '✓' ? 'do' : 'dont', ...withFigure(k[2], where) });
+    else fail(where, `expected a node (“## …”), a row (“- …”), “Where: …”, a step (“1. …”) or a tip (“> …”), not “${line}”`);
   }
-  for (const p of parts.length ? parts : [own]) {
-    if (!p.panels.some(x => x.type === 'step')) fail(p.where ?? file, `${p.title ? `“${p.title}”` : 'a task'} needs at least one numbered step`);
-  }
-  return { data, panels: own.panels, parts, file };
+  return { data, root, file, slug };
+}
+
+function claim(node, where) {
+  if (ids.has(node.id)) fail(where, `the id “${node.id}” is already used by “${ids.get(node.id).title}” (${ids.get(node.id).file})`);
+  ids.set(node.id, node);
 }
 
 function withFigure(text, where) {
@@ -101,13 +135,24 @@ function withFigure(text, where) {
   return { text: text.slice(0, f.index).trim(), where, figure: { alt: f[1], kind: f[2], ref: f[3] } };
 }
 
+// Inline Markdown, with {#id} turned into a link to that node, named by its title.
+function rich(text, where) {
+  const refs = [];
+  const marked_ = text.replace(/\{#([a-z0-9-]+)\}/g, (_, id) => {
+    if (!ids.has(id)) fail(where, `nothing has the id “${id}”`);
+    refs.push(id);
+    return `\u0000${refs.length - 1}\u0000`;
+  });
+  return inline(marked_).replace(/\u0000(\d+)\u0000/g, (_, n) => `<a href="#${refs[n]}">${esc(ids.get(refs[n]).title)}</a>`);
+}
+
 const taskFiles = (await readdir(path.join(CONTENT, 'tasks')))
   .filter(f => /^\d+-.+\.md$/.test(f)).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 if (!taskFiles.length) fail('content/tasks', 'no tasks');
 const tasks = [];
 for (const name of taskFiles) {
   const file = path.join(CONTENT, 'tasks', name);
-  tasks.push({ ...parseTask(await readFile(file, 'utf8'), rel(file)), slug: name.replace(/^\d+-|\.md$/g, '') });
+  tasks.push(parseTask(await readFile(file, 'utf8'), rel(file)));
 }
 
 // ——— Figures ———
@@ -171,34 +216,60 @@ async function renderPanels(panels) {
   return `<ol class="panels${pictured ? '' : ' list'}">\n${indent(items.join('\n'), 2)}\n</ol>`;
 }
 
+// A row: its text, with what it is after a “—” in grey, and the rows inside it.
+function renderLeaf(leaf, branch) {
+  const [head, ...rest] = leaf.text.split(' — ');
+  const text = rich(head, leaf.where) + (rest.length ? ` <span class="desc">— ${rich(rest.join(' — '), leaf.where)}</span>` : '');
+  return `<li class="leaf"><span class="br" aria-hidden="true">${branch}</span><span class="txt">${text}</span>${renderItems(leaf.items)}</li>`;
+}
+
+// A node: its name, which opens to show where it is reached from, a placeholder for its picture,
+// its steps, and its rows and children, as a directory one level further in.
+async function renderNode(node, branch) {
+  const tags = node.tags.filter(t => TAGS[t]).map(t => ` <span class="tag">${TAGS[t]}</span>`).join('');
+  const leaves = node.items.some(x => x.type === 'leaf');
+  const body = [
+    node.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(node.from, node.where)}</p>` : '',
+    leaves ? `<p class="ph" aria-hidden="true">[ picture ]</p>` : '',
+    node.panels.length ? await renderPanels(node.panels) : '',
+    await renderItemsAsync(node.items),
+  ].filter(Boolean).join('\n');
+  return `<li class="node">
+  <details id="${node.id}">
+    <summary><span class="br" aria-hidden="true">${branch}</span><span class="name">${esc(node.title)}</span>${tags}</summary>
+    <div class="body">
+${indent(body, 6)}
+    </div>
+  </details>
+</li>`;
+}
+
+const branchOf = (i, list) => (i === list.length - 1 ? '└' : '├');
+function renderItems(items) {
+  if (!items.length) return '';
+  return `<ul class="tree">${items.map((x, i) => renderLeaf(x, branchOf(i, items))).join('')}</ul>`;
+}
+async function renderItemsAsync(items) {
+  if (!items.length) return '';
+  const out = [];
+  for (const [i, x] of items.entries()) out.push(x.type === 'node' ? await renderNode(x.node, branchOf(i, items)) : renderLeaf(x, branchOf(i, items)));
+  return `<ul class="tree">\n${indent(out.join('\n'), 2)}\n</ul>`;
+}
+
+// A feature: its name, where it is, and its tree.
 async function renderTask(task, i) {
+  const { root } = task;
   const isNew = task.data.new ? `<span class="new">New</span>` : '';
   const startsSection = i > 0 && tasks[i - 1].data.section !== task.data.section;
-  const cls = `feature${startsSection ? ' gs' : ''}`;
-  if (!task.parts.length) {
-    return `<div class="${cls}">
-  <details class="task" id="${task.slug}">
-    <summary><span class="name">${esc(task.data.title)}</span>${isNew}</summary>
-${indent(await renderPanels(task.panels), 4)}
-  </details>
-</div>`;
-  }
-  // A feature with parts: its name, then its parts as a directory, ├ for each and └ for the last.
-  const parts = [];
-  for (const [k, part] of task.parts.entries()) {
-    const branch = k === task.parts.length - 1 ? '└' : '├';
-    parts.push(`<li>
-  <details class="task" id="${task.slug}-${part.slug}">
-    <summary><span class="br" aria-hidden="true">${branch}</span><span class="name">${esc(part.title)}</span></summary>
-${indent(await renderPanels(part.panels), 4)}
-  </details>
-</li>`);
-  }
-  return `<div class="${cls}" id="${task.slug}">
-  <h2 class="fname">${esc(task.data.title)}${isNew}</h2>
-  <ul class="tree">
-${indent(parts.join('\n'), 4)}
-  </ul>
+  const tags = root.tags.concat(task.data.status ? [task.data.status] : []).filter(t => TAGS[t]).map(t => ` <span class="tag">${TAGS[t]}</span>`).join('');
+  const parts = [
+    `<h2 class="fname">${esc(root.title)}${isNew}${tags}</h2>`,
+    root.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(root.from, task.file)}</p>` : '',
+    root.panels.length ? await renderPanels(root.panels) : '',
+    await renderItemsAsync(root.items),
+  ].filter(Boolean).join('\n');
+  return `<div class="feature${startsSection ? ' gs' : ''}" id="${root.id}">
+${indent(parts, 2)}
 </div>`;
 }
 
@@ -263,7 +334,8 @@ await cp(path.join(ROOT, 'public'), OUT, { recursive: true });
 if (existsSync(path.join(ROOT, 'media'))) await cp(path.join(ROOT, 'media'), path.join(OUT, 'media'), { recursive: true });
 await writeFile(path.join(OUT, 'index.html'), html);
 
-const allPanels = tasks.flatMap(t => [t.panels, ...t.parts.map(p => p.panels)]).flat();
-const steps = allPanels.filter(p => p.type === 'step').length;
-const partCount = tasks.reduce((n, t) => n + t.parts.length, 0);
-console.log(`Built ${rel(OUT)}/index.html: ${tasks.length} features, ${partCount} parts, ${steps} steps, ${figureCount} figures.`);
+const all = [...ids.values()];
+const panelsOf = all.flatMap(n => n.panels);
+const rowCount = n => n.items.reduce((c, x) => c + (x.type === 'leaf' ? 1 + rowCount(x) : 0), 0);
+const rows = all.reduce((c, n) => c + rowCount(n), 0);
+console.log(`Built ${rel(OUT)}/index.html: ${tasks.length} features, ${all.length - tasks.length} nodes, ${rows} rows, ${panelsOf.filter(p => p.type === 'step').length} steps, ${figureCount} figures.`);

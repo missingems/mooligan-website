@@ -54,7 +54,8 @@ p { margin: 0; overflow-wrap: break-word; }
 .contents.laid-out { display: flex; gap: 0 3rem; align-items: flex-start; }
 .col { flex: 1 1 0; min-width: 0; }
 .feature { scroll-margin-top: 0.5rem; }
-.fname { margin: 0; font: inherit; }
+.fname { margin: 0; font: inherit; font-weight: 600; }
+.feature + .feature { margin-top: 0.75rem; }
 
 /* ——— A feature’s parts, drawn as a directory: ├ for each, └ for the last ——— */
 .tree { list-style: none; margin: 0; padding: 0; }
@@ -70,14 +71,23 @@ p { margin: 0; overflow-wrap: break-word; }
 }
 .br { color: var(--ink-2); }
 
-/* ——— A part: tap its name to open its steps ——— */
-.task { scroll-margin-top: 0.5rem; }
-.task > summary { display: grid; grid-template-columns: 2ch minmax(0, 1fr); cursor: pointer; list-style: none; }
-.task > summary::-webkit-details-marker { display: none; }
-.feature > .task > summary { display: block; }            /* a feature that is a single task */
-.task > summary:hover .name { text-decoration: underline; text-decoration-color: var(--ink-2); }
-.task[open] > summary .name { font-weight: 600; }
-.tree .task > .panels { margin-left: 2ch; }
+/* ——— A node: tap its name to open it in place, one level further in ——— */
+.node > details { scroll-margin-top: 0.5rem; }
+.node > details > summary { display: grid; grid-template-columns: 2ch minmax(0, 1fr); cursor: pointer; list-style: none; }
+.node > details > summary::-webkit-details-marker { display: none; }
+.node > details > summary:hover .name { text-decoration: underline; text-decoration-color: var(--ink-2); }
+.node > details[open] > summary .name { font-weight: 600; }
+.node > details > .body { margin-left: 2ch; padding-bottom: 0.25rem; }
+.node > details[open] > .body { animation: open 0.2s ease-out; }
+/* A row: a leaf of the tree, its text hanging clear of the branch. */
+.leaf { display: grid; grid-template-columns: 2ch minmax(0, 1fr); }
+.leaf > .tree { grid-column: 2; }
+.desc { color: var(--ink-2); }
+.from { color: var(--ink-2); }
+.from a, .txt a { text-decoration-color: var(--ink-3); }
+.ph { color: var(--ink-3); }                       /* where a picture will go */
+.tag { margin-left: 1ch; color: var(--ink-2); font-size: 0.75rem; font-weight: 400; }
+.tag::before { content: "["; } .tag::after { content: "]"; }
 .new {
   margin-left: 1ch;
   padding: 0 0.5ch;
@@ -101,7 +111,6 @@ p { margin: 0; overflow-wrap: break-word; }
   gap: 1rem 0.75rem;
   line-height: 1.4;
 }
-.task[open] .panels { animation: open 0.25s ease-out; }
 @keyframes open { from { opacity: 0; transform: translateY(-4px); } }
 /* Steps without pictures yet: a plain numbered list. */
 .panels.list { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; padding: 0.2rem 0 0.8rem; }

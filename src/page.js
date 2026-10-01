@@ -1,15 +1,15 @@
 (() => {
   const contents = document.querySelector('.contents');
   const features = [...contents.querySelectorAll('.feature')];   // what the columns hold
-  const tasks = [...contents.querySelectorAll('details.task')];   // what opens
+  const nodes = [...contents.querySelectorAll('details')];   // what opens
   const root = document.documentElement;
   const notice = document.querySelector('.notice');
 
   // ——— Columns ———
-  // One column if every task fits on the screen; otherwise as many columns as it takes,
-  // up to as many as the width allows. Features (a task, or a feature with its directory of
-  // parts) keep their order and are split so the columns come out as even as they can. Only
-  // closed heights count, so opening a task lengthens its own column and never moves the others.
+  // One column if every feature fits on the screen; otherwise as many columns as it takes,
+  // up to as many as the width allows. Features (each a name and its tree) keep their order and
+  // are split so the columns come out as even as they can. Only closed heights count, so opening
+  // a node lengthens its own column and never moves the others.
   const SINGLE = 34;   // rem: the width of the page as one column
   const COLUMN = 20;   // rem: the widest a column gets when there are several
   const MIN = 15;      // rem: the narrowest a column may be
@@ -37,8 +37,9 @@
     return { cols: fill(hi), tallest: hi };
   }
 
-  // A feature’s height with every task in it closed.
-  const closed = f => [...f.querySelectorAll('details.task[open]')].reduce(
+  // A feature’s height with every node in it closed.
+  // Only the outermost open nodes count: an inner one is part of its parent’s height.
+  const closed = f => [...f.querySelectorAll('details[open]')].filter(d => !d.parentElement.closest('details[open]')).reduce(
     (h, d) => h - (d.getBoundingClientRect().height - d.querySelector('summary').getBoundingClientRect().height),
     f.getBoundingClientRect().height);
 
@@ -71,7 +72,7 @@
       if (result.tallest <= room || n === most) break;
     }
 
-    // Move the features into their columns (moving keeps each task open or closed).
+    // Move the features into their columns (moving keeps each node open or closed).
     contents.replaceChildren(...cols.map(ids => {
       const col = document.createElement('div');
       col.className = 'col';
@@ -88,18 +89,21 @@
   document.fonts?.ready.then(relayout);
   layout();
 
-  // ——— Opening tasks ———
-  // Opens the task named in the address, keeps the address in step with the task opened
-  // last, and opens every task before printing.
+  // ——— Opening nodes ———
+  // Opens the node named in the address (and the nodes it sits in), keeps the address in step with the node opened
+  // last, and opens every node before printing.
   const show = () => {
     const d = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (d && d.matches('details.task')) { d.open = true; d.scrollIntoView({ block: 'start' }); }
+    if (!d) return;
+    // Open the node and every node it sits in, then bring it into view.
+    for (let p = d; p; p = p.parentElement?.closest('details')) if (p.matches('details')) p.open = true;
+    d.scrollIntoView({ block: 'start' });
   };
-  for (const d of tasks) d.addEventListener('toggle', () => {
+  for (const d of nodes) d.addEventListener('toggle', () => {
     if (d.open) history.replaceState(null, '', '#' + d.id);
     else if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
   });
   addEventListener('hashchange', show);
-  addEventListener('beforeprint', () => tasks.forEach(d => { d.open = true; }));
+  addEventListener('beforeprint', () => nodes.forEach(d => { d.open = true; }));
   show();
 })();
