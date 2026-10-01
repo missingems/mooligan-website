@@ -47,6 +47,9 @@ p { margin: 0; overflow-wrap: break-word; }
 
 /* ——— The logo: the app icon’s cards and the name, in pixels ——— */
 .logo { margin: 0; padding: clamp(1.5rem, 6vw, 3.5rem) 0 1.75rem; line-height: 0; }
+.devices { margin: -0.75rem 0 1.75rem; color: var(--ink-2); }
+.devices .on { color: var(--ink); font-weight: 600; }
+.devices .soon .tag { margin-left: 0.5ch; }
 .logo svg { display: block; width: auto; height: clamp(2.75rem, 8vw, 3.5rem); }
 
 /* ——— Contents: as many columns as it takes to fit the screen (see src/page.js) ——— */
@@ -84,6 +87,7 @@ p { margin: 0; overflow-wrap: break-word; }
 .leaf > .tree { grid-column: 2; }
 .desc { color: var(--ink-2); }
 .from { color: var(--ink-2); }
+.intro { color: var(--ink-2); font-style: italic; }
 .from a, .txt a { text-decoration-color: var(--ink-3); }
 .ph { color: var(--ink-3); }                       /* where a picture will go */
 .tag { margin-left: 1ch; color: var(--ink-2); font-size: 0.75rem; font-weight: 400; }

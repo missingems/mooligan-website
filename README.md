@@ -39,7 +39,7 @@ examples/release-kit/  an example kit
 
 ## Writing a feature
 
-Each file in `content/tasks/` is one feature of the app, as a tree: headings are screens and
+Each file in `content/tasks/` is one part of the handbook (iPhone for now), as a tree: headings are screens and
 sections, one level further in per `#`, and bullets are the rows on them.
 
 ```markdown
@@ -70,11 +70,14 @@ Where: Explore → latest meta; Metagame → popular decks
 | `{#id}` | a link to that node, by its title; opening it opens every node it sits in |
 | `` `Label` `` | a label in the app, in bold |
 | `1. Step.`, `> Tip.` | numbered steps and tips, shown when the node opens |
+| any other line | a sentence introducing the node, in grey italics |
+| `[screen]` | the node is a whole screen: it holds a `[ screenshot ]` placeholder |
 
 Describe a screen reached from several places once, under one id, list its entries in `Where:`,
 and link to it from the rest. `[planned]` (or `status: planned` for a whole feature) and
-`[soon]` show as tags; other bracketed words are notes. Each opened node with rows holds a
-`[ picture ]` placeholder until it has a screenshot.
+`[soon]` show as “coming soon”; other bracketed words are notes for editors. Write for the
+person using the app: what they see, what it means, what to do. The devices the handbook covers
+are listed in `content/book.yml`; this page is the first without `soon`.
 
 The build stops with a clear message, naming the file and line, on anything it can’t resolve: a
 missing drawing or screenshot, a malformed line, a task without steps or with an unknown section.

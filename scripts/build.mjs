@@ -50,13 +50,15 @@ const media = existsSync(mediaFile) ? JSON.parse(await readFile(mediaFile, 'utf8
 //   ## Screen or section {#id} [planned]        a node, one level down per extra #
 //   1. Step. ![](figure:name)                   a numbered step, shown when the node opens
 //   > Tip.                                      a tip
+//   Any other line                              a sentence introducing the node
 // {#id} anywhere in text links to that node, by its title. A node without an id is given one
 // from its title and its parent’s. Any node opens in place to show its rows and children; each
 // opened node with rows holds a placeholder for its picture until there is one.
 const FIGURE = /\s*!\[([^\]]*)\]\((figure|asset):([^)\s]+)\)\s*$/;
 const slugify = s => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ’']/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 // Tags a node can carry in [brackets]; only these show, the rest are notes for the editor.
-const TAGS = { planned: 'planned', data: 'planned', unfinished: 'unfinished', soon: 'soon' };
+const TAGS = { planned: 'coming soon', soon: 'coming soon' };
+// [screen] marks a node that is a whole screen: it holds a placeholder for its screenshot.
 const ids = new Map();   // id → node, across every file
 
 function parseTask(src, file) {
@@ -119,7 +121,8 @@ function parseTask(src, file) {
     inTip = false;
     if ((k = line.match(/^\d+\.\s+(.+)$/))) node.panels.push({ type: 'step', ...withFigure(k[1], where) });
     else if ((k = line.match(/^([✓✗])\s+(.+)$/))) node.panels.push({ type: k[1] === '✓' ? 'do' : 'dont', ...withFigure(k[2], where) });
-    else fail(where, `expected a node (“## …”), a row (“- …”), “Where: …”, a step (“1. …”) or a tip (“> …”), not “${line}”`);
+    // Any other line is a sentence introducing the node, shown under its name.
+    else node.intro = (node.intro ? node.intro + ' ' : '') + line;
   }
   return { data, root, file, slug };
 }
@@ -232,10 +235,10 @@ async function renderNode(node, branch, inherited = []) {
   const shown = node.tags.filter(t => TAGS[t]).map(t => TAGS[t]);
   const tags = shown.filter(t => !inherited.includes(t)).map(t => ` <span class="tag">${t}</span>`).join('');
   const passed = inherited.concat(shown);
-  const leaves = node.items.some(x => x.type === 'leaf');
   const body = [
     node.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(node.from, node.where)}</p>` : '',
-    leaves ? `<p class="ph" aria-hidden="true">[ picture ]</p>` : '',
+    node.intro ? `<p class="intro">${rich(node.intro, node.where)}</p>` : '',
+    node.tags.includes('screen') ? `<p class="ph" aria-hidden="true">[ screenshot ]</p>` : '',
     node.panels.length ? await renderPanels(node.panels) : '',
     await renderItemsAsync(node.items, passed),
   ].filter(Boolean).join('\n');
@@ -271,6 +274,8 @@ async function renderTask(task, i) {
   const parts = [
     `<h2 class="fname">${esc(root.title)}${isNew}${tags}</h2>`,
     root.from ? `<p class="from"><span aria-hidden="true">↳ </span><span class="vh">Reached from: </span>${rich(root.from, task.file)}</p>` : '',
+    root.intro ? `<p class="intro">${rich(root.intro, task.file)}</p>` : '',
+    task.data.screen ? `<p class="ph" aria-hidden="true">[ screenshot ]</p>` : '',
     root.panels.length ? await renderPanels(root.panels) : '',
     await renderItemsAsync(root.items, rootTags),
   ].filter(Boolean).join('\n');
@@ -289,6 +294,9 @@ if (!/<title>[^<]+<\/title>/.test(logo)) fail(rel(logoFile), 'the logo needs a <
 logo = logo.replace(/^<svg([^>]*?)\s+xmlns="[^"]*"([^>]*)>/, '<svg$1$2>')
   .replace(/^<svg/, '<svg role="img" aria-labelledby="logo"').replace('<title>', '<title id="logo">');
 const script = (await readFile(path.join(ROOT, 'src/page.js'), 'utf8')).trimEnd();
+// The devices the handbook covers: the one on this page, and the ones still to come.
+const devices = book.devices?.length ? `<p class="devices">${book.devices.map(d =>
+  d.soon ? `<span class="soon">${esc(d.name)} <span class="tag">coming soon</span></span>` : `<span class="on" aria-current="page">${esc(d.name)}</span>`).join('<span class="sep" aria-hidden="true"> · </span>')}</p>` : '';
 tasks.sort((a, b) => book.sections.indexOf(a.data.section) - book.sections.indexOf(b.data.section));
 const taskHtml = [];
 for (const [i, t] of tasks.entries()) taskHtml.push(await renderTask(t, i));
@@ -321,6 +329,7 @@ ${indent(css, 2)}
 <div class="page">
 
 <h1 class="logo">${logo}<span class="vh">${book.label ? ` ${esc(book.label)}` : ''}</span></h1>
+${devices}
 
 <main class="contents">
 ${taskHtml.join("\n\n")}
