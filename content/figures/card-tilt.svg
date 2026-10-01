@@ -1,0 +1,18 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A phone tilted, the card on it leaning and a sheen of light sliding across.</title>
+  <g transform="rotate(-14 60 60)">
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="44" y="26" width="32" height="44.7" rx="2.29"/>
+  <rect class="ln faint" x="47.2" y="31.36" width="25.6" height="16.99" rx="1"/>
+  <line class="ln faint" x1="47.2" y1="53.71" x2="72.8" y2="53.71"/>
+  <line class="ln faint" x1="47.2" y1="58.18" x2="68" y2="58.18"/>
+  <line class="ln faint" x1="47.2" y1="62.65" x2="70.24" y2="62.65"/>
+  <line class="ln faint" x1="48" y1="70" x2="62" y2="30"/>
+  <line class="ln faint" x1="54" y1="72" x2="68" y2="32"/>
+  </g>
+  <path class="ln" d="M14 42 Q6 60 14 78"/>
+  <path class="ln" d="M14.37 73.52 L14 78 L10.42 75.27"/>
+  <path class="ln" d="M106 78 Q114 60 106 42"/>
+  <path class="ln" d="M105.63 46.48 L106 42 L109.58 44.73"/>
+</svg>

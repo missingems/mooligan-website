@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mooligan.com/schemas/release-kit/manifest.schema.json",
+  "title": "Release kit: manifest.json",
+  "description": "The app version, the devices captured, and every screenshot and video in the kit. See docs/release-kit.md.",
+  "type": "object",
+  "required": ["kit_version", "app", "devices", "appearances", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "kit_version": { "const": 1 },
+    "app": {
+      "type": "object",
+      "required": ["version", "build", "commit", "released"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "$ref": "#/definitions/version" },
+        "build": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+        "released": { "type": "string", "format": "date" }
+      }
+    },
+    "previous": { "oneOf": [{ "$ref": "#/definitions/version" }, { "type": "null" }] },
+    "locale": { "type": "string" },
+    "devices": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "family"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/definitions/id" },
+          "name": { "type": "string", "minLength": 1 },
+          "family": { "enum": ["iphone", "ipad"] },
+          "points": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 2, "maxItems": 2 },
+          "scale": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "appearances": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["light", "dark"] } },
+    "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } }
+  },
+  "definitions": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+(\\.\\d+)?$" },
+    "path": { "type": "string", "pattern": "^assets/[a-z0-9][a-z0-9./-]*$" },
+    "asset": {
+      "type": "object",
+      "required": ["id", "feature", "use_case", "capture", "kind", "description", "files"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+$" },
+        "feature": { "$ref": "#/definitions/id" },
+        "use_case": { "$ref": "#/definitions/id" },
+        "capture": { "$ref": "#/definitions/id" },
+        "kind": { "enum": ["screenshot", "video"] },
+        "description": { "type": "string", "minLength": 1 },
+        "files": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/file" } }
+      }
+    },
+    "file": {
+      "type": "object",
+      "required": ["device", "appearance", "framed", "web", "width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "device": { "$ref": "#/definitions/id" },
+        "appearance": { "enum": ["light", "dark"] },
+        "framed": { "$ref": "#/definitions/path" },
+        "web": { "$ref": "#/definitions/path" },
+        "raw": { "$ref": "#/definitions/path" },
+        "poster": { "$ref": "#/definitions/path" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "duration": { "type": "number", "exclusiveMinimum": 0, "maximum": 15 }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The close button at the top right being tapped, to scan another card.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <circle class="ln" cx="43.5" cy="18.5" r="3.5"/>
+  <line class="ln" x1="42.1" y1="17.1" x2="44.9" y2="19.9"/>
+  <line class="ln" x1="44.9" y1="17.1" x2="42.1" y2="19.9"/>
+  <circle class="ln" cx="76.5" cy="18.5" r="3.5"/>
+  <line class="ln" x1="75.1" y1="17.1" x2="77.9" y2="19.9"/>
+  <line class="ln" x1="77.9" y1="17.1" x2="75.1" y2="19.9"/>
+  <rect class="ln" x="45" y="28" width="30" height="42" rx="2.14"/>
+  <rect class="ln faint" x="48" y="33.04" width="24" height="15.96" rx="1"/>
+  <line class="ln faint" x1="48" y1="54.04" x2="72" y2="54.04"/>
+  <line class="ln faint" x1="48" y1="58.24" x2="67.5" y2="58.24"/>
+  <line class="ln faint" x1="48" y1="62.44" x2="69.6" y2="62.44"/>
+  <line class="ln" x1="48" y1="78" x2="72" y2="78"/>
+  <circle class="fill" cx="76.5" cy="18.5" r="2.2"/>
+  <circle class="ln" cx="76.5" cy="18.5" r="7"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The next pack peeking up from the foot of the finished pack, being pulled up.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <line class="ln bold" x1="46" y1="18" x2="74" y2="18"/>
+  <line class="ln faint" x1="52" y1="23" x2="68" y2="23"/>
+  <rect class="ln faint" x="40.25" y="28" width="19.5" height="27.24" rx="1.5"/>
+  <rect class="ln faint" x="42.2" y="31.27" width="15.6" height="10.35" rx="1"/>
+  <line class="ln faint" x1="42.2" y1="44.89" x2="57.8" y2="44.89"/>
+  <line class="ln faint" x1="42.2" y1="47.61" x2="54.88" y2="47.61"/>
+  <line class="ln faint" x1="42.2" y1="50.34" x2="56.24" y2="50.34"/>
+  <rect class="ln faint" x="61.25" y="28" width="19.5" height="27.24" rx="1.5"/>
+  <rect class="ln faint" x="63.2" y="31.27" width="15.6" height="10.35" rx="1"/>
+  <line class="ln faint" x1="63.2" y1="44.89" x2="78.8" y2="44.89"/>
+  <line class="ln faint" x1="63.2" y1="47.61" x2="75.88" y2="47.61"/>
+  <line class="ln faint" x1="63.2" y1="50.34" x2="77.24" y2="50.34"/>
+  <rect class="ln faint" x="40.25" y="57.24" width="19.5" height="27.24" rx="1.5"/>
+  <rect class="ln faint" x="42.2" y="60.51" width="15.6" height="10.35" rx="1"/>
+  <line class="ln faint" x1="42.2" y1="74.13" x2="57.8" y2="74.13"/>
+  <line class="ln faint" x1="42.2" y1="76.85" x2="54.88" y2="76.85"/>
+  <line class="ln faint" x1="42.2" y1="79.57" x2="56.24" y2="79.57"/>
+  <rect class="ln faint" x="61.25" y="57.24" width="19.5" height="27.24" rx="1.5"/>
+  <rect class="ln faint" x="63.2" y="60.51" width="15.6" height="10.35" rx="1"/>
+  <line class="ln faint" x1="63.2" y1="74.13" x2="78.8" y2="74.13"/>
+  <line class="ln faint" x1="63.2" y1="76.85" x2="75.88" y2="76.85"/>
+  <line class="ln faint" x1="63.2" y1="79.57" x2="77.24" y2="79.57"/>
+  <path class="ln" d="M44 110 L44 94 94 L45.78 92.6 L47.56 94 L49.33 92.6 L51.11 94 L52.89 92.6 L54.67 94 L56.44 92.6 L58.22 94 L60 92.6 L61.78 94 L63.56 92.6 L65.33 94 L67.11 92.6 L68.89 94 L70.67 92.6 L72.44 94 L74.22 92.6 L76 94 L76 110"/>
+  <line class="ln bold" x1="56" y1="89" x2="64" y2="89"/>
+  <circle class="fill" cx="60" cy="101" r="2.2"/>
+  <circle class="ln" cx="60" cy="101" r="7"/>
+  <line class="ln bold" x1="60" y1="101" x2="60" y2="76"/>
+  <path class="ln bold" d="M57.6 80.39 L60 76 L62.4 80.39"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A finger dragging across the top of a sealed pack, right to left, tearing it open.</title>
+  <path class="ln" d="M28 22 L32 19.09 L36 22 L40 19.09 L44 22 L48 19.09 L52 22 L56 19.09 L60 22 L64 19.09 L68 22 L72 19.09 L76 22 L80 19.09 L84 22 L88 19.09 L92 22 L92 112 L88 114.91 L84 112 L80 114.91 L76 112 L72 114.91 L68 112 L64 114.91 L60 112 L56 114.91 L52 112 L48 114.91 L44 112 L40 114.91 L36 112 L32 114.91 L28 112 Z"/>
+  <line class="ln dash" x1="28" y1="34" x2="92" y2="34"/>
+  <line class="ln faint" x1="40" y1="56" x2="80" y2="56"/>
+  <path class="ln faint" d="M52 71.6 L60 68 L68 71.6 L64.96 82 L60 84 L55.04 82 Z"/>
+  <circle class="fill" cx="104" cy="28" r="2.2"/>
+  <circle class="ln" cx="104" cy="28" r="7"/>
+  <line class="ln bold" x1="104" y1="28" x2="18" y2="28"/>
+  <path class="ln bold" d="M22.39 30.4 L18 28 L22.39 25.6"/>
+</svg>

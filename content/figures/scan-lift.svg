@@ -1,0 +1,13 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The card lifting off the camera’s picture and turning upright on the screen.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <path class="ln faint" d="M45 82 L73 76 L79 104 L49 108 Z"/>
+  <rect class="ln" x="46" y="18" width="28" height="39" rx="2"/>
+  <rect class="ln faint" x="48.8" y="22.68" width="22.4" height="14.82" rx="1"/>
+  <line class="ln faint" x1="48.8" y1="42.18" x2="71.2" y2="42.18"/>
+  <line class="ln faint" x1="48.8" y1="46.08" x2="67" y2="46.08"/>
+  <line class="ln faint" x1="48.8" y1="49.98" x2="68.96" y2="49.98"/>
+  <path class="ln dash" d="M62 78 Q56 70 60 61"/>
+  <path class="ln" d="M56.42 63.73 L60 61 L60.37 65.48"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Legality: ten formats in two columns, each marked legal or not legal.</title>
+  <text class="t" x="6" y="12" font-size="9" text-anchor="start" dominant-baseline="central" font-weight="600">Legality</text>
+  <line class="ln faint" x1="6" y1="21" x2="32" y2="21"/>
+  <rect class="soft" x="2" y="27" width="116" height="17" rx="5"/>
+  <rect class="ln" x="5" y="31.5" width="13" height="8" rx="4"/>
+  <text class="t" x="21" y="35.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Standard</text>
+  <rect class="fill" x="64" y="31.5" width="13" height="8" rx="4"/>
+  <text class="t" x="80" y="35.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Historic</text>
+  <rect class="fill" x="5" y="48.5" width="13" height="8" rx="4"/>
+  <text class="t" x="21" y="52.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Pioneer</text>
+  <rect class="fill" x="64" y="48.5" width="13" height="8" rx="4"/>
+  <text class="t" x="80" y="52.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Modern</text>
+  <rect class="soft" x="2" y="61" width="116" height="17" rx="5"/>
+  <rect class="fill" x="5" y="65.5" width="13" height="8" rx="4"/>
+  <text class="t" x="21" y="69.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Legacy</text>
+  <rect class="fill" x="64" y="65.5" width="13" height="8" rx="4"/>
+  <text class="t" x="80" y="69.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Pauper</text>
+  <rect class="fill" x="5" y="82.5" width="13" height="8" rx="4"/>
+  <text class="t" x="21" y="86.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Vintage</text>
+  <rect class="fill" x="64" y="82.5" width="13" height="8" rx="4"/>
+  <text class="t" x="80" y="86.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Penny</text>
+  <rect class="soft" x="2" y="95" width="116" height="17" rx="5"/>
+  <rect class="fill" x="5" y="99.5" width="13" height="8" rx="4"/>
+  <text class="t" x="21" y="103.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Commander</text>
+  <rect class="ln" x="64" y="99.5" width="13" height="8" rx="4"/>
+  <text class="t" x="80" y="103.8" font-size="6.8" text-anchor="start" dominant-baseline="central">Brawl</text>
+</svg>

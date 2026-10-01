@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Pull Rate: a booster’s odds of holding the card, 1 in 168 packs, 1 in 840 foil, beside the pack.</title>
+  <rect class="soft" x="6" y="14" width="108" height="90" rx="10"/>
+  <rect class="ln" x="6" y="14" width="108" height="90" rx="10"/>
+  <text class="t" x="14" y="24" font-size="8.5" text-anchor="start" dominant-baseline="central" font-weight="600">Play Booster</text>
+  <text class="t" x="14" y="36" font-size="6" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">Regular</text>
+  <text class="t" x="14" y="46" font-size="11" text-anchor="start" dominant-baseline="central" font-weight="600">1 in 168</text>
+  <text class="t" x="14" y="58" font-size="6" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">Foil</text>
+  <text class="t" x="14" y="68" font-size="11" text-anchor="start" dominant-baseline="central" font-weight="600">1 in 840</text>
+  <g transform="rotate(6 96 50)">
+  <path class="ln bg" d="M84 32 L85.38 31 L86.75 32 L88.13 31 L89.5 32 L90.88 31 L92.25 32 L93.63 31 L95 32 L96.38 31 L97.75 32 L99.13 31 L100.5 32 L101.88 31 L103.25 32 L104.63 31 L106 32 L106 68 L104.63 69 L103.25 68 L101.88 69 L100.5 68 L99.13 69 L97.75 68 L96.38 69 L95 68 L93.63 69 L92.25 68 L90.88 69 L89.5 68 L88.13 69 L86.75 68 L85.38 69 L84 68 Z"/>
+  </g>
+  <line class="ln dash" x1="6" y1="82" x2="114" y2="82"/>
+  <text class="t" x="60" y="93" font-size="8" text-anchor="middle" dominant-baseline="central" font-weight="600">Open Pack</text>
+</svg>

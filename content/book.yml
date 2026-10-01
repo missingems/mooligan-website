@@ -1,0 +1,24 @@
+# Mooligan: instructions. The page-wide settings.
+# Each file in content/tasks is one feature, with its parts; see README.md for the format.
+
+name: Mooligan
+label: Instructions
+url: https://mooligan.com/
+description: "How to use Mooligan, the companion app for Magic: The Gathering, in short illustrated steps."
+
+# One grey line under everything: the notice Wizards’ Fan Content Policy asks fan sites to carry.
+notice: "Mooligan is unofficial Fan Content permitted under the [Fan Content Policy](https://company.wizards.com/en/legal/fancontentpolicy). Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC."
+
+# Features are grouped by these sections, in this order (the names aren’t shown); each names its section.
+sections:
+  - Sets
+  - Cards
+  - Value
+  - Packs
+  - Scanning
+  - Settings
+
+# The release the page describes, and the device its screenshots come from (release kits).
+app_version:
+figures:
+  device: iphone-17-pro

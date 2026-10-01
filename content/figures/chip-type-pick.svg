@@ -1,0 +1,48 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The list of card types, Creature being picked.</title>
+  <rect class="ln" x="4" y="12" width="34" height="15" rx="7.5"/>
+  <circle class="ln bg" cx="12" cy="19.5" r="3.2"/>
+  <text class="t" x="12" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="16.6" cy="19.5" r="3.2"/>
+  <text class="t" x="16.6" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="21.2" cy="19.5" r="3.2"/>
+  <text class="t" x="21.2" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="25.8" cy="19.5" r="3.2"/>
+  <text class="t" x="25.8" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <circle class="ln bg" cx="30.4" cy="19.5" r="3.2"/>
+  <text class="t" x="30.4" y="19.7" font-size="3.68" text-anchor="middle" dominant-baseline="central" font-weight="600">
+  </text>
+  <rect class="ln" x="42" y="12" width="44" height="15" rx="7.5"/>
+  <rect class="fill" x="47.4" y="16.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="50.4" y="16.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="47.4" y="19.9" width="2.2" height="2.2" rx="0.4"/>
+  <rect class="fill" x="50.4" y="19.9" width="2.2" height="2.2" rx="0.4"/>
+  <text class="t" x="55.5" y="19.8" font-size="8" text-anchor="start" dominant-baseline="central">Creature</text>
+  <rect class="bg" x="42" y="32" width="74" height="81.6" rx="7"/>
+  <rect class="ln" x="42" y="32" width="74" height="81.6" rx="7"/>
+  <rect class="ln faint" x="48.2" y="37.05" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="39.15" font-size="7" text-anchor="start" dominant-baseline="central">All</text>
+  <rect class="ln faint" x="48.2" y="46.75" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="48.85" font-size="7" text-anchor="start" dominant-baseline="central">Land</text>
+  <rect class="ln faint" x="48.2" y="56.45" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="58.55" font-size="7" text-anchor="start" dominant-baseline="central">Artifact</text>
+  <rect class="ln faint" x="48.2" y="66.15" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="68.25" font-size="7" text-anchor="start" dominant-baseline="central">Enchantment</text>
+  <rect class="ln faint" x="48.2" y="75.85" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="77.95" font-size="7" text-anchor="start" dominant-baseline="central">Instant</text>
+  <rect class="ln faint" x="48.2" y="85.55" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="87.65" font-size="7" text-anchor="start" dominant-baseline="central">Sorcery</text>
+  <rect class="ln faint" x="48.2" y="95.25" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="97.35" font-size="7" text-anchor="start" dominant-baseline="central">Planeswalker</text>
+  <rect class="soft" x="44" y="102.5" width="70" height="8.5" rx="4.5"/>
+  <rect class="ln faint" x="48.2" y="104.95" width="3.6" height="3.6" rx="0.8"/>
+  <text class="t" x="56" y="107.05" font-size="7" text-anchor="start" dominant-baseline="central">Creature</text>
+  <circle class="fill" cx="108" cy="106.75" r="2.8"/>
+  <path class="ln tick" d="M106.6 106.75 L107.66 107.81 L109.46 105.74"/>
+  <circle class="fill" cx="108" cy="107" r="2.2"/>
+  <circle class="ln" cx="108" cy="107" r="7"/>
+</svg>

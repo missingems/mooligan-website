@@ -1,0 +1,25 @@
+{
+  "name": "mooligan-website",
+  "private": true,
+  "description": "Mooligan’s instructions at mooligan.com, built from content/ into dist/.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "validate-kit": "node scripts/validate-kit.mjs",
+    "import-kit": "node scripts/import-kit.mjs",
+    "preview": "npm run build && python3 -m http.server 8000 --directory dist"
+  },
+  "dependencies": {
+    "marked": "^18.0.0",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "html-validate": "^11.16.0"
+  }
+}

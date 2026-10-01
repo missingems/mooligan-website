@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The scanned card with its other printings beside it, a finger swiping to them.</title>
+  <rect class="ln" x="34" y="4" width="52" height="112" rx="9"/>
+  <rect class="fill" x="54" y="8" width="12" height="3" rx="1.5"/>
+  <rect class="ln" x="45" y="22" width="30" height="42" rx="2.14"/>
+  <rect class="ln faint" x="48" y="27.04" width="24" height="15.96" rx="1"/>
+  <line class="ln faint" x1="48" y1="48.04" x2="72" y2="48.04"/>
+  <line class="ln faint" x1="48" y1="52.24" x2="67.5" y2="52.24"/>
+  <line class="ln faint" x1="48" y1="56.44" x2="69.6" y2="56.44"/>
+  <path class="ln" d="M81.5 26 H80 a2.2 2.2 0 0 0 -2.2 2.2 V61.8 a2.2 2.2 0 0 0 2.2 2.2 H81.5"/>
+  <circle class="fill" cx="72" cy="82" r="2.2"/>
+  <circle class="ln" cx="72" cy="82" r="7"/>
+  <line class="ln" x1="72" y1="82" x2="46" y2="82"/>
+  <path class="ln" d="M50.39 84.4 L46 82 L50.39 79.6"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The back arrow at the top left being tapped; the last card flies back onto the pile.</title>
+  <circle class="ln" cx="14" cy="20" r="8"/>
+  <path class="ln" d="M10.5 18.5 H15 A3 3 0 0 1 15 24.5 H12.5"/>
+  <path class="ln" d="M12.5 16 L10 18.5 L12.5 21"/>
+  <text class="t" x="55" y="15" font-size="8" text-anchor="middle" dominant-baseline="central" font-weight="600">3 / 14</text>
+  <text class="t" x="55" y="25" font-size="7" text-anchor="middle" dominant-baseline="central" fill-opacity="0.55">$4.27</text>
+  <rect class="ln" x="78" y="13" width="38" height="14" rx="7"/>
+  <text class="t" x="97" y="20.3" font-size="6.8" text-anchor="middle" dominant-baseline="central" font-weight="600">Reveal All</text>
+  <rect class="ln" x="40" y="38" width="36" height="44.29" rx="2.57"/>
+  <rect class="ln faint" x="43.6" y="43.31" width="28.8" height="16.83" rx="1"/>
+  <line class="ln faint" x1="43.6" y1="65.46" x2="72.4" y2="65.46"/>
+  <line class="ln faint" x1="43.6" y1="69.89" x2="67" y2="69.89"/>
+  <line class="ln faint" x1="43.6" y1="74.31" x2="69.52" y2="74.31"/>
+  <rect class="soft" x="12" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="12" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="soft" x="23" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="23" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="soft" x="34" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln" x="34" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="45" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="56" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="67" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="78" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="89" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <rect class="ln faint" x="100" y="100" width="8.5" height="11.5" rx="1.2"/>
+  <path class="ln dash" d="M39 99 Q18 70 38 56"/>
+  <path class="ln" d="M33.53 56.5 L38 56 L36 60.03"/>
+  <circle class="fill" cx="14" cy="20" r="2.2"/>
+  <circle class="ln" cx="14" cy="20" r="7"/>
+</svg>

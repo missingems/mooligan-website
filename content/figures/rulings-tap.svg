@@ -1,0 +1,14 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>Related, at the foot of a card’s page: Artist, and Rulings being tapped.</title>
+  <text class="t" x="8" y="34" font-size="9" text-anchor="start" dominant-baseline="central" font-weight="600">Related</text>
+  <rect class="soft" x="6" y="42" width="108" height="44" rx="9"/>
+  <circle class="ln" cx="18" cy="53" r="3.2"/>
+  <text class="t" x="26" y="53.3" font-size="8" text-anchor="start" dominant-baseline="central" font-weight="600">Artist</text>
+  <path class="ln" d="M105 51 L107 53 L105 55"/>
+  <line class="ln faint" x1="26" y1="64" x2="114" y2="64"/>
+  <rect class="ln" x="15.5" y="71" width="5" height="6.5" rx="0.8"/>
+  <text class="t" x="26" y="75.3" font-size="8" text-anchor="start" dominant-baseline="central" font-weight="600">Rulings</text>
+  <path class="ln" d="M105 73 L107 75 L105 77"/>
+  <circle class="fill" cx="86" cy="75" r="2.2"/>
+  <circle class="ln" cx="86" cy="75" r="7"/>
+</svg>

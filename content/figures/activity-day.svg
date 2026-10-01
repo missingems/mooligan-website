@@ -1,0 +1,16 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>A day’s update, cards added, changed and removed, being tapped.</title>
+  <rect class="ln" x="4" y="14" width="112" height="72" rx="9"/>
+  <text class="t" x="14" y="22" font-size="8" text-anchor="start" dominant-baseline="central" font-weight="600">Sep 27</text>
+  <text class="t" x="14" y="31.5" font-size="7" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">+12  ~40  −1</text>
+  <path class="ln" d="M105 24 L107 26 L105 28"/>
+  <text class="t" x="14" y="46" font-size="8" text-anchor="start" dominant-baseline="central" font-weight="600">Sep 26</text>
+  <text class="t" x="14" y="55.5" font-size="7" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">No changes</text>
+  <line class="ln faint" x1="14" y1="38" x2="116" y2="38"/>
+  <text class="t" x="14" y="70" font-size="8" text-anchor="start" dominant-baseline="central" font-weight="600">Sep 25</text>
+  <text class="t" x="14" y="79.5" font-size="7" text-anchor="start" dominant-baseline="central" fill-opacity="0.55">+3  ~18</text>
+  <path class="ln" d="M105 72 L107 74 L105 76"/>
+  <line class="ln faint" x1="14" y1="62" x2="116" y2="62"/>
+  <circle class="fill" cx="100" cy="26" r="2.2"/>
+  <circle class="ln" cx="100" cy="26" r="7"/>
+</svg>

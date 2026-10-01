@@ -1,0 +1,22 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <title>The strip of small cards at the foot of the page; one being tapped brings its card up.</title>
+  <rect class="ln" x="44" y="8" width="32" height="44.7" rx="2.29"/>
+  <rect class="ln faint" x="47.2" y="13.36" width="25.6" height="16.99" rx="1"/>
+  <line class="ln faint" x1="47.2" y1="35.71" x2="72.8" y2="35.71"/>
+  <line class="ln faint" x1="47.2" y1="40.18" x2="68" y2="40.18"/>
+  <line class="ln faint" x1="47.2" y1="44.65" x2="70.24" y2="44.65"/>
+  <rect class="ln" x="4" y="80" width="112" height="22" rx="11"/>
+  <rect class="ln faint" x="16.44" y="88.7" width="6.12" height="4.61" rx="1"/>
+  <rect class="ln" x="29.34" y="88.25" width="7.31" height="5.5" rx="1"/>
+  <rect class="ln" x="42.25" y="87.8" width="8.5" height="6.4" rx="1"/>
+  <rect class="ln" x="69.25" y="87.8" width="8.5" height="6.4" rx="1"/>
+  <rect class="ln" x="83.34" y="88.25" width="7.31" height="5.5" rx="1"/>
+  <rect class="ln faint" x="97.44" y="88.7" width="6.12" height="4.61" rx="1"/>
+  <circle class="ln" cx="60" cy="91" r="9.5"/>
+  <rect class="soft" x="54.5" y="86.9" width="11" height="8.2" rx="1.2"/>
+  <rect class="ln" x="54.5" y="86.9" width="11" height="8.2" rx="1.2"/>
+  <circle class="fill" cx="87" cy="91" r="2.2"/>
+  <circle class="ln" cx="87" cy="91" r="7"/>
+  <path class="ln dash" d="M87 80 Q90 64 78 46"/>
+  <path class="ln" d="M78.4 50.48 L78 46 L81.99 48.09"/>
+</svg>
