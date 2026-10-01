@@ -87,7 +87,7 @@ p { margin: 0; overflow-wrap: break-word; }
 .leaf > .tree { grid-column: 2; }
 .desc { color: var(--ink-2); }
 .from { color: var(--ink-2); }
-.intro { color: var(--ink-2); font-style: italic; }
+.intro { color: var(--ink-2); max-width: 60ch; }
 .from a, .txt a { text-decoration-color: var(--ink-3); }
 .ph { color: var(--ink-3); }                       /* where a picture will go */
 .tag { margin-left: 1ch; color: var(--ink-2); font-size: 0.75rem; font-weight: 400; }

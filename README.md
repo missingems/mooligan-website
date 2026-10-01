@@ -75,8 +75,12 @@ Where: Explore → latest meta; Metagame → popular decks
 
 Describe a screen reached from several places once, under one id, list its entries in `Where:`,
 and link to it from the rest. `[planned]` (or `status: planned` for a whole feature) and
-`[soon]` show as “coming soon”; other bracketed words are notes for editors. Write for the
-person using the app: what they see, what it means, what to do. The devices the handbook covers
+`[soon]` show as “coming soon”; other bracketed words are notes for editors.
+
+Write each node as a tip for players, as Apple's Tips app does: the title is what the player
+gets (“Price a card by pointing your camera”), the sentence under it is the problem and how
+Mooligan solves it, then a few numbered steps. Group tips into collections by what players want
+(what a card's worth, finding cards, opening packs), not by the app's screens. The devices the handbook covers
 are listed in `content/book.yml`; this page is the first without `soon`.
 
 The build stops with a clear message, naming the file and line, on anything it can’t resolve: a

@@ -2,20 +2,23 @@
 # Each file in content/tasks is one feature, with its parts; see README.md for the format.
 
 name: Mooligan
-label: Handbook
+label: Tips
 url: https://mooligan.com/
-description: "The Mooligan handbook: every screen, button and symbol of the companion app for Magic: The Gathering, explained."
+description: "Tips for Mooligan, the Magic: The Gathering companion: price a card with your camera, find what your commander can play, open packs for free, and more."
 
 # One grey line under everything: the notice Wizards’ Fan Content Policy asks fan sites to carry.
 notice: "Mooligan is unofficial Fan Content permitted under the [Fan Content Policy](https://company.wizards.com/en/legal/fancontentpolicy). Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC."
 
 # Features are grouped by these sections, in this order (the names aren’t shown); each names its section.
 sections:
-  - Basics
-  - Meta
+  - Start
+  - Value
+  - Search
   - Cards
-  - Tools
-  - Help
+  - Packs
+  - News
+  - Meta
+  - Reference
 
 # The devices the handbook covers, in order; this page is the first without “soon”.
 devices:
