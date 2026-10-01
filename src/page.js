@@ -11,8 +11,8 @@
   // are split so the columns come out as even as they can. Only closed heights count, so opening
   // a node lengthens its own column and never moves the others.
   const SINGLE = 34;   // rem: the width of the page as one column
-  const COLUMN = 20;   // rem: the widest a column gets when there are several
-  const MIN = 15;      // rem: the narrowest a column may be
+  const COLUMN = 22;   // rem: the widest a column gets when there are several
+  const MIN = 16;      // rem: the narrowest a column may be
   const GAP = 3;       // rem: between columns
 
   const px = rem => rem * parseFloat(getComputedStyle(root).fontSize);

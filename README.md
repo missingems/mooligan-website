@@ -15,8 +15,8 @@ Sets
 Under them is one grey line, the notice Wizards’ Fan Content Policy asks for (`notice` in
 `content/book.yml`). The list sits in one column when it fits the screen, and in as many columns
 as it needs to fit otherwise (as the width allows; `src/page.js`), re-measured on resize. Tap a
-part to open its steps in place, each a picture and a caption of a few words. Everything is set
-in New York (SF Serif), with the tree’s marks in SF Mono; one ink, light or dark with the device; no scrolling sideways at any width. A link
+part to open its steps in place, each a picture and a caption of a few words. Names are set
+in New York (SF Serif), reading in SF Pro, the tree’s marks in SF Mono; one ink, light or dark with the device; no scrolling sideways at any width. A link
 such as `mooligan.com/#a-set-colour` opens that part.
 
 The page is written in Markdown under `content/`, and `npm run build` turns it into `dist/`.
@@ -145,9 +145,13 @@ Nothing is published until the site is launched. To launch, once:
 To take the site down again, set `PUBLISH` to anything else and unpublish it under
 **Settings → Pages**.
 
+The type uses three of Apple’s faces, each with one job. New York (SF Serif) names things: a
+collection large and semibold, a tip in regular. SF Pro is what you read: descriptions, steps,
+rows and the small print, with the app’s own labels in semibold. SF Mono draws the structure:
+the tree’s `├ │ └`, step numbers, tags and placeholders, small and grey. The scale is 22, 17,
+14, 13 and 11 px (`src/style.css`).
+
 Apple’s licence doesn’t allow serving SF fonts from a website, so the page asks for the ones
-already on the reader’s device: New York (SF Serif) through `ui-serif` in Safari for the words,
-and SF Mono through `ui-monospace` for the tree’s `├ │ └`, step numbers and tags, so the lines
-join. Chrome and Firefox on a Mac fall back to Iowan Old Style and Menlo; other systems use
-their own serif and monospace. The drawings’ labels use the system sans, SF Pro on Apple
-devices, as the app does.
+already on the reader’s device: `ui-serif`, `system-ui` and `ui-monospace` reach New York, SF Pro
+and SF Mono in Safari. Chrome and Firefox on a Mac fall back to Iowan Old Style, SF Pro and
+Menlo; other systems use their own serif, sans and monospace.

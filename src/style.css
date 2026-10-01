@@ -1,12 +1,26 @@
-/* Mooligan · Tips. A directory of tips: the words in New York (SF Serif), set tight; the tree’s
-   marks, step numbers and tags in SF Mono. One ink. */
+/* Mooligan · Tips. Three of Apple’s faces, each with one job:
+   New York (SF Serif) names things: a collection large and semibold, a tip in regular;
+   SF Pro (sans) is what you read: descriptions, steps, rows and the small print;
+   SF Mono draws the structure: the tree’s ├ │ └, step numbers, tags and placeholders, small and grey.
+   One ink. */
 
 :root {
-  /* New York (Apple’s SF Serif) through ui-serif in Safari; SF Mono through ui-monospace;
-     SF Pro, the system sans, inside the drawings. */
+  /* New York through ui-serif and SF Mono through ui-monospace in Safari; SF Pro through system-ui. */
   --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
-  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* The scale: 22 / 17 / 14 / 13 / 11 px. */
+  --display: 1.375rem;   /* a collection: New York semibold */
+  --title: 1.0625rem;    /* a tip: New York regular */
+  --body: 0.875rem;      /* reading: SF Pro */
+  --small: 0.8125rem;    /* intros and asides: SF Pro */
+  --micro: 0.6875rem;    /* tags and the notice */
+
+  /* The tree’s marks: SF Mono at 14px, in a column 18px wide; a mono ├ is 0.6em wide. */
+  --mark: 0.875rem;
+  --branch: 1.15rem;
+  --stem: calc(var(--mark) * 0.3 - 0.5px);
 
   --paper: #ffffff;
   --ink: #161616;
@@ -31,84 +45,111 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 0.9375rem;
-  line-height: 1.4;
-  letter-spacing: -0.012em;
+  font-family: var(--sans);
+  font-size: var(--body);
+  line-height: 1.45;
+  letter-spacing: -0.006em;
   font-kerning: normal;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-@media (pointer: coarse) { body { line-height: 1.75; } }   /* room for a finger */
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 p { margin: 0; overflow-wrap: break-word; }
 ::selection { background: var(--ink); color: var(--paper); }
 :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-/* One column is 34rem; the page script widens the page when it lays the features out in several. */
+/* One column is 34rem; the page script widens the page when it lays the collections out in several. */
 .page { width: min(var(--page, 34rem), 100% - 2 * var(--gutter)); margin-inline: auto; }
 
-/* ——— The logo: the app icon’s cards and the name, in pixels ——— */
+/* ——— The logo, and the device the page is for ——— */
 .logo { margin: 0; padding: clamp(1.5rem, 6vw, 3.5rem) 0 1.75rem; line-height: 0; }
-.devices { margin: -0.75rem 0 1.75rem; color: var(--ink-2); }
-.devices .on { color: var(--ink); font-weight: 600; }
-.devices .soon .tag { margin-left: 0.5ch; }
 .logo svg { display: block; width: auto; height: clamp(2.75rem, 8vw, 3.5rem); }
+.devices { margin: -0.75rem 0 2rem; font-size: var(--small); color: var(--ink-2); }
+.devices .on { color: var(--ink); font-weight: 600; }
+.devices .soon, .devices .on { white-space: nowrap; }
+.devices .soon .tag { margin-left: 0.5ch; }
 
 /* ——— Contents: as many columns as it takes to fit the screen (see src/page.js) ——— */
 .contents { padding: 0 0 2.5rem; }
 .contents.laid-out { display: flex; gap: 0 3rem; align-items: flex-start; }
 .col { flex: 1 1 0; min-width: 0; }
 .feature { scroll-margin-top: 0.5rem; }
-.fname { margin: 0; font: inherit; font-weight: 600; letter-spacing: -0.02em; }
-.feature + .feature { margin-top: 0.75rem; }
+.feature + .feature { margin-top: 1.6rem; }
+/* A collection’s name: New York, large and semibold, set tight. */
+.fname {
+  margin: 0 0 0.1rem;
+  font-family: var(--serif);
+  font-size: var(--display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+}
+.feature > .intro { margin-bottom: 0.5rem; font-size: var(--small); }
+.feature > .tree { margin-top: 0.15rem; }
 
-/* ——— A feature’s parts, drawn as a directory: ├ for each, └ for the last ——— */
+/* ——— The tree: ├ for each tip, └ for the last ——— */
 .tree { list-style: none; margin: 0; padding: 0; }
 .tree > li { position: relative; }
-/* Below a ├, the │ runs on while the part’s name wraps or its steps are open. */
+/* Below a ├, the │ runs on while a name wraps or a tip is open. */
 .tree > li:not(:last-child)::before {
   content: "";
   position: absolute;
   top: 1lh;
   bottom: 0;
-  left: calc(0.3em - 0.5px);   /* the middle of a mono ├, 0.6em wide */
-  border-left: 1px solid var(--ink-2);
+  left: var(--stem);
+  border-left: 1px solid var(--ink-3);
 }
-/* The tree’s marks are SF Mono, so ├ │ └ line up and join; the words around them are serif. */
-.br, .tag, .panel .k { font-family: var(--mono); letter-spacing: 0; }
-.br { color: var(--ink-2); }
+.br, .tag, .ph, .panel .k { font-family: var(--mono); letter-spacing: 0; font-weight: 400; }
+.br { font-size: var(--mark); color: var(--ink-2); }
 
-/* ——— A node: tap its name to open it in place, one level further in ——— */
+/* ——— A tip: its name in New York; open, it reads in SF Pro ——— */
+.node { font-family: var(--serif); font-size: var(--title); line-height: 1.32; letter-spacing: -0.014em; }
 .node > details { scroll-margin-top: 0.5rem; }
-.node > details > summary { display: grid; grid-template-columns: 2ch minmax(0, 1fr); cursor: pointer; list-style: none; }
+.node > details > summary {
+  display: grid;
+  grid-template-columns: var(--branch) minmax(0, 1fr);
+  align-items: baseline;
+  padding: 0.08rem 0;
+  cursor: pointer;
+  list-style: none;
+}
 .node > details > summary::-webkit-details-marker { display: none; }
-.node > details > summary:hover .name { text-decoration: underline; text-decoration-color: var(--ink-2); }
+.node > details > summary:hover .name { text-decoration: underline; text-decoration-color: var(--ink-3); text-underline-offset: 0.18em; }
 .node > details[open] > summary .name { font-weight: 600; }
-.node > details > .body { margin-left: 2ch; padding-bottom: 0.25rem; }
+.node > details > .body {
+  margin-left: var(--branch);
+  padding: 0.3rem 0 0.9rem;
+  font-family: var(--sans);
+  font-size: var(--body);
+  line-height: 1.45;
+  letter-spacing: -0.006em;
+}
 .node > details[open] > .body { animation: open 0.2s ease-out; }
-/* A row: a leaf of the tree, its text hanging clear of the branch. */
-.leaf { display: grid; grid-template-columns: 2ch minmax(0, 1fr); }
+/* A tip inside a tip is named in the same serif, a size down. */
+.node .node { font-size: 0.9375rem; }
+.intro { color: var(--ink-2); max-width: 58ch; }
+.body > .intro { margin-bottom: 0.45rem; }
+.from { margin-bottom: 0.3rem; font-size: var(--small); color: var(--ink-2); }
+.ph { margin: 0.1rem 0 0.4rem; font-size: 0.75rem; color: var(--ink-3); }   /* where a screenshot will go */
+.tag { margin-left: 1ch; font-size: var(--micro); color: var(--ink-2); vertical-align: 0.1em; }
+.tag::before { content: "["; } .tag::after { content: "]"; }
+.new { margin-left: 1ch; padding: 0 0.5ch; border: 1px solid currentColor; border-radius: 0.2rem; font-size: var(--micro); vertical-align: 0.1em; }
+
+/* A row: SF Pro, its meaning in grey after the dash. */
+.leaf { display: grid; grid-template-columns: var(--branch) minmax(0, 1fr); align-items: baseline; font-family: var(--sans); font-size: var(--body); line-height: 1.45; letter-spacing: -0.006em; }
 .leaf > .tree { grid-column: 2; }
 .desc { color: var(--ink-2); }
-.from { color: var(--ink-2); }
-.intro { color: var(--ink-2); max-width: 60ch; }
-.from a, .txt a { text-decoration-color: var(--ink-3); }
-.ph { color: var(--ink-3); }                       /* where a picture will go */
-.tag { margin-left: 1ch; color: var(--ink-2); font-size: 0.6875rem; font-weight: 400; }
-.tag::before { content: "["; } .tag::after { content: "]"; }
-.new {
-  margin-left: 1ch;
-  padding: 0 0.5ch;
-  border: 1px solid currentColor;
-  border-radius: 0.2rem;
-  font-size: 0.6875rem;
-  vertical-align: 0.05rem;
+.from a, .txt a, .intro a { text-decoration-color: var(--ink-3); }
+.ui { font-weight: 600; }
+
+@media (pointer: coarse) {        /* room for a finger */
+  .node { line-height: 1.55; }
+  .leaf { line-height: 1.6; }
 }
 
 /* ——— The fan content notice: one grey line under everything ——— */
-.notice { margin: 0 0 clamp(1.5rem, 5vw, 2.5rem); font-size: 0.6875rem; line-height: 1.5; color: var(--ink-2); }
+.notice { margin: 0 0 clamp(1.5rem, 5vw, 2.5rem); font-size: var(--micro); line-height: 1.5; color: var(--ink-2); }
 .notice a { text-decoration-color: var(--ink-3); }
 
 /* ——— Steps ——— */
@@ -123,9 +164,9 @@ p { margin: 0; overflow-wrap: break-word; }
 }
 @keyframes open { from { opacity: 0; transform: translateY(-4px); } }
 /* Steps without pictures yet: a plain numbered list. */
-.panels.list { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; padding: 0.2rem 0 0.8rem; }
-.panels.list .panel { display: grid; grid-template-columns: 2ch minmax(0, 1fr); align-items: baseline; }
-.panels.list .panel .k { position: static; font-size: inherit; }
+.panels.list { grid-template-columns: minmax(0, 1fr); gap: 0.3rem; padding: 0.25rem 0 0.2rem; }
+.panels.list .panel { display: grid; grid-template-columns: var(--branch) minmax(0, 1fr); align-items: baseline; }
+.panels.list .panel .k { position: static; font-size: 0.75rem; font-weight: 400; color: var(--ink-2); }
 .panels.list .panel p { margin: 0; font-size: inherit; }
 .panel { position: relative; min-width: 0; }
 .panel .k { position: absolute; top: 0; left: 0; font-size: 1rem; font-weight: 700; line-height: 1; }
@@ -139,13 +180,12 @@ p { margin: 0; overflow-wrap: break-word; }
 }
 /* A screenshot from a release kit: phone-sized like the drawings, in the same one ink. */
 .panel img, .panel video { max-width: 4.5rem; margin-inline: auto; filter: grayscale(1) contrast(1.04); }
-.panel p { margin-top: 0.35rem; font-size: 0.8125rem; }
-.ui { font-weight: 600; }
+.panel p { margin-top: 0.35rem; font-size: var(--small); }
 
 /* Tips, dos and don’ts: a mark and a line, as in the listing. */
-.tip { grid-column: 1 / -1; display: grid; grid-template-columns: 2ch minmax(0, 1fr); align-items: baseline; }
-.tip .k { position: static; font-size: 0.8125rem; }
-.tip p { margin: 0; color: var(--ink-2); }
+.tip { grid-column: 1 / -1; display: grid; grid-template-columns: var(--branch) minmax(0, 1fr); align-items: baseline; margin-top: 0.25rem; }
+.tip .k { position: static; font-size: 0.75rem; color: var(--ink-2); }
+.tip p { margin: 0; font-size: var(--small); color: var(--ink-2); }
 .do .k, .dont .k { font-size: 0.9375rem; }
 
 /* ——— Drawings ——— */
